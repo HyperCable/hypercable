@@ -72,6 +72,10 @@ GEM
     childprocess (3.0.0)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.9.0)
     ffi (1.13.1)
     globalid (0.4.2)
@@ -187,6 +191,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara (>= 2.15)
+  dotenv-rails (~> 2.7)
   jbuilder (~> 2.7)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
