@@ -8,27 +8,27 @@ development:
     <<: *default
     url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
     migrations_paths: db/migrate
-  olap:
+  hyper:
     <<: *default
-    url: <%= ENV['HYPERCABLE_OLAP_DATABASE_URL'] %>
-    migrations_paths: db/olap_migrate
+    url: <%= ENV['HYPERCABLE_HYPER_DATABASE_URL'] %>
+    migrations_paths: db/hyper_migrate
 
 test:
   main:
     <<: *default
     database: 'hypercable_web_test'
     migrations_paths: db/migrate
-  olap:
+  hyper:
     <<: *default
-    database: 'hypercable_olap_test'
-    migrations_paths: db/olap_migrate
+    database: 'hypercable_hyper_test'
+    migrations_paths: db/hyper_migrate
 
 production:
   main:
     <<: *default
     url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
     migrations_paths: db/migrate
-  olap:
+  hyper:
     <<: *default
-    url: <%= ENV['HYPERCABLE_OLAP_DATABASE_URL'] %>
-    migrations_paths: db/olap_migrate
+    url: <%= ENV['HYPERCABLE_HYPER_DATABASE_URL'] %>
+    migrations_paths: db/hyper_migrate
