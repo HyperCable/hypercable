@@ -4,13 +4,25 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
+  main:
+    <<: *default
+    url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
+  stats:
+    <<: *default
+    url: <%= ENV['HYPERCABLE_STATS_DATABASE_URL'] %>
 
 test:
-  <<: *default
-  database: hypercable_web_test
+  main:
+    <<: *default
+    database: 'hypercable_web_test'
+  stats:
+    <<: *default
+    database: 'hypercable_stats_test'
 
 production:
-  <<: *default
-  url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
+  main:
+    <<: *default
+    url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
+  stats:
+    <<: *default
+    url: <%= ENV['HYPERCABLE_STATS_DATABASE_URL'] %>
