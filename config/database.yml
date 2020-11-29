@@ -6,29 +6,29 @@ default: &default
 development:
   main:
     <<: *default
-    url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
+    url: <%= ENV['DATABASE_URL'] %>
     migrations_paths: db/migrate
   hyper:
     <<: *default
-    url: <%= ENV['HYPERCABLE_HYPER_DATABASE_URL'] %>
+    url: <%= ENV['HYPER_DATABASE_URL'] %>
     migrations_paths: db/hyper_migrate
 
 test:
   main:
     <<: *default
-    database: 'hypercable_web_test'
+    url: <%= ENV['DATABASE_URL'] %>
     migrations_paths: db/migrate
   hyper:
     <<: *default
-    database: 'hypercable_hyper_test'
+    url: <%= ENV['HYPER_DATABASE_URL'] %>
     migrations_paths: db/hyper_migrate
 
 production:
   main:
     <<: *default
-    url: <%= ENV['HYPERCABLE_WEB_DATABASE_URL'] %>
+    url: <%= ENV['DATABASE_URL'] %>
     migrations_paths: db/migrate
   hyper:
     <<: *default
-    url: <%= ENV['HYPERCABLE_HYPER_DATABASE_URL'] %>
+    url: <%= ENV['HYPER_DATABASE_URL'] %>
     migrations_paths: db/hyper_migrate
