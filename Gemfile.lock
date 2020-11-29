@@ -209,7 +209,6 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   turbolinks (~> 5)
-  tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
