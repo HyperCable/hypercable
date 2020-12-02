@@ -73,7 +73,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./docker/dockerfiles
-          file: openresty.Dockerfile
+          file: ./docker/dockerfiles/openresty.Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
