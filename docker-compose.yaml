@@ -102,6 +102,22 @@ services:
     ports:
       - '6380:6379'
 
+  openresty:
+    build:
+      context: ./docker/dockerfiles
+      dockerfile: openresty.Dockerfile
+    tty: true
+    restart: always
+    stdin_open: true
+    ports:
+      - '8000:8000'
+    image: hypercable-openresty:development
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+
 volumes:
   postgres:
   redis:
