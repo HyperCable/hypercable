@@ -51,5 +51,6 @@ end
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "dotenv-rails", "~> 2.7", require: "dotenv/rails-now"
+gem "sidekiq"
 
 gem "pry-rails", "~> 0.3.9"
