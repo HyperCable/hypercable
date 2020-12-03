@@ -1,5 +1,7 @@
-class HelloJob < ApplicationJob
-  queue_as :default
+# frozen_string_literal: true
+
+class HelloJob
+  include Sidekiq::Worker
 
   def perform(*args)
     puts args
