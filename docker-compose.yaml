@@ -29,6 +29,7 @@ services:
       - bundle:/usr/local/bundle
     depends_on:
       - postgres
+      - tsdb
       - redis
       - webpack
       - sidekiq
@@ -53,6 +54,7 @@ services:
       - bundle:/usr/local/bundle
     depends_on:
       - postgres
+      - tsdb
       - redis
     environment:
       - NODE_ENV=development
@@ -81,7 +83,7 @@ services:
     command: bin/webpack-dev-server
 
   postgres:
-    image: hooopo/pg12-zhparser-rum
+    image: postgres:12
     restart: always
     ports:
       - '5432:5432'
@@ -89,6 +91,19 @@ services:
       - postgres:/data/postgres
     environment:
       - POSTGRES_DB=hypercable_dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  tsdb:
+    image: timescale/timescaledb:2.0.0-rc4-pg12
+    #image: timescale/timescaledb:latest-pg12
+    restart: always
+    ports:
+      - '5532:5432'
+    volumes:
+      - postgres:/data/tsdb
+    environment:
+      - POSTGRES_DB=tsdb_dev
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
 
@@ -120,6 +135,7 @@ services:
 
 volumes:
   postgres:
+  tsdb:
   redis:
   packs:
   node_modules:
