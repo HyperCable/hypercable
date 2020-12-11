@@ -34,7 +34,7 @@ services:
       - webpack
       - sidekiq
     ports:
-      - 3000:3000
+      - 3333:3000
     env_file: .env
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack
@@ -74,7 +74,7 @@ services:
       - cache:/app/tmp/cache
       - bundle:/usr/local/bundle
     ports:
-      - "3035" # Webpack dev server
+      - "13035:3035" # Webpack dev server
     environment:
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
       - NODE_ENV=development
@@ -86,7 +86,7 @@ services:
     image: postgres:12
     restart: always
     ports:
-      - '5432:5432'
+      - '4432:5432'
     volumes:
       - postgres:/data/postgres
     environment:
