@@ -54,3 +54,7 @@ gem "dotenv-rails", "~> 2.7", require: "dotenv/rails-now"
 gem "sidekiq"
 
 gem "pry-rails", "~> 0.3.9"
+
+gem "fast_jsonparser", "~> 0.5.0"
+
+gem "mini_sql", "~> 0.3"

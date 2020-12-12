@@ -3,8 +3,7 @@
 class HelloJob
   include Sidekiq::Worker
 
-  def perform(*args)
-    puts args
+  def perform(args)
     Rails.logger.info args.inspect
   end
 end
