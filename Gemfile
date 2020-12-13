@@ -58,3 +58,5 @@ gem "pry-rails", "~> 0.3.9"
 gem "fast_jsonparser", "~> 0.5.0"
 
 gem "mini_sql", "~> 0.3"
+
+gem "device_detector", "~> 1.0"
