@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_205418) do
+ActiveRecord::Schema.define(version: 2020_12_16_101055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,82 @@ ActiveRecord::Schema.define(version: 2020_12_08_205418) do
     t.datetime "time", null: false
     t.integer "site_id"
     t.index ["time"], name: "events_time_idx", order: :desc
+  end
+
+  create_table "hits", id: false, force: :cascade do |t|
+    t.string "name"
+    t.integer "site_id", null: false
+    t.string "session_id", null: false
+    t.string "user_token", null: false
+    t.string "user_id"
+    t.string "hostname"
+    t.string "pathname"
+    t.string "user_agent"
+    t.string "ip"
+    t.string "referrer"
+    t.string "referrer_source"
+    t.string "landing_page"
+    t.string "country"
+    t.string "region"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "utm_source"
+    t.string "utm_medium"
+    t.string "utm_term"
+    t.string "utm_content"
+    t.string "utm_campaign"
+    t.string "browser"
+    t.string "os"
+    t.string "device_type"
+    t.string "app_version"
+    t.string "os_version"
+    t.string "platform"
+    t.jsonb "props", default: {}
+    t.datetime "started_at", null: false
+    t.index ["site_id", "session_id", "started_at"], name: "index_hits_on_site_id_and_session_id_and_started_at", order: { started_at: :desc }
+    t.index ["started_at"], name: "hits_started_at_idx", order: :desc
+  end
+
+  create_table "sessions", id: false, force: :cascade do |t|
+    t.string "session_id", null: false
+    t.integer "site_id", null: false
+    t.string "visit_token", null: false
+    t.string "visitor_token", null: false
+    t.string "user_id"
+    t.string "hostname"
+    t.string "pathname"
+    t.string "user_agent"
+    t.string "ip"
+    t.string "referrer"
+    t.string "referrer_source"
+    t.string "landing_page"
+    t.string "country"
+    t.string "region"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "utm_source"
+    t.string "utm_medium"
+    t.string "utm_term"
+    t.string "utm_content"
+    t.string "utm_campaign"
+    t.string "browser"
+    t.string "os"
+    t.string "device_type"
+    t.string "app_version"
+    t.string "os_version"
+    t.string "platform"
+    t.boolean "is_bounce", default: true
+    t.string "entry_page"
+    t.string "exit_page"
+    t.integer "pageviews", default: 0
+    t.integer "events", default: 0
+    t.integer "duration", default: 0
+    t.datetime "end_at", null: false
+    t.datetime "started_at", null: false
+    t.index ["site_id", "session_id", "started_at"], name: "index_sessions_on_site_id_and_session_id_and_started_at", order: { started_at: :desc }
+    t.index ["started_at"], name: "sessions_started_at_idx", order: :desc
   end
 
   create_table "visits", id: false, force: :cascade do |t|
