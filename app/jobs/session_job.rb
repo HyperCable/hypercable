@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EventJob
+class SessionJob
   include Sidekiq::Worker
 
   def perform(*args)
@@ -8,7 +8,7 @@ class EventJob
     p form
     p "------"
     p request
-    # Hyper::Event.create()
+    Rails.logger.info args.inspect
   end
 end
 
