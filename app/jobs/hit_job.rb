@@ -8,7 +8,29 @@ class HitJob
     p form
     p "------"
     p request
-    # Hyper::Event.create()
+
+    events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
+    events.each do |event|
+      url = event["properties"]["url"]
+
+      Hyper::Hit.create(
+        site_id: 1,
+        started_at: Time.now,
+        name: event["name"],
+        session_id: form["visit_token"],
+        user_token: form["visit_token"],
+
+        pathname: event["properties"]["page"],
+        hostname: URI.parse(event["properties"]["href"]).host,
+        ip: request["ip"],
+        referer: request["referer"],
+        user_agent: request["user_agent"],
+
+        platform: "Web",
+
+      )
+    end
+    puts Hyper::Hit.count
   end
 end
 

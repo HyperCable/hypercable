@@ -14,8 +14,8 @@ class AddHits < ActiveRecord::Migration[6.1]
       t.string :pathname
       t.string :user_agent
       t.string :ip
-      t.string :referrer
-      t.string :referrer_source
+      t.string :referer
+      t.string :referer_source
       t.string :landing_page
 
       # location
@@ -59,8 +59,8 @@ class AddHits < ActiveRecord::Migration[6.1]
       t.string :pathname
       t.string :user_agent
       t.string :ip
-      t.string :referrer
-      t.string :referrer_source
+      t.string :referer
+      t.string :referer_source
       t.string :landing_page
 
       # location

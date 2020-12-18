@@ -4,36 +4,36 @@
 #
 # Table name: hits
 #
-#  app_version     :string
-#  browser         :string
-#  city            :string
-#  country         :string
-#  device_type     :string
-#  hostname        :string
-#  ip              :string
-#  landing_page    :string
-#  latitude        :float
-#  longitude       :float
-#  name            :string
-#  os              :string
-#  os_version      :string
-#  pathname        :string
-#  platform        :string
-#  props           :jsonb
-#  referrer        :string
-#  referrer_source :string
-#  region          :string
-#  started_at      :datetime         not null
-#  user_agent      :string
-#  user_token      :string           not null
-#  utm_campaign    :string
-#  utm_content     :string
-#  utm_medium      :string
-#  utm_source      :string
-#  utm_term        :string
-#  session_id      :string           not null
-#  site_id         :integer          not null
-#  user_id         :string
+#  app_version    :string
+#  browser        :string
+#  city           :string
+#  country        :string
+#  device_type    :string
+#  hostname       :string
+#  ip             :string
+#  landing_page   :string
+#  latitude       :float
+#  longitude      :float
+#  name           :string
+#  os             :string
+#  os_version     :string
+#  pathname       :string
+#  platform       :string
+#  props          :jsonb
+#  referer        :string
+#  referer_source :string
+#  region         :string
+#  started_at     :datetime         not null
+#  user_agent     :string
+#  user_token     :string           not null
+#  utm_campaign   :string
+#  utm_content    :string
+#  utm_medium     :string
+#  utm_source     :string
+#  utm_term       :string
+#  session_id     :string           not null
+#  site_id        :integer          not null
+#  user_id        :string
 #
 # Indexes
 #
