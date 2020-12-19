@@ -52,6 +52,7 @@ services:
       - packs:/app/public/packs
       - cache:/app/tmp/cache
       - bundle:/usr/local/bundle
+      - 'geoipupdate_data:/usr/share/GeoIP'
     depends_on:
       - postgres
       - tsdb
@@ -133,6 +134,22 @@ services:
     depends_on:
       - redis
 
+  geoipupdate:
+    container_name: geoipupdate
+    image: maxmindinc/geoipupdate
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-ASN GeoLite2-City GeoLite2-Country'
+      - GEOIPUPDATE_FREQUENCY=72
+    networks:
+      - geoipupdate
+    volumes:
+      - 'geoipupdate_data:/usr/share/GeoIP'
+
+networks:
+  geoipupdate:
+
 volumes:
   postgres:
   tsdb:
@@ -141,3 +158,5 @@ volumes:
   node_modules:
   cache:
   bundle:
+  geoipupdate_data:
+    driver: local
