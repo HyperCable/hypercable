@@ -12,6 +12,7 @@ class HitJob
     events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
     events.each do |event|
       # url = event["properties"]["url"]
+      ip_info = IPDB.get(ip)
 
       Hyper::Hit.create(
         site_id: 1,
@@ -27,6 +28,11 @@ class HitJob
         user_agent: request["user_agent"],
 
         platform: "Web",
+
+        country: ip_info[:country_name],
+        city: ip_info[:city],
+        latitude: ip_info[:latitude],
+        longitude: ip_info[:longitude]
 
       )
     end
