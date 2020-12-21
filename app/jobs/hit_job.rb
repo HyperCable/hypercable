@@ -11,7 +11,7 @@ class HitJob
 
     events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
     events.each do |event|
-      url = event["properties"]["url"]
+      # url = event["properties"]["url"]
 
       Hyper::Hit.create(
         site_id: 1,

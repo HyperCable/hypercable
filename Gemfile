@@ -63,3 +63,5 @@ gem "mini_sql", "~> 0.3"
 gem "device_detector", "~> 1.0"
 
 gem "geoip2_compat"
+
+gem "lru_redux", "~> 1.1"
