@@ -42,5 +42,40 @@
 #
 module Hyper
   class Hit < ApplicationHyperRecord
+    ATTRS = %W[
+      site_id
+
+      session_id
+      user_token
+      user_id
+
+      hostname
+      pathname
+      user_agent
+      ip
+      referer
+      referer_source
+      landing_page
+
+      country
+      region
+      city
+      latitude
+      longitude
+
+      utm_source
+      utm_medium
+      utm_term
+      utm_content
+      utm_campaign
+
+      browser
+      os
+      device_type
+
+      app_version
+      os_version
+      platform
+    ]
   end
 end

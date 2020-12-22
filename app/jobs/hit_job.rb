@@ -17,7 +17,7 @@ class HitJob
       tech_info = TechDetector.detect(request["user_agent"])
       referer_source = RefererSourceDetector.detect(request["referer"])
       puts event["time"]
-      Hyper::Hit.create(
+      hit = Hyper::Hit.create(
         site_id: 1,
         started_at: Time.at(event["time"]),
         name: event["name"],
@@ -42,9 +42,25 @@ class HitJob
         longitude: ip_info[:longitude]
 
       )
+      # TODO handle event & view different
+      if session = Hyper::Session.where(site_id: hit.site_id, session_id: hit.session_id).order("started_at desc").first
+        Hyper::Session
+          .where(site_id: hit.site_id, session_id: hit.session_id)
+          .where(started_at: session.started_at)
+          .update_all("end_at = '#{hit.started_at.to_s(:db)}', exit_page = '#{hit.pathname}', is_bounce = false, duration = EXTRACT(EPOCH FROM (end_at - started_at)), pageviews = pageviews + 1, events = events + 1")
+      else
+        Hyper::Session.create(
+          hit.attributes.slice(*Hyper::Hit::ATTRS).merge(
+            entry_page: hit.pathname,
+            exit_page: hit.pathname,
+            end_at: hit.started_at,
+            started_at: hit.started_at
+          )
+        )
+      end
     end
-    puts event["time"]
     puts Hyper::Hit.count
+    puts Hyper::Session.count
   end
 end
 

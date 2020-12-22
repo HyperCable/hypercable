@@ -18,6 +18,7 @@ ENV BUNDLE_PATH="/gems"
 RUN apk update \
   && apk add \
     openssl \
+    less \
     tar \
     build-base \
     tzdata \

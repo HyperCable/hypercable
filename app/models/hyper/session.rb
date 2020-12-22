@@ -42,7 +42,7 @@
 #
 # Indexes
 #
-#  index_sessions_on_site_id_and_session_id_and_started_at  (site_id,session_id,started_at DESC)
+#  index_sessions_on_site_id_and_session_id_and_started_at  (site_id,session_id,started_at DESC) UNIQUE
 #  sessions_started_at_idx                                  (started_at)
 #
 module Hyper
