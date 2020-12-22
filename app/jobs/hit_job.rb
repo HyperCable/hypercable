@@ -16,7 +16,7 @@ class HitJob
       ip_info = IPDB.get(request["ip"])
       tech_info = TechDetector.detect(request["user_agent"])
       referer_source = RefererSourceDetector.detect(request["referer"])
-puts event["time"]
+      puts event["time"]
       Hyper::Hit.create(
         site_id: 1,
         started_at: Time.at(event["time"]),
@@ -28,7 +28,7 @@ puts event["time"]
         hostname: url && URI.parse(url).host,
         ip: request["ip"],
         referer: request["referer"],
-        referer_source: referer_source, 
+        referer_source: referer_source,
         user_agent: request["user_agent"],
 
         platform: "Web",
