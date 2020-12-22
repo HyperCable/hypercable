@@ -10,23 +10,25 @@ class HitJob
     p request
 
     events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
-    
+
     events.each do |event|
       url = event["properties"]["url"] || event["properties"]["href"]
       ip_info = IPDB.get(request["ip"])
       tech_info = TechDetector.detect(request["user_agent"])
-
+      referer_source = RefererSourceDetector.detect(request["referer"])
+puts event["time"]
       Hyper::Hit.create(
         site_id: 1,
-        started_at: Time.now,
+        started_at: Time.at(event["time"]),
         name: event["name"],
         session_id: form["visit_token"],
-        user_token: form["visit_token"],
+        user_token: form["visitor_token"],
 
         pathname: event["properties"]["page"],
         hostname: url && URI.parse(url).host,
         ip: request["ip"],
         referer: request["referer"],
+        referer_source: referer_source, 
         user_agent: request["user_agent"],
 
         platform: "Web",
@@ -41,6 +43,7 @@ class HitJob
 
       )
     end
+    puts event["time"]
     puts Hyper::Hit.count
   end
 end
