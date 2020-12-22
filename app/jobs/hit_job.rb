@@ -13,6 +13,7 @@ class HitJob
     events.each do |event|
       url = event["properties"]["url"] || event["properties"]["href"]
       ip_info = IPDB.get(request["ip"])
+      tech_info = TechDetector.detect(request["user_agent"])
 
       Hyper::Hit.create(
         site_id: 1,
@@ -28,6 +29,9 @@ class HitJob
         user_agent: request["user_agent"],
 
         platform: "Web",
+        device_type: tech_info[:device_type],
+        os: tech_info[:os],
+        browser: tech_info[:browser],
 
         country: ip_info[:country_name],
         city: ip_info[:city],
