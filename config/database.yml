@@ -6,7 +6,7 @@ default: &default
 development:
   main:
     <<: *default
-    url: <%= ENV['DATABASE_URL'] %>
+    url: <%= ENV['MAIN_DATABASE_URL'] %>
     migrations_paths: db/migrate
   hyper:
     <<: *default
@@ -16,7 +16,7 @@ development:
 test:
   main:
     <<: *default
-    url: <%= ENV['DATABASE_URL'] %>
+    url: <%= ENV['MAIN_DATABASE_URL'] %>
     migrations_paths: db/migrate
   hyper:
     <<: *default
@@ -26,7 +26,7 @@ test:
 production:
   main:
     <<: *default
-    url: <%= ENV['DATABASE_URL'] %>
+    url: <%= ENV['MAIN_DATABASE_URL'] %>
     migrations_paths: db/migrate
   hyper:
     <<: *default

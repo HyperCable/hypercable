@@ -15,6 +15,70 @@ services:
     image: hypercable:development
     env_file: .env
 
+  postgres:
+    image: postgres:12
+    restart: always
+    ports:
+      - '4432:5432'
+    volumes:
+      - postgres:/data/postgres
+    environment:
+      - POSTGRES_DB=hypercable_dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  tsdb:
+    image: timescale/timescaledb:2.0.0-rc4-pg12
+    #image: timescale/timescaledb:latest-pg12
+    restart: always
+    ports:
+      - '5532:5432'
+    volumes:
+      - postgres:/data/tsdb
+    environment:
+      - POSTGRES_DB=tsdb_dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  redis:
+    image: redis:alpine
+    restart: always
+    command: ["sh", "-c", "redis-server --requirepass \"$REDIS_PASSWORD\""]
+    env_file: .env
+    volumes:
+      - redis:/data/redis
+    ports:
+      - '6380:6379'
+
+  openresty:
+    build:
+      context: ./docker/dockerfiles
+      dockerfile: openresty.Dockerfile
+    tty: true
+    restart: always
+    stdin_open: true
+    ports:
+      - '8000:8000'
+    image: hypercable-openresty:development
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+
+  geoipupdate:
+    container_name: geoipupdate
+    image: maxmindinc/geoipupdate
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-ASN GeoLite2-City GeoLite2-Country'
+      - GEOIPUPDATE_FREQUENCY=72
+    networks:
+      - geoipupdate
+    volumes:
+      - 'geoipupdate_data:/usr/local/var/GeoIP/'
+
   rails:
     <<: *base
     build:
@@ -83,69 +147,7 @@ services:
     entrypoint: docker/entrypoints/webpack.sh
     command: bin/webpack-dev-server
 
-  postgres:
-    image: postgres:12
-    restart: always
-    ports:
-      - '4432:5432'
-    volumes:
-      - postgres:/data/postgres
-    environment:
-      - POSTGRES_DB=hypercable_dev
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-
-  tsdb:
-    image: timescale/timescaledb:2.0.0-rc4-pg12
-    #image: timescale/timescaledb:latest-pg12
-    restart: always
-    ports:
-      - '5532:5432'
-    volumes:
-      - postgres:/data/tsdb
-    environment:
-      - POSTGRES_DB=tsdb_dev
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-
-  redis:
-    image: redis:alpine
-    restart: always
-    command: ["sh", "-c", "redis-server --requirepass \"$REDIS_PASSWORD\""]
-    env_file: .env
-    volumes:
-      - redis:/data/redis
-    ports:
-      - '6380:6379'
-
-  openresty:
-    build:
-      context: ./docker/dockerfiles
-      dockerfile: openresty.Dockerfile
-    tty: true
-    restart: always
-    stdin_open: true
-    ports:
-      - '8000:8000'
-    image: hypercable-openresty:development
-    environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-    depends_on:
-      - redis
-
-  geoipupdate:
-    container_name: geoipupdate
-    image: maxmindinc/geoipupdate
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-ASN GeoLite2-City GeoLite2-Country'
-      - GEOIPUPDATE_FREQUENCY=72
-    networks:
-      - geoipupdate
-    volumes:
-      - 'geoipupdate_data:/usr/local/var/GeoIP/'
+  
 
 networks:
   geoipupdate:

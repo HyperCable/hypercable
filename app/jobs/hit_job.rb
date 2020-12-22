@@ -10,6 +10,7 @@ class HitJob
     p request
 
     events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
+    
     events.each do |event|
       url = event["properties"]["url"] || event["properties"]["href"]
       ip_info = IPDB.get(request["ip"])
