@@ -16,8 +16,12 @@ class HitJob
       ip_info = IPDB.get(request["ip"])
       tech_info = TechDetector.detect(request["user_agent"])
       referer_source = RefererSourceDetector.detect(request["referer"])
-      puts event["time"]
-      hit = Hyper::Hit.create(
+      utm_info = UtmDetector.detect(url || "")
+
+      result = {}
+      result.merge!(utm_info)
+      result.merge!(tech_info)
+      result.merge!({
         site_id: 1,
         started_at: Time.at(event["time"]),
         name: event["name"],
@@ -32,16 +36,14 @@ class HitJob
         user_agent: request["user_agent"],
 
         platform: "Web",
-        device_type: tech_info[:device_type],
-        os: tech_info[:os],
-        browser: tech_info[:browser],
 
         country: ip_info[:country_name],
         city: ip_info[:city],
         latitude: ip_info[:latitude],
         longitude: ip_info[:longitude]
+      })
 
-      )
+      hit = Hyper::Hit.create(result)
       # TODO handle event & view different
       if session = Hyper::Session.where(site_id: hit.site_id, session_id: hit.session_id).order("started_at desc").first
         Hyper::Session
