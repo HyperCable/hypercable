@@ -238,6 +238,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  addressable (~> 2.7)
   annotate
   byebug
   capybara (>= 2.15)

@@ -65,3 +65,5 @@ gem "device_detector", "~> 1.0"
 gem "geoip2_compat"
 
 gem "lru_redux", "~> 1.1"
+
+gem "addressable", "~> 2.7"

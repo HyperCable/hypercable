@@ -13,7 +13,8 @@ class HitJob
 
     events.each do |event|
       url = event["properties"]["url"] || event["properties"]["href"]
-      ip_info = IPDB.get(request["ip"])
+      real_ip = request["x_forwarded_for"] || request["ip"]
+      ip_info = IPDB.get(real_ip)
       tech_info = TechDetector.detect(request["user_agent"])
       referer_source = RefererSourceDetector.detect(request["referer"])
       utm_info = UtmDetector.detect(url || "")
