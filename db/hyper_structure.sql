@@ -28,22 +28,41 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: hits; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.hits (
-    name character varying,
+    event_name character varying DEFAULT 'page_view'::character varying,
     site_id integer NOT NULL,
     session_id character varying NOT NULL,
-    user_token character varying NOT NULL,
+    client_id character varying NOT NULL,
     user_id character varying,
+    tracking_id character varying NOT NULL,
+    protocol_version character varying DEFAULT '2'::character varying,
+    data_source character varying DEFAULT 'web'::character varying,
+    location_url character varying,
     hostname character varying,
-    pathname character varying,
+    path character varying,
+    title character varying,
     user_agent character varying,
     ip character varying,
     referer character varying,
     referer_source character varying,
     landing_page character varying,
+    screen_resolution character varying,
+    user_language character varying,
     country character varying,
     region character varying,
     city character varying,
@@ -60,30 +79,10 @@ CREATE TABLE public.hits (
     app_version character varying,
     os_version character varying,
     platform character varying,
-    props jsonb DEFAULT '{}'::jsonb,
+    user_props jsonb DEFAULT '{}'::jsonb,
+    event_props jsonb DEFAULT '{}'::jsonb,
+    non_interaction_hit boolean DEFAULT false,
     started_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: _hyper_4_1_chunk; Type: TABLE; Schema: _timescaledb_internal; Owner: -
---
-
-CREATE TABLE _timescaledb_internal._hyper_4_1_chunk (
-    CONSTRAINT constraint_1 CHECK (((started_at >= '2020-12-17 00:00:00'::timestamp without time zone) AND (started_at < '2020-12-24 00:00:00'::timestamp without time zone)))
-)
-INHERITS (public.hits);
-
-
---
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.ar_internal_metadata (
-    key character varying NOT NULL,
-    value character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -101,17 +100,24 @@ CREATE TABLE public.schema_migrations (
 --
 
 CREATE TABLE public.sessions (
-    session_id character varying NOT NULL,
     site_id integer NOT NULL,
-    user_token character varying NOT NULL,
+    session_id character varying NOT NULL,
+    client_id character varying NOT NULL,
     user_id character varying,
+    tracking_id character varying NOT NULL,
+    protocol_version character varying DEFAULT '2'::character varying,
+    data_source character varying DEFAULT 'web'::character varying,
+    location_url character varying,
     hostname character varying,
-    pathname character varying,
+    path character varying,
+    title character varying,
     user_agent character varying,
     ip character varying,
     referer character varying,
     referer_source character varying,
     landing_page character varying,
+    screen_resolution character varying,
+    user_language character varying,
     country character varying,
     region character varying,
     city character varying,
@@ -140,13 +146,6 @@ CREATE TABLE public.sessions (
 
 
 --
--- Name: _hyper_4_1_chunk props; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
---
-
-ALTER TABLE ONLY _timescaledb_internal._hyper_4_1_chunk ALTER COLUMN props SET DEFAULT '{}'::jsonb;
-
-
---
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -160,20 +159,6 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
-
-
---
--- Name: _hyper_4_1_chunk_hits_started_at_idx; Type: INDEX; Schema: _timescaledb_internal; Owner: -
---
-
-CREATE INDEX _hyper_4_1_chunk_hits_started_at_idx ON _timescaledb_internal._hyper_4_1_chunk USING btree (started_at DESC);
-
-
---
--- Name: _hyper_4_1_chunk_index_hits_on_site_id_and_session_id_and_start; Type: INDEX; Schema: _timescaledb_internal; Owner: -
---
-
-CREATE INDEX _hyper_4_1_chunk_index_hits_on_site_id_and_session_id_and_start ON _timescaledb_internal._hyper_4_1_chunk USING btree (site_id, session_id, started_at DESC);
 
 
 --
@@ -229,7 +214,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201208173343'),
 ('20201208205418'),
 ('20201216100948'),
-('20201216101055'),
 ('20201217004521'),
 ('20201222091938');
 

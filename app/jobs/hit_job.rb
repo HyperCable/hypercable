@@ -4,9 +4,7 @@ class HitJob
   include Sidekiq::Worker
 
   def perform(*args)
-    p args
-    return
-    form, request = args
+    params, form, request = args
 
 
     events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
