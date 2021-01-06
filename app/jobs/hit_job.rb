@@ -44,10 +44,6 @@ class HitJob
         ip: request["ip"],
         referrer: event["dr"],
         referrer_source: referrer_source,
-
-        referrer: request["referer"],
-        referrer_source: referer_source,
-        user_agent: request["user_agent"],
         screen_resolution: event["sr"],
         user_language: event["ul"],
 
@@ -63,12 +59,12 @@ class HitJob
         Hyper::Session
           .where(site_id: hit.site_id, session_id: hit.session_id)
           .where(started_at: session.started_at)
-          .update_all("end_at = '#{hit.started_at.to_s(:db)}', exit_page = '#{hit.pathname}', is_bounce = false, duration = EXTRACT(EPOCH FROM (end_at - started_at)), pageviews = pageviews + 1, events = events + 1")
+          .update_all("end_at = '#{hit.started_at.to_s(:db)}', exit_page = '#{hit.path}', is_bounce = false, duration = EXTRACT(EPOCH FROM (end_at - started_at)), pageviews = pageviews + 1, events = events + 1")
       else
         Hyper::Session.create(
           hit.attributes.slice(*Hyper::Hit::ATTRS).merge(
-            entry_page: hit.pathname,
-            exit_page: hit.pathname,
+            entry_page: hit.path,
+            exit_page: hit.path,
             end_at: hit.started_at,
             started_at: hit.started_at
           )
