@@ -44,10 +44,6 @@ class AddHits < ActiveRecord::Migration[6.1]
       t.string :os
       t.string :device_type
 
-      # native apps
-      t.string :app_version
-      t.string :os_version
-      t.string :platform
       t.jsonb :user_props, default: {}
       t.jsonb :event_props, default: {}
 
@@ -97,11 +93,6 @@ class AddHits < ActiveRecord::Migration[6.1]
       t.string :browser
       t.string :os
       t.string :device_type
-
-      # native apps
-      t.string :app_version
-      t.string :os_version
-      t.string :platform
 
       # stats
       t.string :landing_page

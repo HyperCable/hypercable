@@ -6,15 +6,15 @@ class HitJob
   def perform(*args)
     params, form, request = args
 
-    #events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
+    # events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
     if form
-      events = form.split("\r\n").map{|x| x.split("&").map{|x| x.split("=")}.to_h.merge(params)}
+      events = form.split("\r\n").map { |x| x.split("&").map { |x| x.split("=") }.to_h.merge(params) }
     else
       events = [params]
     end
 
     events.each do |event|
-      url = event['dl']
+      url = event["dl"]
       real_ip = request["x_forwarded_for"] || request["ip"]
       ip_info = IPDB.get(real_ip)
       tech_info = TechDetector.detect(request["user_agent"])
@@ -25,34 +25,31 @@ class HitJob
       result.merge!(utm_info)
       result.merge!(tech_info)
       result.merge!({
-        event_name: event['en'],
-        tracking_id: event['tid'],
-        client_id: event['cid'],
         site_id: 1,
-        started_at: Time.now,
-        session_id: event['sid'],
+        event_name: event["en"],
+        session_id: event["sid"],
+        client_id: event["cid"],
         user_id: event["uid"],
+        tracking_id: event["tid"],
+        started_at: Time.now,
 
-        pathname: event["properties"]["page"],
-        
-        
+        protocol_version: event["v"],
+        data_source: "web",
+
+        location_url: event["dl"],
+        hostname: URI.parse(url).host,
+        path: URI.parse(url).path,
+        title: event["dt"],
+        user_agent: request["user_agent"],
+        ip: request["ip"],
+        referrer: event["dr"],
+        referrer_source: referrer_source,
+
         referrer: request["referer"],
         referrer_source: referer_source,
         user_agent: request["user_agent"],
-
-        location_url: event['dl'],
-        hostname: URI.parse(url).host,
-        path: URI.parse(url).path,
-        title: event['dt'],
-        user_agent: request['user_agent'],
-        ip: request["ip"],
-        referrer: event['dr'],
-        referrer_source: referrer_source,
-        screen_resolution: event['sr'],
-        user_language: event['ul'],
-
-
-        platform: "Web",
+        screen_resolution: event["sr"],
+        user_language: event["ul"],
 
         country: ip_info[:country_name],
         city: ip_info[:city],
@@ -60,7 +57,7 @@ class HitJob
         longitude: ip_info[:longitude]
       })
 
-      hit = Hyper::Hit.create(result)
+      hit = Hyper::Hit.create!(result)
       # TODO handle event & view different
       if session = Hyper::Session.where(site_id: hit.site_id, session_id: hit.session_id).order("started_at desc").first
         Hyper::Session

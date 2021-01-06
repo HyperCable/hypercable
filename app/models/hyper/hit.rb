@@ -51,6 +51,7 @@
 module Hyper
   class Hit < ApplicationHyperRecord
     ATTRS = %W[
+      site_id
       session_id
       client_id
       user_id
@@ -85,10 +86,6 @@ module Hyper
       browser
       os
       device_type
-
-      app_version
-      os_version
-      platform
     ]
   end
 end
