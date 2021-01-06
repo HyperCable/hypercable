@@ -28,8 +28,8 @@
 #  path              :string
 #  platform          :string
 #  protocol_version  :string           default("2")
-#  referer           :string
-#  referer_source    :string
+#  referrer          :string
+#  referrer_source   :string
 #  region            :string
 #  screen_resolution :string
 #  started_at        :datetime         not null

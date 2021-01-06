@@ -20,9 +20,8 @@ class AddHits < ActiveRecord::Migration[6.1]
       t.string :title
       t.string :user_agent
       t.string :ip
-      t.string :referer
-      t.string :referer_source
-      t.string :landing_page
+      t.string :referrer
+      t.string :referrer_source
       t.string :screen_resolution
       t.string :user_language
 
@@ -75,9 +74,8 @@ class AddHits < ActiveRecord::Migration[6.1]
       t.string :title
       t.string :user_agent
       t.string :ip
-      t.string :referer
-      t.string :referer_source
-      t.string :landing_page
+      t.string :referrer
+      t.string :referrer_source
       t.string :screen_resolution
       t.string :user_language
 
@@ -106,6 +104,7 @@ class AddHits < ActiveRecord::Migration[6.1]
       t.string :platform
 
       # stats
+      t.string :landing_page
       t.boolean :is_bounce, default: true
       t.string :entry_page
       t.string :exit_page

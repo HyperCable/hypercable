@@ -6,33 +6,51 @@ class HitJob
   def perform(*args)
     params, form, request = args
 
-
-    events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
+    #events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
+    if form
+      events = form.split("\r\n").map{|x| x.split("&").map{|x| x.split("=")}.to_h.merge(params)}
+    else
+      events = [params]
+    end
 
     events.each do |event|
-      url = event["properties"]["url"] || event["properties"]["href"]
+      url = event['dl']
       real_ip = request["x_forwarded_for"] || request["ip"]
       ip_info = IPDB.get(real_ip)
       tech_info = TechDetector.detect(request["user_agent"])
-      referer_source = RefererSourceDetector.detect(request["referer"])
+      referrer_source = RefererSourceDetector.detect(event["dr"])
       utm_info = UtmDetector.detect(url || "")
 
       result = {}
       result.merge!(utm_info)
       result.merge!(tech_info)
       result.merge!({
+        event_name: event['en'],
+        tracking_id: event['tid'],
+        client_id: event['cid'],
         site_id: 1,
-        started_at: Time.at(event["time"]),
-        name: event["name"],
-        session_id: form["visit_token"],
-        user_token: form["visitor_token"],
+        started_at: Time.now,
+        session_id: event['sid'],
+        user_id: event["uid"],
 
         pathname: event["properties"]["page"],
-        hostname: url && URI.parse(url).host,
-        ip: request["ip"],
-        referer: request["referer"],
-        referer_source: referer_source,
+        
+        
+        referrer: request["referer"],
+        referrer_source: referer_source,
         user_agent: request["user_agent"],
+
+        location_url: event['dl'],
+        hostname: URI.parse(url).host,
+        path: URI.parse(url).path,
+        title: event['dt'],
+        user_agent: request['user_agent'],
+        ip: request["ip"],
+        referrer: event['dr'],
+        referrer_source: referrer_source,
+        screen_resolution: event['sr'],
+        user_language: event['ul'],
+
 
         platform: "Web",
 

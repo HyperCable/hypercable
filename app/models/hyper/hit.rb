@@ -14,7 +14,6 @@
 #  event_props         :jsonb
 #  hostname            :string
 #  ip                  :string
-#  landing_page        :string
 #  latitude            :float
 #  location_url        :string
 #  longitude           :float
@@ -24,8 +23,8 @@
 #  path                :string
 #  platform            :string
 #  protocol_version    :string           default("2")
-#  referer             :string
-#  referer_source      :string
+#  referrer            :string
+#  referrer_source     :string
 #  region              :string
 #  screen_resolution   :string
 #  started_at          :datetime         not null
@@ -52,19 +51,24 @@
 module Hyper
   class Hit < ApplicationHyperRecord
     ATTRS = %W[
-      site_id
-
       session_id
-      user_token
+      client_id
       user_id
+      tracking_id
 
+      protocol_version
+      data_source
+
+      location_url
       hostname
-      pathname
+      path
+      title
       user_agent
       ip
-      referer
-      referer_source
-      landing_page
+      referrer
+      referrer_source
+      screen_resolution
+      user_language
 
       country
       region
