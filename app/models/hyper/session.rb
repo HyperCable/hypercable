@@ -4,7 +4,6 @@
 #
 # Table name: sessions
 #
-#  app_version       :string
 #  browser           :string
 #  city              :string
 #  country           :string
@@ -23,10 +22,8 @@
 #  location_url      :string
 #  longitude         :float
 #  os                :string
-#  os_version        :string
 #  pageviews         :integer          default(0)
 #  path              :string
-#  platform          :string
 #  protocol_version  :string           default("2")
 #  referrer          :string
 #  referrer_source   :string

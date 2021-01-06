@@ -8,7 +8,7 @@ class HitJob
 
     # events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
     if form
-      events = form.split("\r\n").map { |x| x.split("&").map { |x| x.split("=") }.to_h.merge(params) }
+      events = form.split("\r\n").map { |x| x.split("&").map { |y| y.split("=") }.to_h.merge(params) }
     else
       events = [params]
     end

@@ -4,7 +4,6 @@
 #
 # Table name: hits
 #
-#  app_version         :string
 #  browser             :string
 #  city                :string
 #  country             :string
@@ -19,9 +18,7 @@
 #  longitude           :float
 #  non_interaction_hit :boolean          default(FALSE)
 #  os                  :string
-#  os_version          :string
 #  path                :string
-#  platform            :string
 #  protocol_version    :string           default("2")
 #  referrer            :string
 #  referrer_source     :string
