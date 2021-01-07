@@ -8,7 +8,7 @@ class HitJob
 
     # events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
     if form
-      events = form.split("\r\n").map { |x| x.split("&").map { |y| y.split("=") }.to_h.merge(params) }
+      events = form.split("\r\n").map { |x| URI.decode_www_form(x).to_h.merge(params) }
     else
       events = [params]
     end
@@ -20,6 +20,8 @@ class HitJob
       tech_info = TechDetector.detect(request["user_agent"])
       referrer_source = RefererSourceDetector.detect(event["dr"])
       utm_info = UtmDetector.detect(url || "")
+      payload_parser = PayloadParser.new(event)
+
 
       result = {}
       result.merge!(utm_info)
@@ -50,7 +52,10 @@ class HitJob
         country: ip_info[:country_name],
         city: ip_info[:city],
         latitude: ip_info[:latitude],
-        longitude: ip_info[:longitude]
+        longitude: ip_info[:longitude],
+
+        user_props: payload_parser.user_props,
+        event_props: payload_parser.event_props
       })
 
       hit = Hyper::Hit.create!(result)
