@@ -51,6 +51,9 @@ class PayloadParser
     parse!
   end
 
+  # TODO type cast for numberic field
+  # TODO kn & vn fix
+  # TODO item list name fix
   def parse!
     params.each do |key, value|
       if event_prop_key_matched = key.match(EVENT_PROP_KEY)
@@ -72,11 +75,11 @@ class PayloadParser
       end
 
       if items_key_matched = key.match(ITEMS_KEY)
-        items[items_key_matched[:index]] = to_item_hash(value)
+        items[items_key_matched[:index].to_i - 1] = to_item_hash(value)
         next
       end
     end
-    event_props["items"] = items
+    event_props["items"] = items if %w[add_payment_info add_shipping_info add_to_cart add_to_wishlist begin_checkout purchase refund remove_from_cart select_item select_promotion view_cart view_item view_item_list view_promotion].include?(params["en"])
   end
 
   def to_item_hash(string)
