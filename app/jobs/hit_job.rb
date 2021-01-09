@@ -21,6 +21,7 @@ class HitJob
       referrer_source = RefererSourceDetector.detect(event["dr"])
       utm_info = UtmDetector.detect(url || "")
       payload_parser = PayloadParser.new(event)
+      p event
 
 
       result = {}
