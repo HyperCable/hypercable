@@ -24,6 +24,7 @@ class PayloadParser
     price: :pr,
     item_list_name: :ln,
     item_list_id: :li,
+    list_position: :lp,
     promotion_id: :pi,
     promotion_name: :pn,
     creative_name: :cn,
@@ -71,7 +72,7 @@ class PayloadParser
       end
 
       if items_key_matched = key.match(ITEMS_KEY)
-        items << to_item_hash(value)
+        items[items_key_matched[:index]] = to_item_hash(value)
         next
       end
     end
@@ -79,10 +80,9 @@ class PayloadParser
   end
 
   def to_item_hash(string)
-    binding.pry
     result = {}
     scanner = StringScanner.new(string)
-    parsed_data = KEYS.map do |_, _|
+    KEYS.each do |_, _|
       segment = scanner.scan(/(#{KEYS_REG})([^~]|(?:~~))*(?:$|~(?=#{KEYS_REG}))/)
       next unless segment
       matched = segment.match(/^(#{KEYS_REG})(.*?)~?$/)
