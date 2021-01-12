@@ -54,7 +54,6 @@ class PayloadParser
     parse!
   end
 
-  # TODO type cast for numberic field
   # TODO item list name fix
   def parse!
     params.each do |key, value|
