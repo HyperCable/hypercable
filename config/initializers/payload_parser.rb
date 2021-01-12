@@ -52,7 +52,6 @@ class PayloadParser
   end
 
   # TODO type cast for numberic field
-  # TODO kn & vn fix
   # TODO item list name fix
   def parse!
     params.each do |key, value|
@@ -91,6 +90,12 @@ class PayloadParser
       matched = segment.match(/^(#{KEYS_REG})(.*?)~?$/)
       next if matched[1].nil? || matched[2].nil?
       result[KEYS_INVERT[matched[1].to_sym]] = matched[2].gsub("~~", "~")
+    end
+
+    (0..3).each do |i|
+      if key = result.delete("k#{i}".to_sym)
+        result[key] = result.delete("v#{i}")
+      end
     end
     result
   end
