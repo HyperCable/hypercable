@@ -7,6 +7,7 @@ class PayloadParser
   USER_PROP_KEY  = /^up(?<is_number>n)?\.(?<key>\w+)(\.(?<ext>\w+))?$/
   ITEMS_KEY = /^pr(?<index>\d+)$/
 
+  # https://developers.google.com/gtagjs/reference/ga4-events
   KEYS = {
     item_id: :id,
     item_name: :nm,
@@ -39,6 +40,8 @@ class PayloadParser
     k3: :k3,
     v3: :v3,
   }
+
+  NUMBERS = %i[quantity discount price]
 
   KEYS_INVERT = KEYS.invert
   KEYS_REG = KEYS.values.join("|")
@@ -89,7 +92,7 @@ class PayloadParser
       next unless segment
       matched = segment.match(/^(#{KEYS_REG})(.*?)~?$/)
       next if matched[1].nil? || matched[2].nil?
-      result[KEYS_INVERT[matched[1].to_sym]] = matched[2].gsub("~~", "~")
+      result[KEYS_INVERT[matched[1].to_sym]] = NUMBERS.include?(KEYS_INVERT[matched[1].to_sym) ? matched[2].gsub("~~", "~").to_f  : matched[2].gsub("~~", "~")
     end
 
     (0..3).each do |i|
