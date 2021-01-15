@@ -5,6 +5,7 @@ Web for hypercable analytics.
 
 ## local setup
 
+* env: cp .env.example.docker .env
 * build: docker-compose build
 * start: docker-compose up
 * stop: docker-compose stop
