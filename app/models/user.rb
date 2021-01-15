@@ -18,4 +18,7 @@
 class User < ApplicationRecord
   has_many :sites
   has_many :goals
+
+  has_many :site_members
+  has_many :own_sites, through: :site_members, class_name: "Site"
 end

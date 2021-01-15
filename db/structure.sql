@@ -69,6 +69,38 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: site_members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.site_members (
+    id bigint NOT NULL,
+    site_id bigint,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: site_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.site_members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: site_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.site_members_id_seq OWNED BY public.site_members.id;
+
+
+--
 -- Name: sites; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -143,6 +175,13 @@ ALTER TABLE ONLY public.goals ALTER COLUMN id SET DEFAULT nextval('public.goals_
 
 
 --
+-- Name: site_members id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.site_members ALTER COLUMN id SET DEFAULT nextval('public.site_members_id_seq'::regclass);
+
+
+--
 -- Name: sites id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -181,6 +220,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: site_members site_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.site_members
+    ADD CONSTRAINT site_members_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sites sites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -208,6 +255,13 @@ CREATE INDEX index_goals_on_site_id ON public.goals USING btree (site_id);
 --
 
 CREATE INDEX index_goals_on_user_id ON public.goals USING btree (user_id);
+
+
+--
+-- Name: index_site_members_on_site_id_and_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_site_members_on_site_id_and_user_id ON public.site_members USING btree (site_id, user_id);
 
 
 --
@@ -242,6 +296,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201217005220'),
 ('20210110190350'),
 ('20210110200847'),
-('20210115100815');
+('20210115100815'),
+('20210115101634');
 
 
