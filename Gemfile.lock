@@ -255,6 +255,7 @@ DEPENDENCIES
   geoip2_compat
   jbuilder (~> 2.7)
   lru_redux (~> 1.1)
+  mini_portile2 (~> 2.5)
   mini_sql (~> 0.3)
   pg (>= 0.18, < 2.0)
   pry-rails (~> 0.3.9)
