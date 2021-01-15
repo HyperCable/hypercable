@@ -26,6 +26,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: goals; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.goals (
+    id bigint NOT NULL,
+    user_id bigint,
+    site_id bigint,
+    event_name character varying,
+    path character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: goals_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.goals_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: goals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.goals_id_seq OWNED BY public.goals.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -102,6 +136,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: goals id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.goals ALTER COLUMN id SET DEFAULT nextval('public.goals_id_seq'::regclass);
+
+
+--
 -- Name: sites id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -121,6 +162,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: goals goals_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.goals
+    ADD CONSTRAINT goals_pkey PRIMARY KEY (id);
 
 
 --
@@ -145,6 +194,20 @@ ALTER TABLE ONLY public.sites
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_goals_on_site_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_goals_on_site_id ON public.goals USING btree (site_id);
+
+
+--
+-- Name: index_goals_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_goals_on_user_id ON public.goals USING btree (user_id);
 
 
 --
@@ -178,6 +241,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201116103746'),
 ('20201217005220'),
 ('20210110190350'),
-('20210110200847');
+('20210110200847'),
+('20210115100815');
 
 

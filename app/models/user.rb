@@ -17,4 +17,5 @@
 #
 class User < ApplicationRecord
   has_many :sites
+  has_many :goals
 end

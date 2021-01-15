@@ -95,6 +95,16 @@ INHERITS (public.sessions);
 
 
 --
+-- Name: _hyper_3_6_chunk; Type: TABLE; Schema: _timescaledb_internal; Owner: -
+--
+
+CREATE TABLE _timescaledb_internal._hyper_3_6_chunk (
+    CONSTRAINT constraint_6 CHECK (((started_at >= '2021-01-14 00:00:00'::timestamp without time zone) AND (started_at < '2021-01-21 00:00:00'::timestamp without time zone)))
+)
+INHERITS (public.sessions);
+
+
+--
 -- Name: hits; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -153,6 +163,16 @@ INHERITS (public.hits);
 
 CREATE TABLE _timescaledb_internal._hyper_4_3_chunk (
     CONSTRAINT constraint_3 CHECK (((started_at >= '2021-01-07 00:00:00'::timestamp without time zone) AND (started_at < '2021-01-14 00:00:00'::timestamp without time zone)))
+)
+INHERITS (public.hits);
+
+
+--
+-- Name: _hyper_4_5_chunk; Type: TABLE; Schema: _timescaledb_internal; Owner: -
+--
+
+CREATE TABLE _timescaledb_internal._hyper_4_5_chunk (
+    CONSTRAINT constraint_5 CHECK (((started_at >= '2021-01-14 00:00:00'::timestamp without time zone) AND (started_at < '2021-01-21 00:00:00'::timestamp without time zone)))
 )
 INHERITS (public.hits);
 
@@ -263,6 +283,48 @@ ALTER TABLE ONLY _timescaledb_internal._hyper_3_4_chunk ALTER COLUMN duration SE
 
 
 --
+-- Name: _hyper_3_6_chunk protocol_version; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_3_6_chunk ALTER COLUMN protocol_version SET DEFAULT '2'::character varying;
+
+
+--
+-- Name: _hyper_3_6_chunk data_source; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_3_6_chunk ALTER COLUMN data_source SET DEFAULT 'web'::character varying;
+
+
+--
+-- Name: _hyper_3_6_chunk is_bounce; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_3_6_chunk ALTER COLUMN is_bounce SET DEFAULT true;
+
+
+--
+-- Name: _hyper_3_6_chunk pageviews; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_3_6_chunk ALTER COLUMN pageviews SET DEFAULT 0;
+
+
+--
+-- Name: _hyper_3_6_chunk events; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_3_6_chunk ALTER COLUMN events SET DEFAULT 0;
+
+
+--
+-- Name: _hyper_3_6_chunk duration; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_3_6_chunk ALTER COLUMN duration SET DEFAULT 0;
+
+
+--
 -- Name: _hyper_4_1_chunk event_name; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
 --
 
@@ -347,6 +409,48 @@ ALTER TABLE ONLY _timescaledb_internal._hyper_4_3_chunk ALTER COLUMN non_interac
 
 
 --
+-- Name: _hyper_4_5_chunk event_name; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_4_5_chunk ALTER COLUMN event_name SET DEFAULT 'page_view'::character varying;
+
+
+--
+-- Name: _hyper_4_5_chunk protocol_version; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_4_5_chunk ALTER COLUMN protocol_version SET DEFAULT '2'::character varying;
+
+
+--
+-- Name: _hyper_4_5_chunk data_source; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_4_5_chunk ALTER COLUMN data_source SET DEFAULT 'web'::character varying;
+
+
+--
+-- Name: _hyper_4_5_chunk user_props; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_4_5_chunk ALTER COLUMN user_props SET DEFAULT '{}'::jsonb;
+
+
+--
+-- Name: _hyper_4_5_chunk event_props; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_4_5_chunk ALTER COLUMN event_props SET DEFAULT '{}'::jsonb;
+
+
+--
+-- Name: _hyper_4_5_chunk non_interaction_hit; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_4_5_chunk ALTER COLUMN non_interaction_hit SET DEFAULT false;
+
+
+--
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -391,6 +495,20 @@ CREATE INDEX _hyper_3_4_chunk_sessions_started_at_idx ON _timescaledb_internal._
 
 
 --
+-- Name: _hyper_3_6_chunk_index_sessions_on_site_id_and_session_id_and_s; Type: INDEX; Schema: _timescaledb_internal; Owner: -
+--
+
+CREATE UNIQUE INDEX _hyper_3_6_chunk_index_sessions_on_site_id_and_session_id_and_s ON _timescaledb_internal._hyper_3_6_chunk USING btree (site_id, session_id, started_at DESC);
+
+
+--
+-- Name: _hyper_3_6_chunk_sessions_started_at_idx; Type: INDEX; Schema: _timescaledb_internal; Owner: -
+--
+
+CREATE INDEX _hyper_3_6_chunk_sessions_started_at_idx ON _timescaledb_internal._hyper_3_6_chunk USING btree (started_at DESC);
+
+
+--
 -- Name: _hyper_4_1_chunk_hits_started_at_idx; Type: INDEX; Schema: _timescaledb_internal; Owner: -
 --
 
@@ -416,6 +534,20 @@ CREATE INDEX _hyper_4_3_chunk_hits_started_at_idx ON _timescaledb_internal._hype
 --
 
 CREATE INDEX _hyper_4_3_chunk_index_hits_on_site_id_and_session_id_and_start ON _timescaledb_internal._hyper_4_3_chunk USING btree (site_id, session_id, started_at DESC);
+
+
+--
+-- Name: _hyper_4_5_chunk_hits_started_at_idx; Type: INDEX; Schema: _timescaledb_internal; Owner: -
+--
+
+CREATE INDEX _hyper_4_5_chunk_hits_started_at_idx ON _timescaledb_internal._hyper_4_5_chunk USING btree (started_at DESC);
+
+
+--
+-- Name: _hyper_4_5_chunk_index_hits_on_site_id_and_session_id_and_start; Type: INDEX; Schema: _timescaledb_internal; Owner: -
+--
+
+CREATE INDEX _hyper_4_5_chunk_index_hits_on_site_id_and_session_id_and_start ON _timescaledb_internal._hyper_4_5_chunk USING btree (site_id, session_id, started_at DESC);
 
 
 --
