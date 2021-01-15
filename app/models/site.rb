@@ -23,4 +23,6 @@ class Site < ApplicationRecord
 
   has_many :site_members
   has_many :members, through: :site_members, class_name: "User"
+
+  has_many :shared_links
 end

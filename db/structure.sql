@@ -69,6 +69,38 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: shared_links; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.shared_links (
+    id bigint NOT NULL,
+    site_id bigint,
+    slug character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: shared_links_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.shared_links_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: shared_links_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.shared_links_id_seq OWNED BY public.shared_links.id;
+
+
+--
 -- Name: site_members; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -175,6 +207,13 @@ ALTER TABLE ONLY public.goals ALTER COLUMN id SET DEFAULT nextval('public.goals_
 
 
 --
+-- Name: shared_links id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.shared_links ALTER COLUMN id SET DEFAULT nextval('public.shared_links_id_seq'::regclass);
+
+
+--
 -- Name: site_members id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -220,6 +259,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: shared_links shared_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.shared_links
+    ADD CONSTRAINT shared_links_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: site_members site_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -255,6 +302,20 @@ CREATE INDEX index_goals_on_site_id ON public.goals USING btree (site_id);
 --
 
 CREATE INDEX index_goals_on_user_id ON public.goals USING btree (user_id);
+
+
+--
+-- Name: index_shared_links_on_site_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_shared_links_on_site_id ON public.shared_links USING btree (site_id);
+
+
+--
+-- Name: index_shared_links_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_shared_links_on_slug ON public.shared_links USING btree (slug);
 
 
 --
@@ -297,6 +358,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210110190350'),
 ('20210110200847'),
 ('20210115100815'),
-('20210115101634');
+('20210115101634'),
+('20210115103047');
 
 
