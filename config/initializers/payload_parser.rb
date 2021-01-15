@@ -91,7 +91,7 @@ class PayloadParser
       next unless segment
       matched = segment.match(/^(#{KEYS_REG})(.*?)~?$/)
       next if matched[1].nil? || matched[2].nil?
-      result[KEYS_INVERT[matched[1].to_sym]] = NUMBERS.include?(KEYS_INVERT[matched[1].to_sym) ? matched[2].gsub("~~", "~").to_f  : matched[2].gsub("~~", "~")
+      result[KEYS_INVERT[matched[1].to_sym]] = NUMBERS.include?(KEYS_INVERT[matched[1].to_sym]) ? matched[2].gsub("~~", "~").to_f : matched[2].gsub("~~", "~")
     end
 
     (0..3).each do |i|
