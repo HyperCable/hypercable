@@ -64,7 +64,7 @@ services:
     networks:
       - geoipupdate
     volumes:
-      - 'geoipupdate_data:/usr/local/var/GeoIP/'
+      - 'geoipupdate_data:/usr/share/GeoIP/'
 
   rails:
     <<: *base
@@ -98,11 +98,12 @@ services:
       - packs:/app/public/packs
       - cache:/app/tmp/cache
       - bundle:/usr/local/bundle
-      - 'geoipupdate_data:/usr/local/var/GeoIP/'
+      - 'geoipupdate_data:/usr/share/GeoIP/'
     depends_on:
       - postgres
       - tsdb
       - redis
+      - geoipupdate
     environment:
       - NODE_ENV=production
       - RAILS_ENV=production
