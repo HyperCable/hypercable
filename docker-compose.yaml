@@ -85,6 +85,7 @@ services:
       context: .
       dockerfile: ./docker/dockerfiles/rails.Dockerfile
     image: hypercable-rails:development
+    restart: always
     volumes:
       - ./:/app:delegated
       - node_modules:/app/node_modules
@@ -110,6 +111,7 @@ services:
   sidekiq:
     <<: *base
     image: hypercable-rails:development
+    restart: always
     volumes:
       - ./:/app:delegated
       - node_modules:/app/node_modules
