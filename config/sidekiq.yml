@@ -17,6 +17,6 @@
 
 # you can override concurrency based on environment
 production:
-  :concurrency: ENV['SIDEKIQ_CONCURRENCY'] || 25
+  :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 25 %>
 staging:
   :concurrency: 15
