@@ -19,3 +19,5 @@ Web for hypercable analytics.
 * edit .env.production
 * docker-compose -f docker-compose.production.yaml run rails  rake db:migrate
 * docker-compose -f docker-compose.production.yaml up -d
+* git pull && docker-compose -f docker-compose.production.yaml pull
+* docker-compose -f docker-compose.production.yaml logs --tail="all"
