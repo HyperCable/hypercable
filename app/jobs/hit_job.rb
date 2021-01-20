@@ -6,7 +6,6 @@ class HitJob
   def perform(*args)
     params, form, request = args
 
-    # events = FastJsonparser.parse(form["events_json"], symbolize_keys: false)
     if form
       events = form.split("\r\n").map { |x| URI.decode_www_form(x).to_h.merge(params) }
     else
@@ -75,8 +74,6 @@ class HitJob
         )
       end
     end
-    puts Hyper::Hit.count
-    puts Hyper::Session.count
   end
 end
 
