@@ -1,0 +1,53 @@
+<div class="mx-auto mt-6 text-center">
+  <h1 class="text-3xl font-black">Register your 30-day unlimited-use free trial</h1>
+  <div class="text-xl font-medium">Set up privacy-friendly analytics with just a few clicks</div>
+</div>
+
+<div>
+  <div class="w-full max-w-3xl mt-4 mx-auto flex">
+<form action="/register" class="w-full max-w-md mx-auto bg-white shadow-md rounded px-8 py-6 mb-4 mt-8" id="register-form" method="post"><input name="_csrf_token" type="hidden" value="PhNYGzIvARNeLUQrKmkEGAY8BRFNMSwQNDnJHf9u0cpsG8PsVtDAuyfR">      <h2 class="text-xl font-black">Enter your details</h2>
+      <div class="my-4">
+<label class="block text-gray-700 text-sm font-bold mb-2" for="user_name">Full name</label><input class="transition bg-gray-100 appearance-none border border-transparent rounded w-full p-2 text-gray-700 leading-normal appearance-none focus:outline-none focus:bg-white focus:border-gray-300" id="user_name" name="user[name]" placeholder="Jane Doe" type="text">      </div>
+      <div class="my-4">
+<label class="block text-gray-700 text-sm font-bold mb-2" for="user_email">Email</label>        <p class="text-gray-600 text-xs mt-1 mb-2">No spam, guaranteed.</p>
+<input class="transition bg-gray-100 appearance-none border border-transparent rounded w-full p-2 text-gray-700 leading-normal appearance-none focus:outline-none focus:bg-white focus:border-gray-300" id="user_email" name="user[email]" placeholder="example@email.com" type="email">      </div>
+
+
+<button class="button mt-4 w-full" type="submit">Start my free trial →</button>
+      <p class="text-center text-gray-600 text-xs mt-4">
+        Already have an account? <a class="underline text-gray-800" href="<%= new_session_path%>">Log in</a> instead.
+      </p>
+</form>    <div class="pt-12 pl-8 hidden md:block">
+      <ul class="mt-2 leading-loose">
+        <li>
+          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Quick and easy to set up
+        </li>
+        <li>
+          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          No credit card required
+        </li>
+        <li>
+          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Unlimited use during the trial
+        </li>
+        <li>
+          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          From just $6/mo after the trial
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

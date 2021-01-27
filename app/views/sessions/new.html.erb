@@ -1,0 +1,20 @@
+<form action="/login" class="w-full max-w-md mx-auto bg-white dark:bg-gray-800 shadow-md rounded px-8 py-6 mt-8" method="post"><input name="_csrf_token" type="hidden" value="JUEwKTEOEzgieAJbBT8MOQw-LR1QBh40wvcqDyksU070QNmcxolDhRyl">
+  <h1 class="text-xl font-black dark:text-gray-100">Enter your email and password</h1>
+
+
+  <div class="my-4 mt-8">
+<label class="block text-gray-700 dark:text-gray-300  text-sm font-bold mb-2" for="email">Email</label>
+<input class="bg-gray-100 dark:bg-gray-900 outline-none appearance-none border border-transparent rounded w-full p-2 text-gray-700 dark:text-gray-300 leading-normal appearance-none focus:outline-none focus:bg-white dark:focus:bg-gray-800 focus:border-gray-300 dark:focus:border-gray-500" id="email" name="email" placeholder="user@example.com" type="email">
+  </div>
+  <div class="my-4">
+<label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="password">Password</label>
+<input class="transition bg-gray-100 dark:bg-gray-900 outline-none appearance-none border border-transparent rounded w-full p-2 text-gray-700 dark:text-gray-300 leading-normal appearance-none focus:outline-none focus:bg-white dark:focus:bg-gray-800 focus:border-gray-300 dark:focus:border-gray-500" id="password" name="password" type="password">
+    <p class="text-gray-500 text-xs my-2">Forgot password? <a href="/password/request-reset" class="underline text-gray-800 dark:text-gray-50">Click here</a> to reset it.</p>
+  </div>
+<button class="button mt-4 w-full" type="submit">Login →</button>
+
+     <p class="text-center text-gray-500 text-xs mt-4">
+      Don't have an account? <a class="text-gray-800 dark:text-gray-50 underline" href="<%= new_registration_path %>">Register</a> instead.
+      </p>
+
+</form>

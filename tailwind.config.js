@@ -2,8 +2,6 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
   purge: [
-    './js/**/*.js',
-    '../lib/plausible_web/templates/**/*.html.eex',
   ],
   darkMode: 'class',
   theme: {
