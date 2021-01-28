@@ -2,4 +2,8 @@
 
 class RegistrationsController < ApplicationController
   layout "auth"
+
+  def new
+    headers["X-Robots-Tag"] = "none"
+  end
 end

@@ -1,53 +1,112 @@
-<div class="mx-auto mt-6 text-center">
+<div class="mx-auto mt-6 text-center dark:text-gray-300">
   <h1 class="text-3xl font-black">Register your 30-day unlimited-use free trial</h1>
   <div class="text-xl font-medium">Set up privacy-friendly analytics with just a few clicks</div>
 </div>
 
-<div>
-  <div class="w-full max-w-3xl mt-4 mx-auto flex">
-<form action="/register" class="w-full max-w-md mx-auto bg-white shadow-md rounded px-8 py-6 mb-4 mt-8" id="register-form" method="post"><input name="_csrf_token" type="hidden" value="PhNYGzIvARNeLUQrKmkEGAY8BRFNMSwQNDnJHf9u0cpsG8PsVtDAuyfR">      <h2 class="text-xl font-black">Enter your details</h2>
-      <div class="my-4">
-<label class="block text-gray-700 text-sm font-bold mb-2" for="user_name">Full name</label><input class="transition bg-gray-100 appearance-none border border-transparent rounded w-full p-2 text-gray-700 leading-normal appearance-none focus:outline-none focus:bg-white focus:border-gray-300" id="user_name" name="user[name]" placeholder="Jane Doe" type="text">      </div>
-      <div class="my-4">
-<label class="block text-gray-700 text-sm font-bold mb-2" for="user_email">Email</label>        <p class="text-gray-600 text-xs mt-1 mb-2">No spam, guaranteed.</p>
-<input class="transition bg-gray-100 appearance-none border border-transparent rounded w-full p-2 text-gray-700 leading-normal appearance-none focus:outline-none focus:bg-white focus:border-gray-300" id="user_email" name="user[email]" placeholder="example@email.com" type="email">      </div>
+<div class="w-full max-w-3xl mt-4 mx-auto flex flex-shrink-0">
+<form action="/register" class="w-full max-w-md mx-auto bg-white dark:bg-gray-800 shadow-md rounded px-8 py-6 mb-4 mt-8" id="register-form" method="post"><input name="_csrf_token" type="hidden" value="FwZSNwgmABgqUCwbKm41IHQzeC0hMH4aowkEDifrX4EruCcPFp1JRiI_">
+    <h2 class="text-xl font-black dark:text-gray-100">Enter your details</h2>
+    <div class="my-4">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_name">Full name</label>
+      <div class="mt-1">
+<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_name" name="user[name]" placeholder="Jane Doe" type="text">
+      </div>
+
+    </div>
+    <div class="my-4">
+      <div class="flex justify-between">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_email">Email</label>
+      <p class="text-xs text-gray-500 mt-1">No spam, guaranteed.</p>
+      </div>
+      <div class="mt-1">
+<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_email" name="user[email]" placeholder="example@email.com" type="email">
+      </div>
+
+    </div>
+
+    <div class="my-4">
+      <div class="flex justify-between">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_password">Password</label>
+      <p class="text-xs text-gray-500 mt-1">Min 6 characters</p>
+      </div>
+      <div class="mt-1">
+<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_password" name="user[password]" type="password">
+      </div>
+
+    </div>
+
+    <div class="my-4">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_password_confirmation">Password confirmation</label>
+      <div class="mt-1">
+<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_password_confirmation" name="user[password_confirmation]" type="password">
+      </div>
+
+    </div>
+
 
 
 <button class="button mt-4 w-full" type="submit">Start my free trial →</button>
-      <p class="text-center text-gray-600 text-xs mt-4">
-        Already have an account? <a class="underline text-gray-800" href="<%= new_session_path%>">Log in</a> instead.
-      </p>
-</form>    <div class="pt-12 pl-8 hidden md:block">
-      <ul class="mt-2 leading-loose">
-        <li>
-          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-          Quick and easy to set up
-        </li>
-        <li>
-          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-          No credit card required
-        </li>
-        <li>
-          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-          Unlimited use during the trial
-        </li>
-        <li>
-          <svg class="feather text-indigo-600 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-          From just $6/mo after the trial
-        </li>
-      </ul>
-    </div>
+    <p class="text-center text-gray-600 dark:text-gray-500  text-xs mt-4">
+      Already have an account? <a class="underline text-gray-800 dark:text-gray-50" href="/login">Log in</a> instead.
+    </p>
+</form>
+  <div class="pt-12 pl-8 hidden md:block">
+<div class="pt-6 px-4 sm:px-6 lg:px-8">
+  <nav class="flex justify-center">
+    <ol class="space-y-6">
+
+
+
+          <!-- Current Step -->
+          <li class="flex items-start">
+            <span class="flex-shrink-0 h-5 w-5 relative flex items-center justify-center">
+              <span class="absolute h-4 w-4 rounded-full bg-indigo-200 dark:bg-indigo-100"></span>
+              <span class="relative block w-2 h-2 bg-indigo-600 dark:bg-indigo-500 rounded-full"></span>
+            </span>
+            <span class="ml-3 text-sm font-medium text-indigo-600 dark:text-indigo-500">Register</span>
+          </li>
+
+
+
+
+
+
+          <!-- Upcoming Step -->
+          <li class="flex items-start">
+            <div class="flex-shrink-0 h-5 w-5 relative flex items-center justify-center">
+              <div class="h-2 w-2 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+            </div>
+            <p class="ml-3 text-sm font-medium text-gray-500 dark:text-gray-300">Activate account</p>
+          </li>
+
+
+
+
+
+          <!-- Upcoming Step -->
+          <li class="flex items-start">
+            <div class="flex-shrink-0 h-5 w-5 relative flex items-center justify-center">
+              <div class="h-2 w-2 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+            </div>
+            <p class="ml-3 text-sm font-medium text-gray-500 dark:text-gray-300">Add site info</p>
+          </li>
+
+
+
+
+
+          <!-- Upcoming Step -->
+          <li class="flex items-start">
+            <div class="flex-shrink-0 h-5 w-5 relative flex items-center justify-center">
+              <div class="h-2 w-2 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+            </div>
+            <p class="ml-3 text-sm font-medium text-gray-500 dark:text-gray-300">Install snippet</p>
+          </li>
+
+
+    </ol>
+  </nav>
+</div>
+
   </div>
 </div>
