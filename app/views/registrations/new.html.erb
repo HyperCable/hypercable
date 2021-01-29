@@ -4,52 +4,37 @@
 </div>
 
 <div class="w-full max-w-3xl mt-4 mx-auto flex flex-shrink-0">
-<form action="/register" class="w-full max-w-md mx-auto bg-white dark:bg-gray-800 shadow-md rounded px-8 py-6 mb-4 mt-8" id="register-form" method="post"><input name="_csrf_token" type="hidden" value="FwZSNwgmABgqUCwbKm41IHQzeC0hMH4aowkEDifrX4EruCcPFp1JRiI_">
+  <%= form_for(@user, url: registrations_path(@user), html: {class: "w-full max-w-md mx-auto bg-white dark:bg-gray-800 shadow-md rounded px-8 py-6 mb-4 mt-8"}) do |f| %>
+
     <h2 class="text-xl font-black dark:text-gray-100">Enter your details</h2>
-    <div class="my-4">
-<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_name">Full name</label>
-      <div class="mt-1">
-<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_name" name="user[name]" placeholder="Jane Doe" type="text">
-      </div>
 
-    </div>
     <div class="my-4">
       <div class="flex justify-between">
-<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_email">Email</label>
-      <p class="text-xs text-gray-500 mt-1">No spam, guaranteed.</p>
+        <%= f.label :email, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+        <p class="text-xs text-gray-500 mt-1">No spam, guaranteed.</p>
       </div>
       <div class="mt-1">
-<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_email" name="user[email]" placeholder="example@email.com" type="email">
+        <%=f.email_field :email, class: "dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300", placeholder: "example@email.com" %>
       </div>
 
     </div>
 
     <div class="my-4">
       <div class="flex justify-between">
-<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_password">Password</label>
-      <p class="text-xs text-gray-500 mt-1">Min 6 characters</p>
+        <%= f.label :password, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+        <p class="text-xs text-gray-500 mt-1">Min 6 characters</p>
       </div>
       <div class="mt-1">
-<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_password" name="user[password]" type="password">
+        <%= f.password_field :password, class: "dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" %>
       </div>
 
     </div>
 
-    <div class="my-4">
-<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="register-form_password_confirmation">Password confirmation</label>
-      <div class="mt-1">
-<input class="dark:bg-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-300" id="register-form_password_confirmation" name="user[password_confirmation]" type="password">
-      </div>
-
-    </div>
-
-
-
-<button class="button mt-4 w-full" type="submit">Start my free trial →</button>
+    <%= f.button "Start my free trial →", class: "button mt-4 w-full", type: :submit, data: {disable_with: disable_with_spinner('Start my free trial →')} %>
     <p class="text-center text-gray-600 dark:text-gray-500  text-xs mt-4">
-      Already have an account? <a class="underline text-gray-800 dark:text-gray-50" href="/login">Log in</a> instead.
+      Already have an account? <a class="underline text-gray-800 dark:text-gray-50" href="<%= new_session_path %>">Log in</a> instead.
     </p>
-</form>
+<% end %>
   <div class="pt-12 pl-8 hidden md:block">
 <div class="pt-6 px-4 sm:px-6 lg:px-8">
   <nav class="flex justify-center">
