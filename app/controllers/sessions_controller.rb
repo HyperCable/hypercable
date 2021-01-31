@@ -3,6 +3,7 @@
 class SessionsController < ApplicationController
   layout "auth"
   skip_before_action :authenticate_user!, only: %i[new create]
+  skip_before_action :email_verify!, only: %i[new create]
 
   def new
   end
@@ -11,7 +12,12 @@ class SessionsController < ApplicationController
     @user = User.where(email: user_params[:email]).first
     if @user&.authenticate(user_params[:password])
       set_current_user(@user, user_params[:remember_me])
-      redirect_to root_path, notice: "Login OK"
+
+      if @user.email_verified?
+        redirect_to root_path, notice: "Login OK"
+      else
+        redirect_to verification_registrations_path, error: "Please verify your email"
+      end
     else
       flash.now[:error] = "Email or password is wrong"
       render "new"

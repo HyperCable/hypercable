@@ -4,12 +4,14 @@
 #
 # Table name: users
 #
-#  id              :bigint           not null, primary key
-#  email           :string           not null
-#  password_digest :string
-#  remember_token  :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                       :bigint           not null, primary key
+#  email                    :string           not null
+#  email_verification_token :string
+#  email_verified           :boolean          default(FALSE)
+#  password_digest          :string
+#  remember_token           :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
 #
 # Indexes
 #
@@ -27,6 +29,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   before_create { generate_token(:remember_token) }
+  before_create { generate_token(:email_verification_token) }
 
   def generate_token(column)
     begin

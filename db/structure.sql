@@ -176,7 +176,9 @@ CREATE TABLE public.users (
     password_digest character varying,
     remember_token character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    email_verified boolean DEFAULT false,
+    email_verification_token character varying
 );
 
 
@@ -359,6 +361,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210110200847'),
 ('20210115100815'),
 ('20210115101634'),
-('20210115103047');
+('20210115103047'),
+('20210130194542'),
+('20210130223112');
 
 
