@@ -73,3 +73,5 @@ gem "sidekiq-worker-killer", "~> 1.0"
 gem "mini_portile2", "~> 2.5"
 
 gem "bcrypt", "~> 3.1"
+
+gem "sendgrid-actionmailer", "~> 3.1"
