@@ -29,6 +29,7 @@ class RegistrationsController < ApplicationController
         value: @user.remember_token,
         expires: 1.year.from_now.utc
       }
+      VerificationMailer.with(user: @user).verify.deliver_later
       redirect_to verification_registrations_path
     else
       flash[:error] = t("sign_up_failed")
