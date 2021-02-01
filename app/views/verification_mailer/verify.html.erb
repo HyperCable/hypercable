@@ -1,0 +1,11 @@
+<p>Hi there,</p>
+
+<p>Your Hypercable account is almost ready!</p>
+
+<p>Click below to verify your email and activate your account.</p>
+
+<div style="width:100%;text-align:left">
+  <a href="<%= verify_registrations_url(token: @user.email_verification_token) %>" style="background-color:#fdb515;border-radius:3px;color:#141e35;display:inline-block;font-size:14px;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:inherit;max-width:288px" target="_blank">
+    Verify my Email
+  </a>
+</div>
