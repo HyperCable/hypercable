@@ -5,6 +5,7 @@
 # Table name: sites
 #
 #  id          :bigint           not null, primary key
+#  domain      :string
 #  public      :boolean          default(FALSE)
 #  timezone    :string
 #  created_at  :datetime         not null

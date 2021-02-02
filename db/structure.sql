@@ -143,7 +143,8 @@ CREATE TABLE public.sites (
     timezone character varying,
     public boolean DEFAULT false,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    domain character varying
 );
 
 
@@ -363,6 +364,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210115101634'),
 ('20210115103047'),
 ('20210130194542'),
-('20210130223112');
+('20210130223112'),
+('20210202211704');
 
 

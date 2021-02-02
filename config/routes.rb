@@ -9,5 +9,10 @@ Rails.application.routes.draw do
       get "verify"
     end
   end
+  resources :sites, only: %i[new create edit update] do
+    member do
+      get "snippet"
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
