@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get "verify"
     end
   end
-  resources :sites, only: %i[new create edit update] do
+  resources :sites, only: %i[index new create edit update] do
     member do
       get "snippet"
     end

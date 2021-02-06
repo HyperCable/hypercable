@@ -18,3 +18,36 @@ require("channels")
 
 import "controllers"
 require("css/app.css")
+
+import 'alpinejs'
+
+document.addEventListener("turbolinks:load", function () {
+  const triggers = document.querySelectorAll('[data-dropdown-trigger]')
+
+  for (const trigger of triggers) {
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation()
+      e.currentTarget.nextElementSibling.classList.remove('hidden')
+    })
+  }
+
+  if (triggers.length > 0) {
+    document.addEventListener('click', function(e) {
+      const dropdown = e.target.closest('[data-dropdown]')
+
+      if (dropdown && e.target.tagName === 'A') {
+        dropdown.classList.add('hidden')
+      }
+    })
+
+    document.addEventListener('click', function(e) {
+      const clickedInDropdown = e.target.closest('[data-dropdown]')
+
+      if (!clickedInDropdown) {
+        for (const dropdown of document.querySelectorAll('[data-dropdown]')) {
+          dropdown.classList.add('hidden')
+        }
+      }
+    })
+  }
+})

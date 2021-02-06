@@ -17,6 +17,11 @@ class SitesController < ApplicationController
     end
   end
 
+  def index
+    @sites = current_user.sites
+    render "index", layout: "application"
+  end
+
   def snippet
     @site = current_user.sites.find(params[:id])
   end

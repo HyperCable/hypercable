@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-full">
   <head>
-    <title>HypercableWeb</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Hypercable is a lightweight and open-source web analytics tool. Your website data is 100% yours and the privacy of your visitors is respected."/>
+    <title>hypercable · Simple, privacy-friendly alternative to Google Analytics</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
-
-  <body>
-    <%= render "layouts/flash" %>
-    <%= yield %>
+  </head>
+  <body class="flex flex-col h-full bg-gray-50 dark:bg-gray-850">
+    <%= render 'layouts/nav' %>
+    <main class="flex-1">
+      <div class="container pt-6">
+        <%= render "layouts/flash" %>
+        <%= yield %>
+      </div>
+    </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
