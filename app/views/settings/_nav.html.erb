@@ -1,0 +1,34 @@
+<div class="py-4 g:py-0 lg:col-span-3">
+  <form action="" class="lg:hidden" method="post">
+    <select class="dark:bg-gray-800 mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-500 outline-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md dark:text-gray-100" id="tab" name="tab" onchange="location.href = location.href.replace(/[^//]*$/, event.target.value)">
+      <option value="general" selected="">General</option>
+      <option value="visibility">Visibility</option>
+      <option value="goals">Goals</option>
+      <option value="search_console">Search Console</option>
+      <option value="email_reports">Email reports</option>
+      <option value="danger_zone">Danger zone</option></select>
+  </form>
+  <div class="hidden lg:block">
+
+    <a href="<%= general_site_settings_path(@site) %>" class="flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-900 dark:text-gray-100 rounded-md bg-gray-100 dark:bg-gray-900 hover:text-gray-900 hover:bg-gray-100 outline-none focus:outline-none focus:bg-gray-200 dark:focus:bg-gray-800 transition ease-in-out duration-150 cursor-default ">General</a>
+
+
+
+    <a href="<%= visibility_site_settings_path(@site) %>" class="flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 dark:text-gray-400 rounded-md hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 outline-none focus:outline-none focus:text-gray-900 focus:bg-gray-50 dark:focus:text-gray-100 dark:focus:bg-gray-800 transition ease-in-out duration-150 mt-1">Visibility</a>
+
+
+    <a href="/hackershare.dev/settings/goals" class="flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 dark:text-gray-400 rounded-md hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 outline-none focus:outline-none focus:text-gray-900 focus:bg-gray-50 dark:focus:text-gray-100 dark:focus:bg-gray-800 transition ease-in-out duration-150 mt-1">Goals</a>
+
+
+
+    <a href="/hackershare.dev/settings/search-console" class="flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 dark:text-gray-400 rounded-md hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 outline-none focus:outline-none focus:text-gray-900 focus:bg-gray-50 dark:focus:text-gray-100 dark:focus:bg-gray-800 transition ease-in-out duration-150 mt-1">Search Console</a>
+
+
+
+    <a href="/hackershare.dev/settings/email-reports" class="flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 dark:text-gray-400 rounded-md hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 outline-none focus:outline-none focus:text-gray-900 focus:bg-gray-50 dark:focus:text-gray-100 dark:focus:bg-gray-800 transition ease-in-out duration-150 mt-1">Email reports</a>
+
+
+    <a href="/hackershare.dev/settings/danger-zone" class="flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 dark:text-gray-400 rounded-md hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 outline-none focus:outline-none focus:text-gray-900 focus:bg-gray-50 dark:focus:text-gray-100 dark:focus:bg-gray-800 transition ease-in-out duration-150 mt-1">Danger zone</a>
+
+  </div>
+</div>

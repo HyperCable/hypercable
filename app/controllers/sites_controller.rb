@@ -22,6 +22,11 @@ class SitesController < ApplicationController
     render "index", layout: "application"
   end
 
+  def show
+    @site = current_user.sites.find(params[:id])
+    render "show", layout: "application"
+  end
+
   def snippet
     @site = current_user.sites.find(params[:id])
   end

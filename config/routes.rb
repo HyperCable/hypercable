@@ -9,9 +9,20 @@ Rails.application.routes.draw do
       get "verify"
     end
   end
-  resources :sites, only: %i[index new create edit update] do
+  resources :sites do
     member do
       get "snippet"
+    end
+    resources :settings, only: %i[index] do
+      collection do
+        get "general"
+        patch "update_general"
+      end
+
+      collection do
+        get "visibility"
+        patch "update_visibility"
+      end
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
