@@ -23,12 +23,12 @@ class SitesController < ApplicationController
   end
 
   def show
-    @site = current_user.sites.find(params[:id])
+    @site = current_user.sites.find_by!(uuid: params[:id])
     render "show", layout: "application"
   end
 
   def snippet
-    @site = current_user.sites.find(params[:id])
+    @site = current_user.sites.find_by!(uuid: params[:id])
   end
 
   def site_params

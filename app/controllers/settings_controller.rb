@@ -19,6 +19,6 @@ class SettingsController < ApplicationController
   end
 
   def get_site
-    @site = current_user.sites.find(params[:site_id])
+    @site = current_user.sites.find_by!(uuid: params[:site_id])
   end
 end

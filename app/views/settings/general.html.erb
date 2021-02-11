@@ -59,7 +59,7 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', 'MEASUREMENT_ID');
+                gtag('config', 'MEASUREMENT_ID', {transport_url: 'https://hypercable.plus/<%= @site.uuid %>'});
               </script>
 
             </textarea>

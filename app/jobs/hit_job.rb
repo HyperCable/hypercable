@@ -13,6 +13,9 @@ class HitJob
     end
 
     events.each do |event|
+      meta_path = request["path"].match(/\/(?<uuid>.*?)\/g\/collect/)
+      site_uuid = meta_path["uuid"]
+      next if site_uuid.nil?
       url = event["dl"]
       real_ip = request["x_forwarded_for"] || request["ip"]
       ip_info = IPDB.get(real_ip)
@@ -25,7 +28,7 @@ class HitJob
       result.merge!(utm_info)
       result.merge!(tech_info)
       result.merge!({
-        site_id: 1,
+        site_id: site_uuid,
         event_name: event["en"],
         session_id: event["sid"],
         client_id: event["cid"],
