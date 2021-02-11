@@ -11,6 +11,7 @@ class SitesController < ApplicationController
   def create
     @site = current_user.sites.new(site_params)
     if @site.save
+      @site.reload
       redirect_to snippet_site_path(@site), success: "site created"
     else
       render "new"
