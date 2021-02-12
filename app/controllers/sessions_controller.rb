@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       set_current_user(@user, user_params[:remember_me])
 
       if @user.email_verified?
-        flash[:success] = 'Login successfully'
+        flash[:success] = "Login successfully"
         redirect_to new_site_path
       else
         redirect_to verification_registrations_path, error: "Please verify your email"
