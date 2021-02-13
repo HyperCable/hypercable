@@ -46,7 +46,7 @@
 #  index_hits_on_site_id_and_session_id_and_started_at  (site_id,session_id,started_at DESC)
 #
 module Hyper
-  class Hit < ApplicationHyperRecord
+  class Event < ApplicationHyperRecord
     ATTRS = %W[
       site_id
       session_id
