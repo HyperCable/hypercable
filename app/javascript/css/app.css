@@ -289,3 +289,9 @@ blockquote {
 iframe[hidden] {
   display: none;
 }
+
+pre, code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
+}
