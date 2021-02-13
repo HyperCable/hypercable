@@ -7,9 +7,14 @@ class SettingsController < ApplicationController
   end
 
   def update_general
-    @site.update(params.require(:site).permit(:timezone, :domain))
-    flash[:success] = "Site update successfully."
-    redirect_back fallback_location: general_site_settings_path(@site)
+    @site.update(params.require(:site).permit(:timezone, :domain, :tracking_id))
+    if @site.valid?
+      flash[:success] = "Site update successfully."
+      redirect_back fallback_location: general_site_settings_path(@site)
+    else
+      flash[:error] = "Site update failed"
+      render "general"
+    end
   end
 
   def visibility

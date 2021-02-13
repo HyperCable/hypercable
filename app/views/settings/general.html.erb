@@ -31,6 +31,14 @@
               <%= f.time_zone_select(:timezone, ActiveSupport::TimeZone.all, {default: "UTC"}, class: "dark:bg-gray-900  mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md dark:text-gray-100 cursor-pointer") %>
             </div>
           </div>
+
+          <div class="grid grid-cols-4 gap-6">
+            <div class="col-span-4 sm:col-span-2"> 
+              <%= f.label 'tracking_id', class: 'block text-sm font-medium leading-5 text-gray-700 dark:text-gray-300' %>
+              <%= f.text_field :tracking_id, class: 'dark:bg-gray-900 mt-1 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 dark:border-gray-500 rounded-md dark:text-gray-100' %>
+            </div>
+          </div>
+
         </div>
         <div class="px-4 py-3 bg-gray-50 dark:bg-gray-850 text-right sm:px-6">
           <span class="inline-flex rounded-md shadow-sm">
@@ -53,13 +61,13 @@
           <div class="relative">
             <textarea class="transition overflow-hidden bg-gray-100 dark:bg-gray-900 outline-none appearance-none border border-transparent rounded w-full p-2 pr-6 text-gray-700 dark:text-gray-300 leading-normal focus:outline-none focus:bg-white focus:border-gray-300 dark:focus:border-gray-500 text-xs mt-2 resize-none" id="snippet_code" name="domain" rows="16">
               <!-- Global site tag (gtag.js) - Google Analytics -->
-              <script async src="https://www.googletagmanager.com/gtag/js?id=MEASUREMENT_ID"></script>
+              <script async src="https://www.googletagmanager.com/gtag/js?id=<%= @site.tracking_id %>"></script>
               <script>
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', 'MEASUREMENT_ID', {transport_url: 'https://hypercable.plus/<%= @site.uuid %>'});
+                gtag('config', '<%= @site.tracking_id %>', {transport_url: 'https://hypercable.plus/<%= @site.uuid %>'});
               </script>
 
             </textarea>

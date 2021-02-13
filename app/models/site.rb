@@ -29,6 +29,9 @@ class Site < ApplicationRecord
 
   has_many :shared_links
 
+  validates :domain, presence: true
+  validates :tracking_id, presence: true
+
   def to_param
     uuid
   end
