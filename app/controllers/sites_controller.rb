@@ -28,6 +28,12 @@ class SitesController < ApplicationController
     render "show", layout: "application"
   end
 
+  def debug
+    @site = current_user.sites.find_by!(uuid: params[:id])
+    @events = Hyper::Event.where(site_id: @site.uuid).order("started_at desc").limit(20)
+    render "debug", layout: "application"
+  end
+
   def snippet
     @site = current_user.sites.find_by!(uuid: params[:id])
   end

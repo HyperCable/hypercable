@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :sites do
     member do
       get "snippet"
+      get "debug"
     end
     resources :settings, only: %i[index] do
       collection do
