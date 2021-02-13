@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   root "sessions#new"
   resources :sessions, only: [:create, :new]
+  delete "sign_out", to: "sessions#destroy", as: :destroy_session
   resources :registrations, only: [:create, :new] do
     collection do
       get "verification"

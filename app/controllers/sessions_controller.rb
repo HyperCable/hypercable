@@ -15,7 +15,13 @@ class SessionsController < ApplicationController
 
       if @user.email_verified?
         flash[:success] = "Login successfully"
-        redirect_to new_site_path
+        if @user.sites.count == 0
+          redirect_to new_site_path
+        elsif @user.sites.count == 1
+          redirect_to site_path(@user.sites.first)
+        else
+          redirect_to sites_path
+        end
       else
         redirect_to verification_registrations_path, error: "Please verify your email"
       end
