@@ -39,6 +39,11 @@ class HitJob
         protocol_version: event["v"],
         data_source: "web",
 
+        session_engagement: event["seg"] == "1",
+        engagement_time: event["_et"],
+        session_count: event["sct"],
+        request_number: event["_s"],
+
         location_url: event["dl"],
         hostname: URI.parse(url).host,
         path: URI.parse(url).path,
@@ -56,32 +61,12 @@ class HitJob
         longitude: ip_info[:longitude],
 
         user_props: payload_parser.user_props,
-        event_props: payload_parser.event_props
+        event_props: payload_parser.event_props,
+
+        raw_event: event
       })
 
-      hit = Hyper::Hit.create!(result)
-      # TODO handle event & view different
-      if session = Hyper::Session.where(site_id: hit.site_id, session_id: hit.session_id).order("started_at desc").first
-        Hyper::Session
-          .where(site_id: hit.site_id, session_id: hit.session_id)
-          .where(started_at: session.started_at)
-          .update_all("end_at = '#{hit.started_at.to_s(:db)}', exit_page = '#{hit.path}', is_bounce = false, duration = EXTRACT(EPOCH FROM (end_at - started_at)), pageviews = pageviews + 1, events = events + 1")
-      else
-        Hyper::Session.create(
-          hit.attributes.slice(*Hyper::Hit::ATTRS).merge(
-            entry_page: hit.path,
-            exit_page: hit.path,
-            end_at: hit.started_at,
-            started_at: hit.started_at
-          )
-        )
-      end
+      Hyper::Event.create!(result)
     end
   end
 end
-
-
-# {"events_json"=>"[{\"name\":\"$view\",\"properties\":{\"url\":\"http://localhost:3000/\",\"title\":\"极客分享\",\"page\":\"/\"},\"time\":1607976183.145,\"id\":\"a37bd684-112e-43c6-a99c-26c9364637a4\",\"js\":true}]", "visitor_token"=>"b7586f77-d25d-479e-a4cd-2269c256830e", "authenticity_token"=>"CUA2NXv0b7+n/3d0WPiRqAfH7SxlVlU8K0J/LLS5FrQ+WRhpgUphBjO6dANO58hJLhELy6WTBdCbVfXN7CVqOg==", "visit_token"=>"b52259a6-c77c-4b90-b978-d30cd98aa0ff"}
-# sidekiq_1    | "------"
-# sidekiq_1    | {"ip"=>"172.29.0.1", "user_agent"=>"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"}
-# sidekiq_1    | 2020-12-14T20:03:05.432Z pid=1 tid=clx class=HelloJob jid=c0476c2a-f76b-4c78-833e-790782b1266b elapsed=1.019 INFO: done

@@ -40,6 +40,54 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.events (
+    event_name character varying DEFAULT 'page_view'::character varying,
+    site_id character varying NOT NULL,
+    session_id character varying NOT NULL,
+    client_id character varying NOT NULL,
+    user_id character varying,
+    tracking_id character varying NOT NULL,
+    protocol_version character varying DEFAULT '2'::character varying,
+    data_source character varying DEFAULT 'web'::character varying,
+    session_engagement boolean DEFAULT false,
+    engagement_time integer,
+    session_count integer,
+    request_number integer,
+    location_url character varying,
+    hostname character varying,
+    path character varying,
+    title character varying,
+    user_agent character varying,
+    ip character varying,
+    referrer character varying,
+    referrer_source character varying,
+    screen_resolution character varying,
+    user_language character varying,
+    country character varying,
+    region character varying,
+    city character varying,
+    latitude double precision,
+    longitude double precision,
+    utm_source character varying,
+    utm_medium character varying,
+    utm_term character varying,
+    utm_content character varying,
+    utm_campaign character varying,
+    browser character varying,
+    os character varying,
+    device_type character varying,
+    user_props jsonb DEFAULT '{}'::jsonb,
+    event_props jsonb DEFAULT '{}'::jsonb,
+    non_interaction_hit boolean DEFAULT false,
+    started_at timestamp without time zone NOT NULL,
+    raw_event jsonb DEFAULT '{}'::jsonb
+);
+
+
+--
 -- Name: hits; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -155,10 +203,24 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: events_started_at_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_started_at_idx ON public.events USING btree (started_at DESC);
+
+
+--
 -- Name: hits_started_at_idx; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX hits_started_at_idx ON public.hits USING btree (started_at DESC);
+
+
+--
+-- Name: index_events_on_site_id_and_session_id_and_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_events_on_site_id_and_session_id_and_started_at ON public.events USING btree (site_id, session_id, started_at DESC);
 
 
 --
@@ -180,6 +242,13 @@ CREATE UNIQUE INDEX index_sessions_on_site_id_and_session_id_and_started_at ON p
 --
 
 CREATE INDEX sessions_started_at_idx ON public.sessions USING btree (started_at DESC);
+
+
+--
+-- Name: events ts_insert_blocker; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER ts_insert_blocker BEFORE INSERT ON public.events FOR EACH ROW EXECUTE FUNCTION _timescaledb_internal.insert_blocker();
 
 
 --
@@ -208,6 +277,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201208205418'),
 ('20201216100948'),
 ('20201217004521'),
-('20201222091938');
+('20201222091938'),
+('20210213182643');
 
 
