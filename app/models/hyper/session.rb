@@ -51,5 +51,6 @@
 #
 module Hyper
   class Session < ApplicationHyperRecord
+    # TODO REMOVE
   end
 end
