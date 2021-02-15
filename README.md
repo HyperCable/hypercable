@@ -11,6 +11,7 @@ Web for hypercable analytics.
 * stop: docker-compose stop
 * add migration: docker-compose run rails rails g migration xxx
 * run migration: docker-compose run rails rake db:migrate
+* open http://localhost:3333
 
 
 ## production setup
