@@ -75,3 +75,7 @@ gem "mini_portile2", "~> 2.5"
 gem "bcrypt", "~> 3.1"
 
 gem "sendgrid-actionmailer", "~> 3.1"
+
+gem "chartkick", "~> 3.4"
+
+gem "groupdate", "~> 5.2"
