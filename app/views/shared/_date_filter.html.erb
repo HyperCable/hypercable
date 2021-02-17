@@ -1,0 +1,15 @@
+<div class="flex justify-end ml-auto pl-2">
+  <div x-data="{ open: false }" @click.away="open = false" class="relative" style="height: 35.5px; width: 190px;">
+    <div @click="open = !open" class="flex items-center justify-between rounded bg-white dark:bg-gray-800 shadow px-4 pr-3 py-2 leading-tight cursor-pointer text-sm font-medium text-gray-800 dark:text-gray-200 h-full" id="options-menu" aria-haspopup="true" aria-expanded="true" tabindex="0"><span class="mr-2">Last 30 days</span>
+      <svg class="text-indigo-500 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+    <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg z-10" style="display: none;">
+      <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+        <a class="bg-gray-100 block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" href="">Realtime</a>
+        <a class=" block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" href="">Last 7 days</a>
+        <a class=" block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem" href="">Last 30 days</a>
+      </div>
+    </div>
+  </div>
+</div>
