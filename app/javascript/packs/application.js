@@ -20,7 +20,7 @@ require("chart.js")
 // const imagePath = (name) => images(name, true)
 
 import "controllers"
-require("css/app.css")
+import "css/application.scss"
 
 import 'alpinejs'
 
