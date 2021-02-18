@@ -43,13 +43,13 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
   fi
 
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --ignore-engines
 
 COPY . /app
 
 # generate production assets if production environment
 RUN if [ "$RAILS_ENV" = "production" ]; then \
-  SECRET_KEY_BASE=precompile_placeholder RAILS_LOG_TO_STDOUT=enabled bundle exec rake assets:precompile; \
+  SECRET_KEY_BASE=precompile_placeholder RAILS_LOG_TO_STDOUT=enabled bundle exec rake assets:precompile; RAILS_ENV=production RACK_ENV=production NODE_ENV=production bin/webpack; \
   fi
 
 # final build stage
