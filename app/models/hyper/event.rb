@@ -2,13 +2,14 @@
 
 # == Schema Information
 #
-# Table name: hits
+# Table name: events
 #
 #  browser             :string
 #  city                :string
 #  country             :string
 #  data_source         :string           default("web")
 #  device_type         :string
+#  engagement_time     :integer
 #  event_name          :string           default("page_view")
 #  event_props         :jsonb
 #  hostname            :string
@@ -20,10 +21,14 @@
 #  os                  :string
 #  path                :string
 #  protocol_version    :string           default("2")
+#  raw_event           :jsonb
 #  referrer            :string
 #  referrer_source     :string
 #  region              :string
+#  request_number      :integer
 #  screen_resolution   :string
+#  session_count       :integer
+#  session_engagement  :boolean          default(FALSE)
 #  started_at          :datetime         not null
 #  title               :string
 #  user_agent          :string
@@ -36,14 +41,14 @@
 #  utm_term            :string
 #  client_id           :string           not null
 #  session_id          :string           not null
-#  site_id             :integer          not null
+#  site_id             :string           not null
 #  tracking_id         :string           not null
 #  user_id             :string
 #
 # Indexes
 #
-#  hits_started_at_idx                                  (started_at)
-#  index_hits_on_site_id_and_session_id_and_started_at  (site_id,session_id,started_at DESC)
+#  events_started_at_idx                                  (started_at)
+#  index_events_on_site_id_and_session_id_and_started_at  (site_id,session_id,started_at DESC)
 #
 module Hyper
   class Event < ApplicationHyperRecord
