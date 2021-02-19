@@ -33,14 +33,15 @@ module HypercableWeb
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.active_record.schema_format = :sql
+    config.action_mailer.perform_deliveries = true
 
-    if ENV["SMTP_SERVER"].present? && ENV["SMTP_PASSWORD"].present?
-      config.action_mailer.delivery_method = :smtp
-    else
-      config.action_mailer.sendgrid_actionmailer_settings = {
-        api_key: ENV["SENDGRID_API_KEY"],
-        raise_delivery_errors: true
-      }
-    end
+    config.action_mailer.smtp_settings = {
+      address: ENV["SMTP_SERVER"],
+      user_name: ENV["SMTP_USER"],
+      password: ENV["SMTP_PASSWORD"],
+      port: ENV["SMTP_PORT"] || 25
+    }
+
+    config.action_mailer.delivery_method = :smtp
   end
 end
