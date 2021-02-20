@@ -10,4 +10,8 @@ module ApplicationHelper
     SPINNER
     [spinner, text].join.html_safe
   end
+
+  def collector_server_url(site)
+    ['https://, 'ENV['COLLECTOR_HOST'] || ENV['HOST'], '/', site.uuid].join
+  end
 end

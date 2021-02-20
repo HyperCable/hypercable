@@ -59,7 +59,7 @@
 
         <div class="my-4">
           <div class="relative">
-            <textarea class="transition overflow-hidden bg-gray-100 dark:bg-gray-900 outline-none appearance-none border border-transparent rounded w-full p-2 pr-6 text-gray-700 dark:text-gray-300 leading-normal focus:outline-none focus:bg-white focus:border-gray-300 dark:focus:border-gray-500 text-xs mt-2 resize-none" id="snippet_code" name="domain" rows="16">
+            <textarea class="transition overflow-hidden bg-gray-100 dark:bg-gray-900 outline-none appearance-none border border-transparent rounded w-full p-2 pr-6 text-gray-700 dark:text-gray-300 leading-normal focus:outline-none focus:bg-white focus:border-gray-300 dark:focus:border-gray-500 text-xs mt-2 resize-none" id="snippet_code" name="domain" rows="10">
               <!-- Global site tag (gtag.js) - Google Analytics -->
               <script async src="https://www.googletagmanager.com/gtag/js?id=<%= @site.tracking_id %>"></script>
               <script>
@@ -67,7 +67,7 @@
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', '<%= @site.tracking_id %>', {transport_url: 'https://hypercable.plus/<%= @site.uuid %>'});
+                gtag('config', '<%= @site.tracking_id %>', {transport_url: '<%= collector_server_url(@site) %>'});
               </script>
 
             </textarea>
