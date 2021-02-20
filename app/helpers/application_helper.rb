@@ -12,6 +12,6 @@ module ApplicationHelper
   end
 
   def collector_server_url(site)
-    ['https://, 'ENV['COLLECTOR_HOST'] || ENV['HOST'], '/', site.uuid].join
+    ["https://", ENV["COLLECTOR_HOST"] || ENV["HOST"], "/", site.uuid].join
   end
 end
