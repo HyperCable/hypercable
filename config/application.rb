@@ -38,6 +38,7 @@ module HypercableWeb
     config.action_mailer.smtp_settings = {
       address: ENV["SMTP_SERVER"],
       user_name: ENV["SMTP_USER"],
+     
       password: ENV["SMTP_PASSWORD"],
       port: ENV["SMTP_PORT"] || 25
     }

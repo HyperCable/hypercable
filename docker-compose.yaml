@@ -85,6 +85,8 @@ services:
       context: .
       dockerfile: ./docker/dockerfiles/rails.Dockerfile
     image: hypercable-rails:development
+    dns:
+      - 8.8.8.8
     restart: always
     volumes:
       - ./:/app:delegated
@@ -111,6 +113,8 @@ services:
   sidekiq:
     <<: *base
     image: hypercable-rails:development
+    dns:
+      - 8.8.8.8
     restart: always
     volumes:
       - ./:/app:delegated
