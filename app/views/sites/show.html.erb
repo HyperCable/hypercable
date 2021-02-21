@@ -13,7 +13,7 @@
               <img src="https://icons.duckduckgo.com/ip3/<%= @site.domain %>.ico" referrerpolicy="no-referrer" class="inline w-4 mr-2 align-middle"><%= @site.domain %><svg class="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
           </div>
-          <a class="block text-sm font-bold text-gray-500 dark:text-gray-300 mr-auto ml-2" href="<%= site_path(@site, period: :realtime) %>"><svg class="w-2 mr-2 fill-current text-green-500 inline" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8"></circle></svg>0 current visitors</a>
+          <a class="block text-sm font-bold text-gray-500 dark:text-gray-300 mr-auto ml-2" href="<%= site_path(@site, period: :realtime) %>"><svg class="w-2 mr-2 fill-current text-green-500 inline" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8"></circle></svg><%= @current_visitors_count %> current visitors</a>
         </div>
         <%= render partial: 'shared/date_filter' %>
       </div>
