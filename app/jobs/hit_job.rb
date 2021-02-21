@@ -49,7 +49,7 @@ class HitJob
         path: URI.parse(url).path,
         title: event["dt"],
         user_agent: request["user_agent"],
-        ip: request["ip"],
+        ip: real_ip,
         referrer: event["dr"],
         referrer_source: referrer_source,
         screen_resolution: event["sr"],
