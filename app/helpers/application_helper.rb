@@ -22,8 +22,8 @@ module ApplicationHelper
       "month"      => "Month",
       "7d"         => "Last 7 days",
       "30d"        => "Last 30 days",
-      "180d"       => "Last 6 months",
-      "360d"       => "Last 12 months",
+      "6m"         => "Last 6 months",
+      "12m"        => "Last 12 months",
       "realtime"   => "Realtime",
     }
     map.default = "Last 7 days"
