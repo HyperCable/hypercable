@@ -29,7 +29,7 @@ class SitesController < ApplicationController
     current_range = time_range(@site, "realtime")
     @current_visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: current_range).distinct.count(:client_id)
     @visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: range).group("time_bucket('1 day', started_at)::date").distinct.count(:client_id)
-    @top_pages = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("path, count(distinct client_id) as count").group("site_id, path").order("2 desc").limit(10)
+    @top_pages = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("path, count(distinct client_id) as count").group("site_id, path").order("2 desc").limit(9)
     render "show", layout: "application"
   end
 
