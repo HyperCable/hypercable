@@ -26,7 +26,8 @@ class SitesController < ApplicationController
   def show
     @site = current_user.sites.find_by!(uuid: params[:id])
     range = time_range(@site, params[:period])
-    @current_visitors_count = Hyper::Event.where(site_id: params[:id]).where("started_at > ?", 30.minutes.ago.in_time_zone(@site.timezone).to_s(:long)).distinct.count(:client_id)
+    current_range = time_range(@site, "realtime")
+    @current_visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: current_range).distinct.count(:client_id)
     @visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: range).group("time_bucket('1 day', started_at)::date").distinct.count(:client_id)
     render "show", layout: "application"
   end
