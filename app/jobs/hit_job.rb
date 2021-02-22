@@ -66,6 +66,14 @@ class HitJob
         raw_event: event
       })
 
+      if event["_fv"] == "1"
+        Hyper::Event.create(result.merge(event_name: "first_visit"))
+      end
+
+      if event["_ss"] == "1"
+        Hyper::Event.create(result.merge(event_name: "session_start"))
+      end
+
       Hyper::Event.create!(result)
     end
   end
