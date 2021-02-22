@@ -15,6 +15,10 @@ module ApplicationHelper
     ["https://", ENV["COLLECTOR_HOST"] || ENV["HOST"], "/", site.uuid].join
   end
 
+  def url_to_path(url)
+    (URI.parse(url) rescue nil)&.path
+  end
+
   def time_range_names
     map = {
       "today"      => "Today",
