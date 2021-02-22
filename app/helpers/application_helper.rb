@@ -14,4 +14,19 @@ module ApplicationHelper
   def collector_server_url(site)
     ["https://", ENV["COLLECTOR_HOST"] || ENV["HOST"], "/", site.uuid].join
   end
+
+  def time_range_names
+    map = {
+      "today"      => "Today",
+      "week"       => "Week",
+      "month"      => "Month",
+      "7d"         => "Last 7 days",
+      "30d"        => "Last 30 days",
+      "180d"       => "Last 6 months",
+      "360d"       => "Last 12 months",
+      "realtime"   => "Realtime",
+    }
+    map.default = "Last 7 days"
+    map
+  end
 end
