@@ -22,7 +22,7 @@
     <div class="w-full relative bg-white dark:bg-gray-825 shadow-xl rounded mt-6 main-graph">
       <%= render partial: 'shared/summary' %>
       <div class="px-2 relative">
-        <%= line_chart Hyper::Event.group_by_day(:started_at).count %>
+        <%= line_chart @visitors_count %>
       </div>
     </div>
 

@@ -35,4 +35,19 @@ class Site < ApplicationRecord
   def to_param
     uuid
   end
+
+  def utc_offset
+    # Beijing -> 28800
+    ActiveSupport::TimeZone[timezone].utc_offset
+  end
+
+  def utc_offset_hours
+    # Beijing -> 8
+    utc_offset / 60 / 60.0
+  end
+
+  def utc_offset_string
+    # Beijing -> +08:00
+    ActiveSupport::TimeZone[timezone].formatted_offset
+  end
 end
