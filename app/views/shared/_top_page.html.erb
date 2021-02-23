@@ -5,10 +5,10 @@
     </div>
     <div style="position: relative;">
       <% @top_pages.each do |page| %>
-      <% @max ||= page.count %>
+      <% @max_page ||= page.count %>
         <div class="flex items-center justify-between my-1 text-sm">
           <div class="w-full h-8 truncate" style="max-width: calc(100% - 4rem);">
-            <div class="bg-orange-50 dark:bg-gray-500 dark:bg-opacity-15" style="width: <%= (page.count / @max.to_f) * 100 %>%; height: 30px;">
+            <div class="bg-orange-50 dark:bg-gray-500 dark:bg-opacity-15" style="width: <%= (page.count / @max_page.to_f) * 100 %>%; height: 30px;">
 
             </div>
             <span class="flex px-2 group dark:text-gray-300" style="margin-top: -26px;">

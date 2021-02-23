@@ -13,10 +13,10 @@
     </div>
     <div style="position: relative;">
       <% @top_referrer_sources.each do |source| %>
-        <% @max ||= source.count %>
+        <% @max_source ||= source.count %>
         <div class="flex items-center justify-between my-1 text-sm">
           <div class="w-full h-8" style="max-width: calc(100% - 4rem);">
-            <div class="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15" style="width:  <%= number_to_percentage(100 * source.count / @max.to_f, precision: 2) %>; height: 30px;">
+            <div class="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15" style="width:  <%= number_to_percentage(100 * source.count / @max_source.to_f, precision: 2) %>; height: 30px;">
 
             </div>
             <span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;">

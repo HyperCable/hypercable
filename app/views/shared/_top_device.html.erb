@@ -12,13 +12,13 @@
       <div class="flex items-center mt-3 mb-2 justify-between text-gray-500 dark:text-gray-400 text-xs font-bold tracking-wide"><span>Device Type</span><span>Visitors</span>
       </div>
       <% @top_device_types.each do |type| %>
-        <% @max ||= type.count %>
+        <% @max_device ||= type.count %>
         <div class="flex items-center justify-between my-1 text-sm">
           <div class="w-full h-8" style="max-width: calc(100% - 6rem);">
-            <div class="bg-green-50 dark:gray-500 dark:bg-opacity-15" style="width: <%= number_to_percentage(100 * type.count / @max.to_f, precision: 2) %>; height: 30px;">
+            <div class="bg-green-50 dark:gray-500 dark:bg-opacity-15" style="width: <%= number_to_percentage(100 * type.count / @max_device.to_f, precision: 2) %>; height: 30px;">
 
             </div><span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;"><a class="block truncate hover:underline" href="/?os=Windows"><%= type.device_type %></a></span>
-          </div><span class="font-medium dark:text-gray-200"><%= pretty_num type.count %> <span class="inline-block text-xs w-8 text-right">(<%= number_to_percentage(100 * type.count / @max.to_f, precision: 0) %>)</span></span>
+          </div><span class="font-medium dark:text-gray-200"><%= pretty_num type.count %> <span class="inline-block text-xs w-8 text-right">(<%= number_to_percentage(100 * type.count / @max_device.to_f, precision: 0) %>)</span></span>
         </div>
       <% end %>
     </div>
