@@ -50,4 +50,9 @@ class Site < ApplicationRecord
     # Beijing -> +08:00
     ActiveSupport::TimeZone[timezone].formatted_offset
   end
+
+  def visitors_count_of_24h
+    current_range = (1.days.ago.in_time_zone(timezone).to_s(:db)..)
+    Hyper::Event.where(site_id: uuid).where(started_at: current_range).distinct.count(:client_id)
+  end
 end
