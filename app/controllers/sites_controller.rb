@@ -29,6 +29,7 @@ class SitesController < ApplicationController
     current_range = time_range(@site, "realtime")
     @current_visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: current_range).distinct.count(:client_id)
     @unique_visitors_summary = Hyper::Event.where(site_id: params[:id]).where(started_at: range).distinct.count(:client_id)
+    @total_pageviews_summary = Hyper::Event.where(site_id: params[:id]).where(started_at: range).where(event_name: :page_view).count
     @visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: range).group("time_bucket('1 day', started_at)::date").distinct.count(:client_id)
     @top_pages = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("location_url, count(distinct client_id) as count").group("site_id, location_url").order("2 desc").limit(9)
     @top_device_types = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
