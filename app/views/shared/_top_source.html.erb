@@ -12,27 +12,21 @@
     <div class="flex items-center mt-3 mb-2 justify-between text-gray-500 text-xs font-bold tracking-wide"><span>Source</span><span>Visitors</span>
     </div>
     <div style="position: relative;">
-      <div class="flex items-center justify-between my-1 text-sm">
-        <div class="w-full h-8" style="max-width: calc(100% - 4rem);">
-          <div class="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15" style="width: 100%; height: 30px;">
-            
-          </div>
-          <span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;">
-            <a class="block truncate hover:underline" href="/?source=Google">
-              <img src="https://icons.duckduckgo.com/ip3/google.com.ico" referrerpolicy="no-referrer" class="inline h-4 w-4 mr-2 align-middle -mt-px">Google
-            </a>
-          </span>
-        </div><span class="font-medium dark:text-gray-200">777</span>
-      </div>
-      
-      <div class="flex items-center justify-between my-1 text-sm">
-        <div class="w-full h-8" style="max-width: calc(100% - 4rem);">
-          <div class="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15" style="width: 2.3166%; height: 30px;">
-            
-          </div><span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;"><a class="block truncate hover:underline" href="/?source=oschina.net"><img src="https://icons.duckduckgo.com/ip3/oschina.net.ico" referrerpolicy="no-referrer" class="inline h-4 w-4 mr-2 align-middle -mt-px">oschina.net</a></span>
+      <% @top_referrer_sources.each do |source| %>
+        <% @max ||= source.count %>
+        <div class="flex items-center justify-between my-1 text-sm">
+          <div class="w-full h-8" style="max-width: calc(100% - 4rem);">
+            <div class="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15" style="width:  <%= number_to_percentage(100 * source.count / @max.to_f, precision: 2) %>; height: 30px;">
+
+            </div>
+            <span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;">
+              <%= link_to site_path(@site, request.query_parameters.merge(referrer_source: source.referrer_source)), class: 'block truncate hover:underline' do %>
+                <img src="<%= domain_icon_url(source.referrer_source) %>" referrerpolicy="no-referrer" class="inline h-4 w-4 mr-2 align-middle -mt-px"><%= source.referrer_source %>
+              <% end%>
+            </span>
+          </div><span class="font-medium dark:text-gray-200"><%= pretty_num(source.count) %></span>
         </div>
-        <span class="font-medium dark:text-gray-200">18</span>
-      </div>
+      <% end %>
 
     </div>
 

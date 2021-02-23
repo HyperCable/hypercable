@@ -23,6 +23,10 @@ module ApplicationHelper
     number_to_human(num, format: "%n%u", units: { thousand: "K", million: "M", billion: "B" })
   end
 
+  def domain_icon_url(domain)
+    "https://icons.duckduckgo.com/ip3/#{domain}.ico"
+  end
+
   def time_range_names
     map = {
       "today"      => "Today",

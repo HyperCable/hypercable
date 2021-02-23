@@ -33,6 +33,10 @@ class SitesController < ApplicationController
     @top_device_types = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
     @top_browsers = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("browser, count(distinct client_id) as count").group("site_id, browser").order("2 desc").limit(9)
     @top_oses = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("os, count(distinct client_id) as count").group("site_id, os").order("2 desc").limit(9)
+    @top_referrer_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
+    @top_utm_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_source, count(distinct client_id) as count").group("site_id, utm_source").order("2 desc").limit(9)
+    @top_utm_mediums = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_medium, count(distinct client_id) as count").group("site_id, utm_medium").order("2 desc").limit(9)
+    @top_utm_campaigns = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_campaign, count(distinct client_id) as count").group("site_id, utm_campaign").order("2 desc").limit(9)
     render "show", layout: "application"
   end
 
