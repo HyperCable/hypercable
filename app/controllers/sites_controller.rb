@@ -63,11 +63,13 @@ class SitesController < ApplicationController
     when nil, "7d", "week", "30d", "month"
       "time_bucket('1 day', started_at)::date"
     when "realtime"
-      "time_bucket('3 minute', started_at)::time"
+      "time_bucket('1 minute', started_at)::time"
     when "today"
       "time_bucket('1 hour', started_at)::time"
     when "12m", "6m"
-      "time_bucket('1 week', started_at)::date"
+      "time_bucket('1 day', started_at)::date"
+    else
+      "time_bucket('1 day', started_at)::date"
     end
   end
 end
