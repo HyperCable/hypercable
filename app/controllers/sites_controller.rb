@@ -39,6 +39,7 @@ class SitesController < ApplicationController
     @top_utm_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_source, count(distinct client_id) as count").group("site_id, utm_source").order("2 desc").limit(9)
     @top_utm_mediums = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_medium, count(distinct client_id) as count").group("site_id, utm_medium").order("2 desc").limit(9)
     @top_utm_campaigns = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_campaign, count(distinct client_id) as count").group("site_id, utm_campaign").order("2 desc").limit(9)
+    @top_countries = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("country, count(distinct client_id) as count").group("site_id, country")
     render "show", layout: "application"
   end
 
