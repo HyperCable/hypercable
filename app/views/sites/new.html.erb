@@ -14,9 +14,9 @@
 
     <div class="my-6">
       <%= f.label :tracking_id, value: "Tracking ID", class: 'block text-sm font-medium text-gray-700 dark:text-gray-300' %>
-      <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">Google analytics tracking id</p>
+      <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">You need to create <a class='text-blue-500' href='https://support.google.com/analytics/answer/9304153' target="_blank">Google Analytics 4 properties</a> account</p>
       <div class="mt-2 flex rounded-md shadow-sm">
-        <%= f.text_field :tracking_id, class: "focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 flex-1 block w-full px-3 py-2 rounded-none rounded-md sm:text-sm border-gray-300 dark:border-gray-500 dark:bg-gray-900 dark:text-gray-300" %>
+        <%= f.text_field :tracking_id, class: "focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 flex-1 block w-full px-3 py-2 rounded-none rounded-md sm:text-sm border-gray-300 dark:border-gray-500 dark:bg-gray-900 dark:text-gray-300", placeholder: 'G-PJBVXXXXXX' %>
       </div>
 
     </div>
