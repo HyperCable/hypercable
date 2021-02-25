@@ -70,8 +70,16 @@ module ApplicationHelper
     end
   end
 
-  def device_tab_class(tab_name)
+  def source_tab_class(tab_name)
     if (tab_name.to_s == params[:source_meniu]) || (params[:source_meniu].blank? && tab_name.to_s == "referrer_source")
+      "inline-block h-5 text-indigo-700 dark:text-indigo-500 font-bold border-b-2 border-indigo-700 dark:border-indigo-500"
+    else
+      "hover:text-indigo-600 cursor-pointer"
+    end
+  end
+
+  def device_tab_class(tab_name)
+    if (tab_name.to_s == params[:device_meniu]) || (params[:device_meniu].blank? && tab_name.to_s == "device_type")
       "inline-block h-5 text-indigo-700 dark:text-indigo-500 font-bold border-b-2 border-indigo-700 dark:border-indigo-500"
     else
       "hover:text-indigo-600 cursor-pointer"

@@ -1,13 +1,6 @@
 <div class="stats-item">
   <div class="bg-white dark:bg-gray-825 shadow-xl rounded p-4 relative" style="height: 436px;">
-    <div class="w-full flex justify-between">
-      <h3 class="font-bold dark:text-gray-100">Devices</h3>
-      <ul class="flex font-medium text-xs text-gray-500 dark:text-gray-400 space-x-2">
-        <li class="inline-block h-5 text-indigo-700 dark:text-indigo-500 font-bold border-b-2 border-indigo-700 dark:border-indigo-500">Device</li>
-        <li class="hover:text-indigo-600 cursor-pointer">Browser</li>
-        <li class="hover:text-indigo-600 cursor-pointer">OS</li>
-      </ul>
-    </div>
+    <%= render partial: 'shared/devices/nav' %>
     <div class="fade-enter-active">
       <div class="flex items-center mt-3 mb-2 justify-between text-gray-500 dark:text-gray-400 text-xs font-bold tracking-wide"><span>Device Type</span><span>Visitors</span>
       </div>

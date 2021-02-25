@@ -1,9 +1,9 @@
 <div class="w-full flex justify-between">
   <h3 class="font-bold dark:text-gray-100">Top sources</h3>
   <ul class="flex font-medium text-xs text-gray-500 dark:text-gray-400 space-x-2">
-    <li class="<%= device_tab_class(:referrer_source) %>"><%= link_to "All", site_path(@site, request.query_parameters.merge(source_meniu: :referrer_source)) %></li>
-    <li class="<%= device_tab_class(:utm_medium) %>"><%= link_to "Medium", site_path(@site, request.query_parameters.merge(source_meniu: :utm_medium)) %></li>
-    <li class="<%= device_tab_class(:utm_source) %>"><%= link_to "Source", site_path(@site, request.query_parameters.merge(source_meniu: :utm_source)) %></li>
-    <li class="<%= device_tab_class(:utm_campaign) %>"><%= link_to "Campaign", site_path(@site,  request.query_parameters.merge(source_meniu: :utm_campaign)) %></li>
+    <li class="<%= source_tab_class(:referrer_source) %>"><%= link_to "All", site_path(@site, request.query_parameters.merge(source_meniu: :referrer_source)) %></li>
+    <li class="<%= source_tab_class(:utm_medium) %>"><%= link_to "Medium", site_path(@site, request.query_parameters.merge(source_meniu: :utm_medium)) %></li>
+    <li class="<%= source_tab_class(:utm_source) %>"><%= link_to "Source", site_path(@site, request.query_parameters.merge(source_meniu: :utm_source)) %></li>
+    <li class="<%= source_tab_class(:utm_campaign) %>"><%= link_to "Campaign", site_path(@site,  request.query_parameters.merge(source_meniu: :utm_campaign)) %></li>
   </ul>
 </div>
