@@ -41,4 +41,40 @@ module ApplicationHelper
     map.default = "Last 7 days"
     map
   end
+
+  def render_devices
+    case params[:device_meniu]
+    when "device_type"
+      render partial: "shared/devices/device_type"
+    when "browser"
+      render partial: "shared/devices/browser"
+    when "os"
+      render partial: "shared/devices/os"
+    else
+      render partial: "shared/devices/device_type"
+    end
+  end
+
+  def render_sources
+    case params[:source_meniu]
+    when "referrer_source"
+      render partial: "shared/sources/referrer_source"
+    when "utm_medium"
+      render partial: "shared/sources/utm_medium"
+    when "utm_source"
+      render partial: "shared/sources/utm_source"
+    when "utm_campaign"
+      render partial: "shared/sources/utm_campaign"
+    else
+      render partial: "shared/sources/referrer_source"
+    end
+  end
+
+  def device_tab_class(tab_name)
+    if (tab_name.to_s == params[:source_meniu]) || (params[:source_meniu].blank? && tab_name.to_s == "referrer_source")
+      "inline-block h-5 text-indigo-700 dark:text-indigo-500 font-bold border-b-2 border-indigo-700 dark:border-indigo-500"
+    else
+      "hover:text-indigo-600 cursor-pointer"
+    end
+  end
 end
