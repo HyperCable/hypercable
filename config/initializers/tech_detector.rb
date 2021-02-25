@@ -24,9 +24,9 @@ class TechDetector
         end
 
     {
-      browser: client.name,
-      os: client.os_name,
-      device_type: device_type
+      browser: client.name || "unknown",
+      os: client.os_name || "unknown",
+      device_type: device_type || "unknown"
     }
   end
 end
