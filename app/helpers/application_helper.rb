@@ -59,12 +59,12 @@ module ApplicationHelper
     case params[:source_meniu]
     when "referrer_source"
       render partial: "shared/sources/referrer_source"
-    when "utm_medium"
-      render partial: "shared/sources/utm_medium"
-    when "utm_source"
-      render partial: "shared/sources/utm_source"
-    when "utm_campaign"
-      render partial: "shared/sources/utm_campaign"
+    when "traffic_medium"
+      render partial: "shared/sources/traffic_medium"
+    when "traffic_source"
+      render partial: "shared/sources/traffic_source"
+    when "traffic_campaign"
+      render partial: "shared/sources/traffic_campaign"
     else
       render partial: "shared/sources/referrer_source"
     end

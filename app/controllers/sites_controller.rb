@@ -85,12 +85,12 @@ class SitesController < ApplicationController
     case params[:source_meniu]
     when "referrer_source"
       @top_referrer_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
-    when "utm_medium"
-      @top_utm_mediums = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_medium, count(distinct client_id) as count").group("site_id, utm_medium").order("2 desc").limit(9)
-    when "utm_source"
-      @top_utm_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_source, count(distinct client_id) as count").group("site_id, utm_source").order("2 desc").limit(9)
-    when "utm_campaign"
-      @top_utm_campaigns = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("utm_campaign, count(distinct client_id) as count").group("site_id, utm_campaign").order("2 desc").limit(9)
+    when "traffic_medium"
+      @top_traffic_mediums = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("traffic_medium, count(distinct client_id) as count").group("site_id, traffic_medium").order("2 desc").limit(9)
+    when "traffic_source"
+      @top_traffic_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("traffic_source, count(distinct client_id) as count").group("site_id, traffic_source").order("2 desc").limit(9)
+    when "traffic_campaign"
+      @top_traffic_campaigns = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("traffic_campaign, count(distinct client_id) as count").group("site_id, traffic_campaign").order("2 desc").limit(9)
     else
       @top_referrer_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
     end

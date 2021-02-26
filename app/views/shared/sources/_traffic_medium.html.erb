@@ -1,10 +1,10 @@
 <div class="stats-item relative bg-white dark:bg-gray-825 shadow-xl rounded p-4" style="height: 436px;">
   <div class="fade-enter-active">
     <%= render partial: 'shared/sources/nav' %>
-    <div class="flex items-center mt-3 mb-2 justify-between text-gray-500 text-xs font-bold tracking-wide"><span>UTM Medium</span><span>Visitors</span>
+    <div class="flex items-center mt-3 mb-2 justify-between text-gray-500 text-xs font-bold tracking-wide"><span>Traffic Medium</span><span>Visitors</span>
     </div>
     <div style="position: relative;">
-      <% @top_utm_mediums.each do |source| %>
+      <% @top_traffic_mediums.each do |source| %>
         <% @max_medium ||= source.count %>
         <div class="flex items-center justify-between my-1 text-sm">
           <div class="w-full h-8" style="max-width: calc(100% - 4rem);">
@@ -12,8 +12,8 @@
 
             </div>
             <span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;">
-              <%= link_to site_path(@site, request.query_parameters.merge(utm_medium: source.utm_medium)), class: 'block truncate hover:underline' do %>
-               <%= source.utm_medium %>
+              <%= link_to site_path(@site, request.query_parameters.merge(traffic_medium: source.traffic_medium)), class: 'block truncate hover:underline' do %>
+               <%= source.traffic_medium %>
               <% end%>
             </span>
           </div><span class="font-medium dark:text-gray-200"><%= pretty_num(source.count) %></span>
