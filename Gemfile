@@ -80,3 +80,5 @@ gem "sendgrid-actionmailer", "~> 3.1"
 gem "chartkick", "~> 3.4"
 
 gem "groupdate", "~> 5.2"
+
+gem "user_agent_parser", "~> 2.7"

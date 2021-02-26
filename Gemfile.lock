@@ -231,6 +231,7 @@ GEM
     tzinfo (2.0.3)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
+    user_agent_parser (2.7.0)
     web-console (4.0.3)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -283,6 +284,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-worker-killer (~> 1.0)
   turbolinks (~> 5)
+  user_agent_parser (~> 2.7)
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
