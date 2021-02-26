@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# https://support.google.com/analytics/answer/6205762?hl=en
+
 require "addressable/uri"
 
 class TrafficDetector
@@ -13,39 +15,37 @@ class TrafficDetector
     result = {}
     request_url = event["dl"]
     request_uri = Addressable::URI.parse(request_url)
-    request_params = request_uri.query_values || {}
 
     referrer_url = event["dr"]
 
     result[:hostname] = request_uri.domain
     result[:path] = request_uri.normalized_path
 
+    return result.merge!(
+      traffic_campaign: "adwords",
+      traffic_source: "google",
+      traffic_medium: "cpc"
+    ) if request_params["gclid"].present?
+
+    return result.merge!(
+      traffic_campaign: "DoubleClick",
+      traffic_source: "google",
+      traffic_medium: "cpc"
+    ) if request_params["gclsrc"].present?
+
+    return result.merge!(
+      traffic_campaign: request_params["utm_campaign"] || "(not set)",
+      traffic_source: request_params["utm_source"],
+      traffic_medium: request_params["utm_medium"] || "(not set)"
+    ) if request_params["utm_source"].present?
+
     if referrer_url.present?
       referrer_uri = Addressable::URI.parse(referrer_url)
-      referrer_params = referrer_uri.query_values || {}
-      if request_params["gclid"].present?
-        result.merge!(
-          traffic_campaign: "adwords",
-          traffic_source: "google",
-          traffic_medium: "cpc"
-        )
-      elsif request_params["gclsrc"].present?
-        result.merge!(
-          traffic_campaign: "DoubleClick",
-          traffic_source: "google",
-          traffic_medium: "cpc"
-        )
-      elsif referrer_uri.domain == request_uri.domain
+      if  referrer_uri.host == request_uri.host
         result.merge!(
           traffic_campaign: DEFAULT_CAMPAIGN,
           traffic_source: referrer_uri.domain,
           traffic_medium: "(internal)"
-        )
-      elsif request_params["utm_source"].present?
-        result.merge!(
-          traffic_campaign: request_params["utm_campaign"] || "(not set)",
-          traffic_source: request_params["utm_source"],
-          traffic_medium: request_params["utm_medium"] || "(not set)"
         )
       else
         ref_parser_result = REF_PARSER.parse(referrer_url)
@@ -70,7 +70,10 @@ class TrafficDetector
         traffic_medium: DEFAULT_MEDIUM
       )
     end
-
-    result
+    result.merge!(
+      traffic_campaign: DEFAULT_CAMPAIGN,
+      traffic_source: DEFAULT_SOURCE,
+      traffic_medium: DEFAULT_MEDIUM
+    )
   end
 end

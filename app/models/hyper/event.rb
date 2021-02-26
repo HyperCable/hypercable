@@ -31,6 +31,9 @@
 #  session_engagement  :boolean          default(FALSE)
 #  started_at          :datetime         not null
 #  title               :string
+#  traffic_campaign    :string
+#  traffic_medium      :string
+#  traffic_source      :string
 #  user_agent          :string
 #  user_language       :string
 #  user_props          :jsonb

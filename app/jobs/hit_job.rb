@@ -16,16 +16,15 @@ class HitJob
       meta_path = request["path"].match(/\/(?<uuid>.*?)\/g\/collect/)
       site_uuid = meta_path["uuid"]
       next if site_uuid.nil?
-      url = event["dl"]
       real_ip = request["x_forwarded_for"] || request["ip"]
       ip_info = IPDB.get(real_ip)
       tech_info = TechDetector.detect(request["user_agent"])
       referrer_source = RefererSourceDetector.detect(event["dr"])
-      utm_info = UtmDetector.detect(url || "")
+      traffic_info = TrafficDetector.detect(event)
       payload_parser = PayloadParser.new(event)
 
       result = {}
-      result.merge!(utm_info)
+      result.merge!(traffic_info)
       result.merge!(tech_info)
       result.merge!({
         site_id: site_uuid,
@@ -44,9 +43,6 @@ class HitJob
         session_count: event["sct"],
         request_number: event["_s"],
 
-        location_url: event["dl"],
-        hostname: URI.parse(url).host,
-        path: URI.parse(url).path,
         title: event["dt"],
         user_agent: request["user_agent"],
         ip: real_ip,
