@@ -168,6 +168,7 @@ GEM
     rainbow (3.0.0)
     rake (13.0.1)
     redis (4.2.5)
+    referer-parser (0.3.0)
     regexp_parser (1.7.1)
     rexml (3.2.4)
     rubocop (0.92.0)
@@ -275,6 +276,7 @@ DEPENDENCIES
   pry-rails (~> 0.3.9)
   puma (~> 4)
   rails (~> 6.0, >= 6.1.0.rc1)
+  referer-parser (~> 0.3.0)
   rubocop
   rubocop-performance
   rubocop-rails
