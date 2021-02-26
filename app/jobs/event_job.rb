@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HitJob
+class EventJob
   include Sidekiq::Worker
 
   def perform(*args)
