@@ -43,7 +43,7 @@ class TrafficDetector
       referrer_uri = Addressable::URI.parse(referrer_url)
       if  referrer_uri.host == request_uri.host
         result.merge!(
-          traffic_campaign: DEFAULT_CAMPAIGN,
+          traffic_campaign: "(internal)",
           traffic_source: referrer_uri.domain,
           traffic_medium: "(internal)"
         )

@@ -53,6 +53,7 @@ class HitJob
 
         country: ip_info[:country_name],
         city: ip_info[:city],
+        region: ip_info[:region_name],
         latitude: ip_info[:latitude],
         longitude: ip_info[:longitude],
 

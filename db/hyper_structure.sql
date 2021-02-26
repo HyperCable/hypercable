@@ -59,17 +59,11 @@ CREATE TABLE public.events (
     city character varying,
     latitude double precision,
     longitude double precision,
-    utm_source character varying,
-    utm_medium character varying,
-    utm_term character varying,
-    utm_content character varying,
-    utm_campaign character varying,
     browser character varying,
     os character varying,
     device_type character varying,
     user_props jsonb DEFAULT '{}'::jsonb,
     event_props jsonb DEFAULT '{}'::jsonb,
-    non_interaction_hit boolean DEFAULT false,
     started_at timestamp without time zone NOT NULL,
     raw_event jsonb DEFAULT '{}'::jsonb,
     traffic_campaign character varying,
@@ -252,13 +246,6 @@ ALTER TABLE ONLY _timescaledb_internal._hyper_5_1_chunk ALTER COLUMN event_props
 
 
 --
--- Name: _hyper_5_1_chunk non_interaction_hit; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
---
-
-ALTER TABLE ONLY _timescaledb_internal._hyper_5_1_chunk ALTER COLUMN non_interaction_hit SET DEFAULT false;
-
-
---
 -- Name: _hyper_5_1_chunk raw_event; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
 --
 
@@ -305,13 +292,6 @@ ALTER TABLE ONLY _timescaledb_internal._hyper_5_2_chunk ALTER COLUMN user_props 
 --
 
 ALTER TABLE ONLY _timescaledb_internal._hyper_5_2_chunk ALTER COLUMN event_props SET DEFAULT '{}'::jsonb;
-
-
---
--- Name: _hyper_5_2_chunk non_interaction_hit; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
---
-
-ALTER TABLE ONLY _timescaledb_internal._hyper_5_2_chunk ALTER COLUMN non_interaction_hit SET DEFAULT false;
 
 
 --
@@ -442,6 +422,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201217004521'),
 ('20201222091938'),
 ('20210213182643'),
-('20210226015643');
+('20210226015643'),
+('20210226091913');
 
 
