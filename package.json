@@ -1,0 +1,23 @@
+{
+  "name": "hypercable_web",
+  "private": true,
+  "dependencies": {
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.2.2",
+    "@tailwindcss/aspect-ratio": "^0.2.0",
+    "@tailwindcss/forms": "^0.2.1",
+    "@tailwindcss/typography": "^0.4.0",
+    "alpinejs": "^2.8.0",
+    "chart.js": "^2.9.4",
+    "chartkick": "^3.2.1",
+    "stimulus": "^1.1.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "turbolinks": "^5.2.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}

@@ -1,0 +1,297 @@
+
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+@import "./modal.css";
+@import "./loader.css";
+@import "./tooltip.css";
+@import "./flatpickr.css";
+
+
+.button {
+  @apply bg-indigo-600 border border-transparent rounded-md py-2 px-4 inline-flex justify-center text-sm leading-5 font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+}
+
+.button-outline {
+  @apply bg-transparent border border-indigo-600 text-indigo-600;
+}
+
+.button-sm {
+  @apply text-sm py-2 px-4;
+}
+
+.button-md {
+  @apply py-2 px-4;
+}
+
+html {
+  @apply text-gray-800;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+blockquote {
+  @apply my-4 py-2 px-4 border-l-4 border-gray-500;
+}
+
+@screen xl {
+  .container {
+    max-width: 70rem;
+  }
+}
+
+.pricing-table {
+  height: 920px;
+}
+
+@screen md {
+  .pricing-table {
+    height: auto;
+  }
+}
+
+@tailwind utilities;
+
+.main-graph {
+  height: 440px;
+}
+
+@screen md {
+  .main-graph {
+    height: 480px;
+  }
+}
+
+@screen lg {
+  .main-graph {
+    height: 440px;
+  }
+}
+
+@screen xl {
+  .main-graph {
+    height: 460px;
+  }
+}
+
+.light-text {
+  color: #F0F4F8;
+}
+
+.transition {
+  transition: all .1s ease-in;
+}
+
+.pulsating-circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+}
+
+.pulsating-circle:before {
+  content: '';
+  position: relative;
+  display: block;
+  width: 300%;
+  height: 300%;
+  box-sizing: border-box;
+  margin-left: -100%;
+  margin-top: -100%;
+  border-radius: 45px;
+  background-color: #9ae6b4;
+  animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  @apply bg-green-500;
+}
+.pulsating-circle:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 15px;
+  animation: pulse-dot 3s cubic-bezier(0.455, 0.03, 0.515, 0.955) -.4s infinite;
+  @apply bg-green-500;
+}
+
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(.33);
+  }
+  50% {
+    transform: scale(1);
+  }
+  40%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(.8);
+  }
+  25% {
+    transform: scale(1);
+  }
+  50%, 100% {
+    transform: scale(.8);
+  }
+}
+
+.just-text h1, .just-text h2, .just-text h3 {
+  margin-top: 1em;
+  margin-bottom: .5em;
+}
+
+.just-text p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.dropdown-content::before {
+    top: -16px;
+    right: 8px;
+    left: auto;
+}
+.dropdown-content::before {
+    border: 8px solid transparent;
+    border-bottom-color: rgba(27,31,35,0.15);
+}
+.dropdown-content::before, .dropdown-content::after {
+    position: absolute;
+    display: inline-block;
+    content: "";
+  }
+.dropdown-content::after {
+    border: 7px solid transparent;
+    border-bottom-color: #fff;
+}
+.dropdown-content::after {
+    top: -14px;
+    right: 9px;
+    left: auto;
+}
+
+.feather {
+  height: 1em;
+  width: 1em;
+  overflow: visible;
+  display: inline;
+}
+
+.feather-sm {
+  height: 1em;
+  width: 1em;
+  overflow: visible;
+  display: inline;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f1f5f8;
+}
+
+.dark .table-striped tbody tr:nth-child(odd) {
+  background-color: rgb(37, 47, 63);
+}
+
+.dark .table-striped tbody tr:nth-child(even) {
+  background-color: rgb(26, 32, 44);
+}
+
+.twitter-icon {
+  width: 1.25em;
+  height: 1.25em;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: text-bottom;
+  background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2072%2072%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h72v72H0z%22%2F%3E%3Cpath%20class%3D%22icon%22%20fill%3D%22%231da1f2%22%20d%3D%22M68.812%2015.14c-2.348%201.04-4.87%201.744-7.52%202.06%202.704-1.62%204.78-4.186%205.757-7.243-2.53%201.5-5.33%202.592-8.314%203.176C56.35%2010.59%2052.948%209%2049.182%209c-7.23%200-13.092%205.86-13.092%2013.093%200%201.026.118%202.02.338%202.98C25.543%2024.527%2015.9%2019.318%209.44%2011.396c-1.125%201.936-1.77%204.184-1.77%206.58%200%204.543%202.312%208.552%205.824%2010.9-2.146-.07-4.165-.658-5.93-1.64-.002.056-.002.11-.002.163%200%206.345%204.513%2011.638%2010.504%2012.84-1.1.298-2.256.457-3.45.457-.845%200-1.666-.078-2.464-.23%201.667%205.2%206.5%208.985%2012.23%209.09-4.482%203.51-10.13%205.605-16.26%205.605-1.055%200-2.096-.06-3.122-.184%205.794%203.717%2012.676%205.882%2020.067%205.882%2024.083%200%2037.25-19.95%2037.25-37.25%200-.565-.013-1.133-.038-1.693%202.558-1.847%204.778-4.15%206.532-6.774z%22%2F%3E%3C%2Fsvg%3E);
+}
+
+.tweet-text a {
+  @apply text-blue-500;
+}
+
+.tweet-text a:hover {
+  text-decoration: underline;
+}
+
+.stats-item {
+  @apply mt-6;
+  width: 100%;
+}
+
+@screen md {
+  .stats-item {
+    margin-left: 6px;
+    margin-right: 6px;
+    width: calc(50% - 6px);
+    position: relative;
+  }
+}
+
+.stats-item:first-child {
+  margin-left: 0;
+}
+
+.stats-item:last-child {
+  margin-right: 0;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 100ms ease-in;
+}
+
+.flatpickr-calendar.static.open {
+  right: 2px;
+  top: calc(100% - 12px);
+}
+
+.datamaps-subunit {
+  cursor: pointer;
+}
+
+/* Only because the map handler doesn't expose an easier way to change the shadow color */
+.dark .hoverinfo {
+  box-shadow: 1px 1px 5px rgb(26, 32, 44);
+}
+
+.fullwidth-shadow::before {
+  @apply h-full absolute top-0 bg-gray-50 w-screen dark:bg-gray-850;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.06);
+  content: "";
+  z-index: -1;
+  left: calc(-1 * calc(50vw - 50%));
+}
+
+.dark .fullwidth-shadow::before {
+  box-shadow: 0 4px 2px -2px rgba(200, 200, 200, 0.1);
+}
+
+iframe[hidden] {
+  display: none;
+}
+
+pre, code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A lightweight, non-intrusive alternative to Google Analytics."/>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/">
+    <title>Hypercable · Web analytics</title>
+    
+
+    
+  </head>
+  <body class="flex flex-col h-full bg-gray-100 dark:bg-gray-900">
+    <div class="text-center w-full my-8">
+      <a href="/">
+        <img alt="Hypercable logo" class="hidden dark:inline" src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png" style="height: 2.5rem;">
+        <img alt="Hypercable logo" class="inline dark:hidden" src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png" style="height: 2.5rem;">
+      </a>
+    </div>
+    <%= render "layouts/flash" %>
+    <%= yield %>
+    <p class="text-center text-gray-500 text-xs py-8">
+      ©2020 Hypercable Analytics. All rights reserved.
+    </p>
+  </body>
+</html>

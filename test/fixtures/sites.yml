@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: sites
+#
+#  id          :bigint           not null, primary key
+#  domain      :string
+#  public      :boolean          default(FALSE)
+#  timezone    :string
+#  uuid        :uuid             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  tracking_id :string
+#  user_id     :bigint
+#
+# Indexes
+#
+#  index_sites_on_tracking_id  (tracking_id) UNIQUE
+#  index_sites_on_user_id      (user_id)
+#  index_sites_on_uuid         (uuid) UNIQUE
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value

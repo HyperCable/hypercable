@@ -1,0 +1,131 @@
+version: '3.7'
+
+services:
+  base: &base
+    image: hooopo/hypercable:latest
+    env_file: .env.production
+
+  postgres:
+    image: postgres:12
+    restart: always
+    ports:
+      - '4432:5432'
+    volumes:
+      - postgres:/data/postgres
+    environment:
+      - POSTGRES_DB=hypercable_prod
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  tsdb:
+    image: timescale/timescaledb:2.0.1-pg12
+    #image: timescale/timescaledb:latest-pg12
+    restart: always
+    ports:
+      - '5532:5432'
+    volumes:
+      - postgres:/data/tsdb
+    environment:
+      - POSTGRES_DB=tsdb_prod
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  redis:
+    image: redis:alpine
+    restart: always
+    command: ["sh", "-c", "redis-server --requirepass \"$REDIS_PASSWORD\""]
+    env_file: .env.production
+    volumes:
+      - redis:/data/redis
+    ports:
+      - '6380:6379'
+
+  openresty:
+    tty: true
+    restart: always
+    stdin_open: true
+    ports:
+      - '8000:8000'
+    image: hooopo/hypercable-openresty:latest
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+
+  geoipupdate:
+    container_name: geoipupdate
+    image: maxmindinc/geoipupdate
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-ASN GeoLite2-City GeoLite2-Country'
+      - GEOIPUPDATE_FREQUENCY=72
+    networks:
+      - geoipupdate
+    volumes:
+      - 'geoipupdate_data:/usr/share/GeoIP/'
+
+  rails:
+    <<: *base
+    image: hooopo/hypercable:latest
+    dns:
+      - 8.8.8.8
+    restart: always
+    volumes:
+      - ./:/app:delegated
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+      - cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
+    depends_on:
+      - postgres
+      - tsdb
+      - redis
+      - sidekiq
+    ports:
+      - 3333:3000
+    env_file: .env.production
+    environment:
+      - NODE_ENV=production
+      - RAILS_ENV=production
+    entrypoint: docker/entrypoints/rails.sh
+    command: ["bundle", "exec", "rails", "s", "-p", "3000", "-b", "0.0.0.0"]
+
+  sidekiq:
+    <<: *base
+    image: hooopo/hypercable:latest
+    dns:
+      - 8.8.8.8
+    restart: always
+    volumes:
+      - ./:/app:delegated
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+      - cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
+      - 'geoipupdate_data:/usr/share/GeoIP/'
+    depends_on:
+      - postgres
+      - tsdb
+      - redis
+      - geoipupdate
+    environment:
+      - NODE_ENV=production
+      - RAILS_ENV=production
+    command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+
+
+networks:
+  geoipupdate:
+
+volumes:
+  postgres:
+  tsdb:
+  redis:
+  packs:
+  node_modules:
+  cache:
+  bundle:
+  geoipupdate_data:
+    driver: local

@@ -1,0 +1,34 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  main:
+    <<: *default
+    url: <%= ENV['MAIN_DATABASE_URL'] %>
+    migrations_paths: db/migrate
+  hyper:
+    <<: *default
+    url: <%= ENV['HYPER_DATABASE_URL'] %>
+    migrations_paths: db/hyper_migrate
+
+test:
+  main:
+    <<: *default
+    url: <%= ENV['MAIN_DATABASE_URL'] %>
+    migrations_paths: db/migrate
+  hyper:
+    <<: *default
+    url: <%= ENV['HYPER_DATABASE_URL'] %>
+    migrations_paths: db/hyper_migrate
+
+production:
+  main:
+    <<: *default
+    url: <%= ENV['MAIN_DATABASE_URL'] %>
+    migrations_paths: db/migrate
+  hyper:
+    <<: *default
+    url: <%= ENV['HYPER_DATABASE_URL'] %>
+    migrations_paths: db/hyper_migrate

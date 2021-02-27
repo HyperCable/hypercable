@@ -1,0 +1,8 @@
+<div class="stats-item relative bg-white dark:bg-gray-825 shadow-xl rounded p-4" style="height: 436px;">
+  <div class="fade-enter-active"><h3 class="font-bold dark:text-gray-100">Countries</h3>
+
+    <div class="mt-6 mx-auto" id="map-container" style="width: 100%; max-width: 475px; height: 320px; position: relative; padding-bottom: 56.25%;">
+      <%= geo_chart @top_countries, library: {displayMode: "markers"} %>
+    </div>
+  </div>
+</div>
