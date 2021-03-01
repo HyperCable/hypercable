@@ -27,3 +27,4 @@ Hypercable Analytics is a fully featured high performance scalable, open source,
 ## demo site
 
 * https://learnsql.io （Note: demo project, data will be cleared later）
+* https://hackershare.dev (site with hypercable analytics tracker)
