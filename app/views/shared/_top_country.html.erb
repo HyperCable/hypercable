@@ -1,8 +1,75 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+<script src="https://datamaps.github.io/scripts/0.4.4/datamaps.world.min.js"></script>
 <div class="stats-item relative bg-white dark:bg-gray-825 shadow-xl rounded p-4" style="height: 436px;">
   <div class="fade-enter-active"><h3 class="font-bold dark:text-gray-100">Countries</h3>
-
     <div class="mt-6 mx-auto" id="map-container" style="width: 100%; max-width: 475px; height: 320px; position: relative; padding-bottom: 56.25%;">
-      <%= geo_chart @top_countries, library: {displayMode: "markers"} %>
+      
     </div>
   </div>
 </div>
+
+<script>
+  var label =  'Visitors'
+  var defaultFill =  '#f8fafc'
+  var highlightFill =  '#F5F5F5'
+  var borderColor =  '#dae1e7'
+  var highlightBorderColor = '#a779e9'
+
+  var series = <%= @top_countries.html_safe %>;
+
+
+    // Datamaps expect data in format:
+    // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
+    //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
+    var dataset = {};
+
+    // We need to colorize every country based on "numberOfWhatever"
+    // colors should be uniq for every value.
+    // For this purpose we create palette(using min/max series-value)
+    var onlyValues = series.map(function(obj){ return obj[1]; });
+    var minValue = Math.min.apply(null, onlyValues),
+    maxValue = Math.max.apply(null, onlyValues);
+
+    // create color palette function
+    // color can be whatever you wish
+    var paletteScale = d3.scale.linear()
+    .domain([minValue,maxValue])
+            .range(["#EFEFFF","#02386F"]); // blue color
+
+    // fill dataset in appropriate format
+    series.forEach(function(item){ //
+        // item example value ["USA", 70]
+        var iso = item[0],
+        value = item[1];
+        dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
+      });
+    var map = new Datamap(
+    {
+      element: document.getElementById('map-container'),
+
+      responsive: true,
+      projection: 'mercator',
+      fills: { defaultFill },
+      data: dataset,
+      geographyConfig: {
+        borderColor,
+        highlightBorderWidth: 2,
+        highlightFillColor: function(geo) {
+          return geo['fillColor'] || highlightFill;
+        },
+        highlightBorderColor,
+        popupTemplate: function(geo, data) {
+          console.log(geo)
+          console.log(data)
+          if (!data) { return ; }
+          const pluralizedLabel = data.numberOfThings === 1 ? label.slice(0, -1) : label
+          return ['<div class="hoverinfo dark:bg-gray-800 dark:shadow-gray-850 dark:border-gray-850 dark:text-gray-200">',
+          '<strong>', geo.properties.name, '</strong>',
+          '<br><strong class="dark:text-indigo-400">', data.numberOfThings, '</strong> ' + pluralizedLabel,
+          '</div>'].join('');
+        }
+      }
+    }
+    );
+ </script>

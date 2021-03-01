@@ -7,7 +7,7 @@
 # 1. Medium-unknown providers
 # 2. Email providers
 # 3. Social providers
-# 4. Search providers
+# 4. Organic providers
 # 5. Paid media
 
 
@@ -582,9 +582,9 @@ social:
 
 # #######################################################################################################
 #
-# SEARCH PROVIDERS
+# Organic SEARCH PROVIDERS
 
-search:
+organic:
 
   1.cz:
     parameters:

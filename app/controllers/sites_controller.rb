@@ -35,7 +35,13 @@ class SitesController < ApplicationController
     @top_pages = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("location_url, count(distinct client_id) as count").group("site_id, location_url").order("2 desc").limit(9)
     query_devices(range)
     query_sources(range)
-    @top_countries = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("country, count(distinct client_id) as count").group("site_id, country")
+    @top_countries = Hyper::Event
+      .where(site_id: params[:id])
+      .where(started_at: range)
+      .where("country is not null")
+      .select("country, count(distinct client_id) as count")
+      .group("country")
+      .map { |agg| [Hyper::Event.country_full_to_3(agg.country), agg.count] }.to_json
     render "show", layout: "application"
   end
 
