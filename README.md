@@ -1,6 +1,6 @@
-# Hypercable Web
+# Hypercable Analytics
 
-Web for hypercable analytics.
+Hypercable Analytics is a fully featured high performance scalable, open source, standalone deployable alternative to Google Analytics, build with timescaledb openresty redis and rails.
 
 
 ## local setup
@@ -11,6 +11,7 @@ Web for hypercable analytics.
 * stop: docker-compose stop
 * add migration: docker-compose run rails rails g migration xxx
 * run migration: docker-compose run rails rake db:migrate
+* collcetor location: http://localhost:8000
 * open http://localhost:3333
 
 
