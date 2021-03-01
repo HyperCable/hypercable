@@ -23,3 +23,7 @@ Hypercable Analytics is a fully featured high performance scalable, open source,
 * docker-compose -f docker-compose.production.yaml up -d
 * git pull && docker-compose -f docker-compose.production.yaml pull
 * docker-compose -f docker-compose.production.yaml logs --tail="all"
+
+## demo site
+
+* https://learnsql.io （Note: demo project, data will be cleared later）
