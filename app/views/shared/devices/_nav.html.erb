@@ -1,8 +1,8 @@
 <div class="w-full flex justify-between">
   <h3 class="font-bold dark:text-gray-100">Top Devices</h3>
   <ul class="flex font-medium text-xs text-gray-500 dark:text-gray-400 space-x-2">
-    <li class="<%= device_tab_class(:device_type) %>"><%= link_to "Device Type", site_path(@site, request.query_parameters.merge(device_meniu: :device_type)) %></li>
-    <li class="<%= device_tab_class(:browser) %>"><%= link_to "Browser", site_path(@site, request.query_parameters.merge(device_meniu: :browser)) %></li>
-    <li class="<%= device_tab_class(:os) %>"><%= link_to "OS", site_path(@site, request.query_parameters.merge(device_meniu: :os)) %></li>
+    <li class="<%= device_tab_class(:device_type) %>"><%= link_to "Device Type", site_path(@site, request.query_parameters.merge(device_meniu: :device_type), anchor: 'top_devices') %></li>
+    <li class="<%= device_tab_class(:browser) %>"><%= link_to "Browser", site_path(@site, request.query_parameters.merge(device_meniu: :browser), anchor: 'top_devices') %></li>
+    <li class="<%= device_tab_class(:os) %>"><%= link_to "OS", site_path(@site, request.query_parameters.merge(device_meniu: :os), anchor: 'top_devices') %></li>
   </ul>
 </div>
