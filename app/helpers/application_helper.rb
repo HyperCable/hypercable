@@ -11,10 +11,6 @@ module ApplicationHelper
     [spinner, text].join.html_safe
   end
 
-  def filter_keys
-    %w[browser device_type os location_url traffic_source traffic_medium traffic_campaign referrer_source]
-  end
-
   def collector_server_url(site)
     ["https://", ENV["COLLECTOR_HOST"] || ENV["HOST"], "/", site.uuid].join
   end

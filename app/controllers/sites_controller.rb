@@ -26,18 +26,17 @@ class SitesController < ApplicationController
   def show
     @site = current_user.sites.find_by!(uuid: params[:id])
     range = time_range(@site, params[:period])
+    base = Hyper::Event.filter_by_params(filter_keys, params).where(site_id: params[:id]).where(started_at: range)
     current_range = time_range(@site, "realtime")
     @current_visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: current_range).distinct.count(:client_id)
-    @unique_visitors_summary = Hyper::Event.where(site_id: params[:id]).where(started_at: range).distinct.count(:client_id)
-    @total_pageviews_summary = Hyper::Event.where(site_id: params[:id]).where(started_at: range).where(event_name: :page_view).count
+    @unique_visitors_summary = base.distinct.count(:client_id)
+    @total_pageviews_summary = base.where(event_name: :page_view).count
 
-    @visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: range).group(group_sql).distinct.count(:client_id)
-    @top_pages = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("location_url, count(distinct client_id) as count").group("site_id, location_url").order("2 desc").limit(9)
-    query_devices(range)
-    query_sources(range)
-    @top_countries = Hyper::Event
-      .where(site_id: params[:id])
-      .where(started_at: range)
+    @visitors_count = base.group(group_sql).distinct.count(:client_id)
+    @top_pages = base.select("location_url, count(distinct client_id) as count").group("site_id, location_url").order("2 desc").limit(9)
+    query_devices(base)
+    query_sources(base)
+    @top_countries = base
       .where("country is not null")
       .select("country, count(distinct client_id) as count")
       .group("country")
@@ -74,31 +73,31 @@ class SitesController < ApplicationController
     end
   end
 
-  def query_devices(range)
+  def query_devices(base)
     case params[:device_meniu]
     when "device_type"
-      @top_device_types = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
+      @top_device_types = base.select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
     when "browser"
-      @top_browsers = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("browser, count(distinct client_id) as count").group("site_id, browser").order("2 desc").limit(9)
+      @top_browsers = base.select("browser, count(distinct client_id) as count").group("site_id, browser").order("2 desc").limit(9)
     when "os"
-      @top_oses = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("os, count(distinct client_id) as count").group("site_id, os").order("2 desc").limit(9)
+      @top_oses = base.select("os, count(distinct client_id) as count").group("site_id, os").order("2 desc").limit(9)
     else
-      @top_device_types = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
+      @top_device_types = base.select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
     end
   end
 
-  def query_sources(range)
+  def query_sources(base)
     case params[:source_meniu]
     when "referrer_source"
-      @top_referrer_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).where(traffic_medium: "referral").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
+      @top_referrer_sources = base.where(traffic_medium: "referral").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
     when "traffic_medium"
-      @top_traffic_mediums = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("traffic_medium, count(distinct client_id) as count").group("site_id, traffic_medium").order("2 desc").limit(9)
+      @top_traffic_mediums = base.select("traffic_medium, count(distinct client_id) as count").group("site_id, traffic_medium").order("2 desc").limit(9)
     when "traffic_source"
-      @top_traffic_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("traffic_source, count(distinct client_id) as count").group("site_id, traffic_source").order("2 desc").limit(9)
+      @top_traffic_sources = base.select("traffic_source, count(distinct client_id) as count").group("site_id, traffic_source").order("2 desc").limit(9)
     when "traffic_campaign"
-      @top_traffic_campaigns = Hyper::Event.where(site_id: params[:id]).where(started_at: range).select("traffic_campaign, count(distinct client_id) as count").group("site_id, traffic_campaign").order("2 desc").limit(9)
+      @top_traffic_campaigns = base.select("traffic_campaign, count(distinct client_id) as count").group("site_id, traffic_campaign").order("2 desc").limit(9)
     else
-      @top_referrer_sources = Hyper::Event.where(site_id: params[:id]).where(started_at: range).where(traffic_medium: "referral").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
+      @top_referrer_sources = base.where(traffic_medium: "referral").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
     end
   end
 end
