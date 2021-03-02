@@ -552,6 +552,16 @@ module Hyper
       COUNTRY_2_TO_3[CONTRY_FULL_TO_2[full_name]]
     end
 
+    def self.filter_by_params(keys, params)
+      base = self
+      keys.each do |key|
+        if params[key].present?
+          base = base.where(key => params[key])
+        end
+      end
+      base
+    end
+
     def display_path
       return nil if location_url.blank?
       URI.parse(location_url).normalize.path

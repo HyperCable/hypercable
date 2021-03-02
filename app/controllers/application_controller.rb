@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :email_verify!
 
-  helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host, :email_verify!
+  helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host, :email_verify!, :filter_keys
 
   def current_user
     @current_user ||= User.where(remember_token: cookies[:remember_token]).first if cookies[:remember_token]
@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
     return (30.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "30d"
     return (180.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "6m"
     return (360.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "12m"
+  end
+
+  def filter_keys
+    %w[browser device_type os location_url traffic_source traffic_medium traffic_campaign referrer_source country]
   end
 
   protected

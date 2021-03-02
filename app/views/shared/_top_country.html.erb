@@ -47,6 +47,14 @@
     var map = new Datamap(
     {
       element: document.getElementById('map-container'),
+      done: function(datamap) {
+        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+            //alert(geography.properties.name);
+            var url = new URL(window.location);
+            url.searchParams.set('country', geography.properties.name);
+            window.location = url.toString();
+        });
+      },
 
       responsive: true,
       projection: 'mercator',
