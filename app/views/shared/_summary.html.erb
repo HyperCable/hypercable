@@ -13,13 +13,13 @@
     <div class="my-1 flex justify-between items-center"><b class="text-2xl mr-4 dark:text-gray-100"><%= pretty_num @total_pageviews_summary %></b><span class="text-xs dark:text-gray-100"><span class="text-red-400 font-bold">↓</span> 16%</span>
     </div>
   </div>
-  <div class="px-8 w-1/2 my-4 lg:w-auto lg:border-l border-gray-300 border-r lg:border-r-0">  <div class="text-gray-500 dark:text-gray-400 text-xs font-bold tracking-wide uppercase">Bounce rate
+  <div class="px-8 w-1/2 my-4 lg:w-auto lg:border-l border-gray-300 border-r lg:border-r-0">  <div class="text-gray-500 dark:text-gray-400 text-xs font-bold tracking-wide uppercase">New visitors
   </div>
-  <div class="my-1 flex justify-between items-center"><b class="text-2xl mr-4 dark:text-gray-100">51%</b><span class="text-xs text-gray-700 dark:text-gray-300">〰 N/A</span>
+  <div class="my-1 flex justify-between items-center"><b class="text-2xl mr-4 dark:text-gray-100"><%= pretty_num(@new_visitors_count) %></b><span class="text-xs text-gray-700 dark:text-gray-300">〰 N/A</span>
   </div>
 </div>
 <div class="px-8 w-1/2 my-4 lg:w-auto lg:border-l border-gray-300">
-  <div class="text-gray-500 dark:text-gray-400 text-xs font-bold tracking-wide uppercase">Visitor Avg Engagement
+  <div class="text-gray-500 dark:text-gray-400 text-xs font-bold tracking-wide uppercase">Avg Engagement Time
   </div>
   <div class="my-1 flex justify-between items-center">
     <b class="text-2xl mr-4 dark:text-gray-100"><%= pretty_time(@avg_engagement_time.to_i / 1000) %></b><span class="text-xs dark:text-gray-100">

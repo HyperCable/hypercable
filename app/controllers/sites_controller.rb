@@ -32,6 +32,7 @@ class SitesController < ApplicationController
     @unique_visitors_summary = base.distinct.count(:client_id)
     @total_pageviews_summary = base.where(event_name: :page_view).count
     @avg_engagement_time = base.where(event_name: "user_engagement").average(:engagement_time)
+    @new_visitors_count = base.where(event_name: "first_visit").count
 
     @visitors_count = base.group(group_sql).distinct.count(:client_id)
     @top_pages = base.select("location_url, count(distinct client_id) as count").group("site_id, location_url").order("2 desc").limit(9)
