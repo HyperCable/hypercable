@@ -11,6 +11,21 @@ module ApplicationHelper
     [spinner, text].join.html_safe
   end
 
+  def pretty_time(num)
+    return "N/A" if num.nil?
+    duration = ActiveSupport::Duration.build(num.to_i).parts
+    { years: "Y",
+      months: "M",
+      weeks: "W",
+      days: "D",
+      hours: "h",
+      minutes: "m",
+      seconds: "s"
+    }.map do |part, unit|
+      duration.has_key?(part) ? "#{duration[part]}#{unit}" : nil
+    end.compact.join(" ")
+  end
+
   def collector_server_url(site)
     ["https://", ENV["COLLECTOR_HOST"] || ENV["HOST"], "/", site.uuid].join
   end

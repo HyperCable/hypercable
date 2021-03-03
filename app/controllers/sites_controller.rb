@@ -31,6 +31,7 @@ class SitesController < ApplicationController
     @current_visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: current_range).distinct.count(:client_id)
     @unique_visitors_summary = base.distinct.count(:client_id)
     @total_pageviews_summary = base.where(event_name: :page_view).count
+    @avg_engagement_time = base.where(event_name: "user_engagement").average(:engagement_time)
 
     @visitors_count = base.group(group_sql).distinct.count(:client_id)
     @top_pages = base.select("location_url, count(distinct client_id) as count").group("site_id, location_url").order("2 desc").limit(9)

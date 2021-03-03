@@ -5,7 +5,6 @@
 #  browser            :string
 #  city               :string
 #  country            :string
-#  country_code       :string
 #  data_source        :string           default("web")
 #  device_type        :string
 #  engagement_time    :integer
