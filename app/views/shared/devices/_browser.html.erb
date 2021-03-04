@@ -14,7 +14,7 @@
             <span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;">
               <%= link_to type.browser, site_path(@site, request.query_parameters.merge(browser: type.browser)), class: 'block hover:underline', title: type.browser %>
             </span>
-          </div><span class="font-medium dark:text-gray-200"><%= pretty_num type.count %> <span class="inline-block text-xs w-8 text-right">(<%= number_to_percentage(100 * type.count / @max_browser.to_f, precision: 0) %>)</span></span>
+          </div><span class="font-medium dark:text-gray-200"><%= pretty_num type.count %> <span class="inline-block text-xs w-8 text-right">(<%= number_to_percentage(100 * type.count / @unique_visitors_summary.to_f, precision: 0) %>)</span></span>
         </div>
       <% end %>
     </div>
