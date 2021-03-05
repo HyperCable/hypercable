@@ -4,37 +4,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :email_verify!
 
-  helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host, :email_verify!, :filter_keys
+  helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host, :email_verify!
 
   def current_user
     @current_user ||= User.where(remember_token: cookies[:remember_token]).first if cookies[:remember_token]
-  end
-
-  # today
-  # realtime
-  # this week
-  # this month
-
-  # 7 days
-  # 30 days
-  # 6 month
-  # 12 month
-  def time_range(site, range)
-    return (7.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range.blank?
-
-    return (30.minutes.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "realtime"
-    return (Time.now.in_time_zone(site.timezone).beginning_of_day.to_s(:db)..) if range == "today"
-    return (Time.now.in_time_zone(site.timezone).beginning_of_week.to_s(:db)..) if range == "week"
-    return (Time.now.in_time_zone(site.timezone).beginning_of_month.to_s(:db)..) if range == "month"
-
-    return (7.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "7d"
-    return (30.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "30d"
-    return (180.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "6m"
-    return (360.days.ago.in_time_zone(site.timezone).to_s(:db)..) if range == "12m"
-  end
-
-  def filter_keys
-    %w[browser device_type os location_url traffic_source traffic_medium traffic_campaign referrer_source country]
   end
 
   protected

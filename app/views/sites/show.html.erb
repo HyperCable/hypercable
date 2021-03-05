@@ -14,7 +14,7 @@
             </button>
           </div>
           <div id="filters">
-            <% filter_keys.each do |filter| %>
+            <% QueryBuilder::FILTER_KEYS.each do |filter| %>
               <% if params[filter].present? %>
                 <span title="<%= params[filter] %>" class="inline-flex bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 shadow text-sm rounded py-2 px-3 mr-2">
                   <span class="inline-block max-w-2xs md:max-w-xs truncate">
@@ -28,7 +28,7 @@
               <% end %>
             <% end %>
           </div>
-          <% if params.slice(*filter_keys).blank? %>
+          <% if params.slice(*QueryBuilder::FILTER_KEYS).blank? %>
             <a class="block text-sm font-bold text-gray-500 dark:text-gray-300 mr-auto ml-2" href="<%= site_path(@site, period: :realtime) %>"><svg class="w-2 mr-2 fill-current text-green-500 inline" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8"></circle></svg><%= @current_visitors_count %> current visitors</a>
           <% end %>
         </div>
