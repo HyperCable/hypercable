@@ -234,6 +234,12 @@ email:
 # SOCIAL PROVIDERS
 
 social:
+  Wechat:
+    domains:
+      - mp.weixinbridge.com
+  Zhihu:
+    domains:
+      - link.zhihu.com
 
   Facebook:
     domains:
@@ -3410,6 +3416,12 @@ organic:
     domains:
       - www.sougou.com
       - www.soso.com
+
+  DogeDoge:
+    parameters:
+      - q
+    domains:
+      - www.dogedoge.com
 
   Softonic:
     parameters:
