@@ -53,7 +53,7 @@
           <tbody>
             <% @top_location_urls.each do |url| %>
               <tr class="text-sm dark:text-gray-200">
-                <td class="p-2"><a class="hover:underline" target="_blank" href="<%= url.location_url %>"><%= url.location_url %></a></td>
+                <td class="p-2"><a class="hover:underline text-blue-500" target="_blank" href="<%= url.location_url %>"><%= url.location_url %></a></td>
                 <td class="p-2 w-32 font-medium" align="right"><%= pretty_num url.visitors_count %></td>
                 <td class="p-2 w-32 font-medium" align="right"><%= pretty_num url.count %></td>
                 <td class="p-2 w-32 font-medium" align="right"><%= pretty_num url.sessions_count %></td>
