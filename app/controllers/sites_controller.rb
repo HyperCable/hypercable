@@ -25,10 +25,10 @@ class SitesController < ApplicationController
 
   def show
     @site = current_user.sites.find_by!(uuid: params[:id])
-    range = time_range(@site, params[:period])
-    base = Hyper::Event.filter_by_params(filter_keys, params).where(site_id: params[:id]).where(started_at: range)
-    current_range = time_range(@site, "realtime")
-    @current_visitors_count = Hyper::Event.where(site_id: params[:id]).where(started_at: current_range).distinct.count(:client_id)
+    base = QueryBuilder.call(Hyper::Event, @site, params).result
+    current_scope = QueryBuilder.call(Hyper::Event, @site, period: "realtime").result
+
+    @current_visitors_count = current_scope.distinct.count(:client_id)
     @unique_visitors_summary = base.distinct.count(:client_id)
     @total_pageviews_summary = base.where(event_name: :page_view).count
     @avg_engagement_time = base.where(event_name: "user_engagement").average(:engagement_time)
