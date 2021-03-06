@@ -17,9 +17,11 @@
         <% @top_referrer_sources.each do |agg| %>
           <tr class="text-sm dark:text-gray-200">
             <td class="p-2">
-              <span class="flex px-2 dark:text-gray-300" style="margin-top: -26px;">
+             
+              <span class="flex dark:text-gray-300">
                 <img src="<%= domain_icon_url(agg.referrer_source) %>" referrerpolicy="no-referrer" class="inline h-4 w-4 mr-2 align-middle -mt-px"><%= agg.referrer_source %>
               </span>
+         
              </td>
             <td class="p-2 w-32 font-medium" align="right"><%= pretty_num agg.visitors_count %></td>
             <td class="p-2 w-32 font-medium" align="right"><%= pretty_num agg.count %></td>
