@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CountriesController < ApplicationController
+  layout "detail"
+
   def index
     @site = current_user.sites.find_by!(uuid: params[:site_id])
 

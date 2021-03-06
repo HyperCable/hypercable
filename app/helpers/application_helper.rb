@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def parent_layout(layout)
+    @view_flow.set(:layout, self.output_buffer)
+    self.output_buffer = render(template: layout)
+  end
+
   def disable_with_spinner(text)
     spinner = <<~SPINNER
       <svg class="animate-spin mr-1 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
