@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources :sites do
     resources :location_urls, only: [:index]
+    resources :countries, only: [:index]
     member do
       get "snippet"
       get "debug"
