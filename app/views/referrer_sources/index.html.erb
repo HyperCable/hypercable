@@ -1,0 +1,28 @@
+<div class="dark:bg-gray-800">
+  <h1 class="text-xl font-bold dark:text-gray-100">Top Referrer Source</h1>
+  <div class="my-4 border-b border-gray-300">
+    
+  </div>
+  <main class="modal__content">
+    <table class="w-full table-striped table-fixed">
+      <thead>
+        <tr>
+          <th class="p-2 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400" align="left">Referrer Source</th>
+          <th class="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400" align="right">Visitors</th>
+          <th class="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400" align="right">Pageviews</th>
+          <th class="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400" align="right">Sessions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @top_referrer_sources.each do |agg| %>
+          <tr class="text-sm dark:text-gray-200">
+            <td class="p-2"><%= agg.referrer_source %></td>
+            <td class="p-2 w-32 font-medium" align="right"><%= pretty_num agg.visitors_count %></td>
+            <td class="p-2 w-32 font-medium" align="right"><%= pretty_num agg.count %></td>
+            <td class="p-2 w-32 font-medium" align="right"><%= pretty_num agg.sessions_count %></td>
+          </tr>
+        <% end  %>
+      </tbody>
+    </table>
+  </main>
+</div>
