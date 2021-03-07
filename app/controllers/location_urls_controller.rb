@@ -13,6 +13,5 @@ class LocationUrlsController < ApplicationController
       .where(event_name: "page_view")
       .select("location_url, count(distinct client_id) as visitors_count, count(*) as count, count(distinct session_id) as sessions_count")
       .group("site_id, location_url").order("2 desc").limit(100)
-    @sql = SqlFormatter.new(@top_location_urls).call
   end
 end
