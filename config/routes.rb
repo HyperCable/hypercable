@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :countries, only: [:index]
     resources :referrer_sources, only: [:index]
     resources :traffic_mediums, only: [:index]
+    resources :traffic_sources, only: [:index]
+    resources :traffic_campaigns, only: [:index]
     member do
       get "snippet"
       get "debug"
