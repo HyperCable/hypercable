@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     resources :traffic_mediums, only: [:index]
     resources :traffic_sources, only: [:index]
     resources :traffic_campaigns, only: [:index]
+    resources :browsers, only: [:index]
+    resources :device_types, only: [:index]
+    resources :oses, only: [:index]
     member do
       get "snippet"
       get "debug"
