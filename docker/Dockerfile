@@ -75,7 +75,13 @@ RUN apk add --update --no-cache \
     postgresql-client \
     imagemagick \
     curl-dev \
+    git \
+    make \
   && gem install bundler
+
+RUN apk add --no-cache perl
+RUN git clone https://github.com/darold/pgFormatter.git
+RUN cd pgFormatter && perl Makefile.PL && make && make install
 
 RUN if [ "$RAILS_ENV" = "production" ]; then \
   rm -rf spec node_modules app/assets vendor/assets tmp/cache; \
