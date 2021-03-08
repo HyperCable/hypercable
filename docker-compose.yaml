@@ -130,6 +130,7 @@ services:
     environment:
       - NODE_ENV=development
       - RAILS_ENV=development
+    entrypoint: docker/entrypoints/rails.sh
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
 
   webpack:

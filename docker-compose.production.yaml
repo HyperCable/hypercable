@@ -113,6 +113,7 @@ services:
     environment:
       - NODE_ENV=production
       - RAILS_ENV=production
+    entrypoint: docker/entrypoints/rails.sh
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
 
 
