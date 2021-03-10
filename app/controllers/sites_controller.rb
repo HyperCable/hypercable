@@ -25,14 +25,24 @@ class SitesController < ApplicationController
 
   def show
     @site = current_user.sites.find_by!(uuid: params[:id])
-    base = QueryBuilder.call(Hyper::Event, @site, params).result
+    query_builder = QueryBuilder.call(Hyper::Event, @site, params)
+    base = query_builder.result
+    previous_base = query_builder.previous_result
     current_scope = QueryBuilder.call(Hyper::Event, @site, period: "realtime").result
 
     @current_visitors_count = current_scope.distinct.count(:client_id)
+
     @unique_visitors_summary = base.distinct.count(:client_id)
+    @unique_visitors_summary_p = previous_base.distinct.count(:client_id)
+
     @total_pageviews_summary = base.where(event_name: :page_view).count
+    @total_pageviews_summary_p = previous_base.where(event_name: :page_view).count
+
     @avg_engagement_time = base.where(event_name: "user_engagement").average(:engagement_time)
+    @avg_engagement_time_p = previous_base.where(event_name: "user_engagement").average(:engagement_time)
+
     @new_visitors_count = base.where(event_name: "first_visit").count
+    @new_visitors_count_p = previous_base.where(event_name: "first_visit").count
 
     @visitors_count = base.group(group_sql).distinct.count(:client_id)
     @top_pages = base.select("location_url, count(distinct client_id) as count").group("site_id, location_url").order("2 desc").limit(9)
