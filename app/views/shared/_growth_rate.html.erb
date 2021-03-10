@@ -1,0 +1,7 @@
+<% if growth.na? %>
+  <span class="text-xs text-gray-700 dark:text-gray-300">〰 N/A</span>
+<% elsif growth.positive?%>
+  <span class="text-xs text-green-500 font-bold">↑</span> <%= number_to_percentage growth.growth_rate, precision: 0 %></span>
+<% else %>
+  <span class="text-xs text-red-400 font-bold">↓</span> <%= number_to_percentage growth.growth_rate,  precision: 0 %>
+<% end %>

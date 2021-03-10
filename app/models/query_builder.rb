@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QueryBuilder
-  attr_reader :scope, :site, :params, :result, :period
+  attr_reader :scope, :site, :params, :result, :period, :previous_result
 
   FILTER_KEYS = %w[browser device_type os location_url traffic_source traffic_medium traffic_campaign referrer_source country]
 
@@ -20,6 +20,7 @@ class QueryBuilder
         @result = @result.where(key => params[key])
       end
     end
+    @previous_result = @result.where(started_at: previous_period)
     @result = @result.where(started_at: time_period)
     @result
   end
@@ -38,7 +39,7 @@ class QueryBuilder
     return (360.days.ago.in_time_zone(site.timezone).to_s(:db)..) if period == "12m"
   end
 
-  def prev_period
+  def previous_period
     return (14.days.ago.in_time_zone(site.timezone).to_s(:db)...7.days.ago.in_time_zone(site.timezone).to_s(:db)) if period.blank?
 
     return (60.minutes.ago.in_time_zone(site.timezone).to_s(:db)...30.minutes.ago.in_time_zone(site.timezone).to_s(:db)) if period == "realtime"
@@ -46,10 +47,10 @@ class QueryBuilder
     return (1.week.ago.in_time_zone(site.timezone).beginning_of_week.to_s(:db)...Time.now.in_time_zone(site.timezone).beginning_of_week.to_s(:db)) if period == "week"
     return (1.month.ago.in_time_zone(site.timezone).beginning_of_month.to_s(:db)...Time.now.in_time_zone(site.timezone).beginning_of_month.to_s(:db)) if period == "month"
 
-    return (14..days.ago.in_time_zone(site.timezone).to_s(:db)...7.days.ago.in_time_zone(site.timezone).to_s(:db)) if period == "7d"
-    return (60.days.ago.in_time_zone(site.timezone).to_s(:db)...30.days.ago.in_time_zone(site.timezone).to_s(:db)) if period == "30d"
-    return (360.days.ago.in_time_zone(site.timezone).to_s(:db)...180.days.ago.in_time_zone(site.timezone).to_s(:db)) if period == "6m"
-    return (720.days.ago.in_time_zone(site.timezone).to_s(:db)...360.days.ago.in_time_zone(site.timezone).to_s(:db)) if period == "12m"
+    return (14.days.ago.in_time_zone(site.timezone).to_s(:db)...(7.days.ago.in_time_zone(site.timezone).to_s(:db))) if period == "7d"
+    return (60.days.ago.in_time_zone(site.timezone).to_s(:db)...(30.days.ago.in_time_zone(site.timezone).to_s(:db))) if period == "30d"
+    return (360.days.ago.in_time_zone(site.timezone).to_s(:db)...(180.days.ago.in_time_zone(site.timezone).to_s(:db))) if period == "6m"
+    return (720.days.ago.in_time_zone(site.timezone).to_s(:db)...(360.days.ago.in_time_zone(site.timezone).to_s(:db))) if period == "12m"
   end
 
   def self.call(scope, site, params)
