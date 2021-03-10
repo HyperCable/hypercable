@@ -4,7 +4,7 @@ Hypercable Analytics is a fully featured high performance scalable alternative t
 
 ## screenshot
 
-![](https://l.ruby-china.com/photo/hooopo/4da95824-f7d6-4a30-a91b-aa1db73186e3.png!large)
+![](https://l.ruby-china.com/photo/hooopo/20a17dd6-e78c-4b3a-8802-d6e11172da26.png!large)
 
 
 ## local setup
