@@ -93,6 +93,14 @@ INHERITS (public.events);
 
 
 --
+-- Name: a; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.a (
+);
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -277,6 +285,13 @@ CREATE TRIGGER ts_insert_blocker BEFORE INSERT ON public.events FOR EACH ROW EXE
 
 
 --
+-- Name: events event_access; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY event_access ON public.events FOR SELECT USING (((site_id)::text = (CURRENT_USER)::text));
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -294,6 +309,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210226091913'),
 ('20210226093841'),
 ('20210226100232'),
-('20210311071834');
+('20210311071834'),
+('20210311151807'),
+('20210311173212'),
+('20210311175013');
 
 
