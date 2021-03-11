@@ -6,7 +6,6 @@
 #
 #  id         :bigint           not null, primary key
 #  password   :string           not null
-#  username   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  site_id    :bigint
@@ -19,10 +18,14 @@ class SiteConnection < ApplicationRecord
   belongs_to :site
 
   before_create do
-    username = "u" + SecureRandom.hex(4)
-    password = SecureRandom.hex(10)
-    ApplicationHyperRecord.connection.execute("CREATE USER #{username} WITH PASSWORD '#{password}';")
-    ApplicationHyperRecord.connection.execute("GRANT readonly TO #{username};")
-    ApplicationHyperRecord.connection.execute("ALTER ROLE #{username} SET statement_timeout=10000;")
+    username = site.uuid
+    self.password = SecureRandom.hex(10)
+    ApplicationHyperRecord.connection.execute(%Q[CREATE USER "#{username}" WITH PASSWORD '#{password}'])
+    ApplicationHyperRecord.connection.execute(%Q[GRANT readonly TO "#{username}"])
+    ApplicationHyperRecord.connection.execute(%Q[ALTER ROLE "#{username}" SET statement_timeout=10000])
+  end
+
+  before_destroy do
+    ApplicationHyperRecord.connection.execute(%Q[DROP USER IF EXISTS "#{site.uuid}"])
   end
 end
