@@ -121,7 +121,6 @@ ALTER SEQUENCE public.shared_links_id_seq OWNED BY public.shared_links.id;
 CREATE TABLE public.site_connections (
     id bigint NOT NULL,
     site_id bigint,
-    username character varying NOT NULL,
     password character varying NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
@@ -444,6 +443,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210130223112'),
 ('20210202211704'),
 ('20210211144851'),
-('20210311122231');
+('20210311122231'),
+('20210311142921');
 
 
