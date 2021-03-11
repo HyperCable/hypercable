@@ -38,8 +38,8 @@ class SitesController < ApplicationController
     @total_pageviews_summary = base.where(event_name: :page_view).count
     @total_pageviews_summary_p = previous_base.where(event_name: :page_view).count
 
-    @avg_engagement_time = base.where(event_name: "user_engagement").average(:engagement_time)
-    @avg_engagement_time_p = previous_base.where(event_name: "user_engagement").average(:engagement_time)
+    @avg_engagement_time = base.where(event_name: "user_engagement").select("sum(engagement_time) / count(distinct session_id) as avg_engagement_time")[0]["avg_engagement_time"]
+    @avg_engagement_time_p = previous_base.where(event_name: "user_engagement").select("sum(engagement_time) / count(distinct session_id) as avg_engagement_time")[0]["avg_engagement_time"]
 
     @new_visitors_count = base.where(event_name: "first_visit").count
     @new_visitors_count_p = previous_base.where(event_name: "first_visit").count
