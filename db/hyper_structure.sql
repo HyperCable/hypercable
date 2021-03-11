@@ -93,6 +93,14 @@ INHERITS (public.events);
 
 
 --
+-- Name: a; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.a (
+);
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -302,6 +310,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210226093841'),
 ('20210226100232'),
 ('20210311071834'),
-('20210311151807');
+('20210311151807'),
+('20210311173212'),
+('20210311175013');
 
 
