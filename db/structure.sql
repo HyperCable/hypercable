@@ -115,6 +115,39 @@ ALTER SEQUENCE public.shared_links_id_seq OWNED BY public.shared_links.id;
 
 
 --
+-- Name: site_connections; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.site_connections (
+    id bigint NOT NULL,
+    site_id bigint,
+    username character varying NOT NULL,
+    password character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: site_connections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.site_connections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: site_connections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.site_connections_id_seq OWNED BY public.site_connections.id;
+
+
+--
 -- Name: site_members; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -232,6 +265,13 @@ ALTER TABLE ONLY public.shared_links ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: site_connections id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.site_connections ALTER COLUMN id SET DEFAULT nextval('public.site_connections_id_seq'::regclass);
+
+
+--
 -- Name: site_members id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -282,6 +322,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.shared_links
     ADD CONSTRAINT shared_links_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: site_connections site_connections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.site_connections
+    ADD CONSTRAINT site_connections_pkey PRIMARY KEY (id);
 
 
 --
@@ -337,6 +385,13 @@ CREATE UNIQUE INDEX index_shared_links_on_slug ON public.shared_links USING btre
 
 
 --
+-- Name: index_site_connections_on_site_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_site_connections_on_site_id ON public.site_connections USING btree (site_id);
+
+
+--
 -- Name: index_site_members_on_site_id_and_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -388,6 +443,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210130194542'),
 ('20210130223112'),
 ('20210202211704'),
-('20210211144851');
+('20210211144851'),
+('20210311122231');
 
 

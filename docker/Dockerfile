@@ -91,6 +91,8 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
 COPY --from=pre-builder /gems/ /gems/
 COPY --from=pre-builder /app /app
 
+RUN apk --update add less
+
 # Remove unnecessary files
 RUN rm -rf /gems/ruby/2.7.0/cache/*.gem \
   && find /gems/ruby/2.7.0/gems/ -name "*.c" -delete \
