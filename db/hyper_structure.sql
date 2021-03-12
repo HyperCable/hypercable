@@ -68,7 +68,8 @@ CREATE TABLE public.events (
     raw_event jsonb DEFAULT '{}'::jsonb,
     traffic_campaign character varying,
     traffic_medium character varying,
-    traffic_source character varying
+    traffic_source character varying,
+    request_params jsonb DEFAULT '"{}"'::jsonb
 );
 
 
@@ -163,6 +164,13 @@ ALTER TABLE ONLY _timescaledb_internal._hyper_5_1_chunk ALTER COLUMN raw_event S
 
 
 --
+-- Name: _hyper_5_1_chunk request_params; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_5_1_chunk ALTER COLUMN request_params SET DEFAULT '"{}"'::jsonb;
+
+
+--
 -- Name: _hyper_5_2_chunk event_name; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
 --
 
@@ -209,6 +217,13 @@ ALTER TABLE ONLY _timescaledb_internal._hyper_5_2_chunk ALTER COLUMN event_props
 --
 
 ALTER TABLE ONLY _timescaledb_internal._hyper_5_2_chunk ALTER COLUMN raw_event SET DEFAULT '{}'::jsonb;
+
+
+--
+-- Name: _hyper_5_2_chunk request_params; Type: DEFAULT; Schema: _timescaledb_internal; Owner: -
+--
+
+ALTER TABLE ONLY _timescaledb_internal._hyper_5_2_chunk ALTER COLUMN request_params SET DEFAULT '"{}"'::jsonb;
 
 
 --
@@ -304,6 +319,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210311071834'),
 ('20210311151807'),
 ('20210311173212'),
-('20210311175013');
+('20210311175013'),
+('20210312171927');
 
 

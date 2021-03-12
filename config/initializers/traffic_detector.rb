@@ -14,14 +14,15 @@ class TrafficDetector
   def self.detect(event)
     result = {}
     request_url = event["dl"]
-    request_uri = Addressable::URI.parse(request_url)
+    request_uri = Addressable::URI.parse(request_url).normalize
     request_params = request_uri.query_values || {}
 
     referrer_url = event["dr"]
 
     result[:hostname] = request_uri.domain
-    result[:path] = request_uri.request_uri
-    result[:location_url] = request_uri.normalize.to_s
+    result[:path] = request_uri.path
+    result[:location_url] = request_uri.to_s
+    result[:request_params] = request_params
 
     return result.merge!(
       traffic_campaign: "adwords",
