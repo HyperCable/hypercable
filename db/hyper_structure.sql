@@ -93,14 +93,6 @@ INHERITS (public.events);
 
 
 --
--- Name: a; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.a (
-);
-
-
---
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
