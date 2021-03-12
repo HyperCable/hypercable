@@ -25,6 +25,7 @@
 #  referrer_source    :string
 #  region             :string
 #  request_number     :integer
+#  request_params     :jsonb
 #  screen_resolution  :string
 #  session_count      :integer
 #  session_engagement :boolean          default(FALSE)
