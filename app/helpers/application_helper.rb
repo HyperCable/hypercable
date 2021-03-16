@@ -106,4 +106,13 @@ module ApplicationHelper
       "hover:text-indigo-600 cursor-pointer"
     end
   end
+
+  def render_setting_nav_css(tab_name)
+    current = "cursor-default text-gray-900 dark:text-gray-100 rounded-md bg-gray-100 dark:bg-gray-900 hover:text-gray-900 hover:bg-gray-100 outline-none focus:outline-none focus:bg-gray-200 dark:focus:bg-gray-800"
+    none_current = "text-gray-600 dark:text-gray-400 rounded-md hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 outline-none focus:outline-none focus:text-gray-900 focus:bg-gray-50 dark:focus:text-gray-100 dark:focus:bg-gray-800"
+    return current if params[:controller] == "settings" && params[:action] == "general" && tab_name.to_s == "general"
+    return current if params[:controller] == "site_connections" && params[:action] == "index" && tab_name.to_s == "site_connection"
+
+    none_current
+  end
 end

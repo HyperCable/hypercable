@@ -28,4 +28,9 @@ class SiteConnection < ApplicationRecord
   before_destroy do
     ApplicationHyperRecord.connection.execute(%Q[DROP USER IF EXISTS "#{site.uuid}"])
   end
+
+  # TODO replace host & port
+  def link
+    "postgresql://#{site.uuid}:#{password}@localhost:5432/#{ApplicationHyperRecord.connection.current_database}"
+  end
 end
