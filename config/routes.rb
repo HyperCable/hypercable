@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :browsers, only: [:index]
     resources :device_types, only: [:index]
     resources :oses, only: [:index]
+
+    resources :site_connections, only: [:index, :new, :show, :destroy, :create]
     member do
       get "snippet"
       get "debug"
