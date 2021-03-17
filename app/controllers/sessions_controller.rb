@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.where(email: user_params[:email]).first
     if @user&.authenticate(user_params[:password])
-      set_current_user(@user, user_params[:remember_me])
+      set_current_user(@user, true)
 
       if @user.email_verified?
         flash[:success] = "Login successfully"
