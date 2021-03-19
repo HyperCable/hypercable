@@ -26,7 +26,8 @@ class TechDetector
     {
       browser: client.name || "unknown",
       os: client.os_name || "unknown",
-      device_type: device_type || "unknown"
+      device_type: device_type || "unknown",
+      is_bot: client.bot? || !client.known? || client.name == "Headless Chrome"
     }
   end
 end

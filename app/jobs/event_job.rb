@@ -13,12 +13,14 @@ class EventJob
     end
 
     events.each do |event|
+      tech_info = TechDetector.detect(request["user_agent"])
+      next if tech_info.delete(:is_bot)
       meta_path = request["path"].match(/\/(?<uuid>.*?)\/g\/collect/)
       site_uuid = meta_path["uuid"]
       next if site_uuid.nil?
       real_ip = request["x_forwarded_for"] || request["ip"]
       ip_info = IPDB.get(real_ip)
-      tech_info = TechDetector.detect(request["user_agent"])
+
       referrer_source = RefererSourceDetector.detect(event["dr"])
       traffic_info = TrafficDetector.detect(event)
       payload_parser = PayloadParser.new(event)
