@@ -31,6 +31,6 @@ class SiteConnection < ApplicationRecord
 
   # TODO replace host & port
   def link
-    "postgresql://#{site.uuid}:#{password}@localhost:5432/#{ApplicationHyperRecord.connection.current_database}"
+    "postgresql://#{site.uuid}:#{password}@#{ENV["HOST"].to_s.split(":").first}:5532/#{ApplicationHyperRecord.connection.current_database}"
   end
 end
