@@ -21,7 +21,7 @@ services:
     ports:
       - '4432:5432'
     volumes:
-      - postgres:/data/postgres
+      - postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=hypercable_dev
       - POSTGRES_USER=postgres
@@ -34,7 +34,7 @@ services:
     ports:
       - '5532:5432'
     volumes:
-      - postgres:/data/tsdb
+      - tsdb:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=tsdb_dev
       - POSTGRES_USER=postgres
