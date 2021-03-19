@@ -13,7 +13,7 @@ class EventJob
     end
 
     events.each do |event|
-      tech_info = TechDetector.detect(request["user_agent"])
+      tech_info = TechDetector.detect(request["user_agent"]).dup
       next if tech_info.delete(:is_bot)
       meta_path = request["path"].match(/\/(?<uuid>.*?)\/g\/collect/)
       site_uuid = meta_path["uuid"]
