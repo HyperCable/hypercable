@@ -84,3 +84,5 @@ gem "groupdate", "~> 5.2"
 gem "user_agent_parser", "~> 2.7"
 
 gem "referer-parser", "~> 0.3.0"
+
+gem "activerecord-import", "~> 1.0"
