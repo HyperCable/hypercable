@@ -1,4 +1,6 @@
 # Hypercable Analytics
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHyperCable%2Fhypercable.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FHyperCable%2Fhypercable?ref=badge_shield)
+
 
 Hypercable Analytics is a fully featured high performance scalable alternative to Google Analytics, build with timescaledb openresty redis and rails.
 
@@ -32,3 +34,7 @@ Hypercable Analytics is a fully featured high performance scalable alternative t
 
 * https://learnsql.io （Note: demo project, data will be cleared later）
 * https://hackershare.dev (site with hypercable analytics tracker installed)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHyperCable%2Fhypercable.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FHyperCable%2Fhypercable?ref=badge_large)
