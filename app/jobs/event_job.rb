@@ -3,6 +3,8 @@
 class EventJob
   include Sidekiq::Worker
 
+  COLUMN_NAMES = Hyper::Event.column_names
+
   def perform(*args)
     params, form, request = args
 
@@ -11,6 +13,8 @@ class EventJob
     else
       events = [params]
     end
+
+    attrs = []
 
     events.each do |event|
       tech_info = TechDetector.detect(request["user_agent"]).dup
@@ -66,14 +70,21 @@ class EventJob
       })
 
       if event["_fv"] == "1"
-        Hyper::Event.create(result.merge(event_name: "first_visit"))
+        attrs << result.merge(event_name: "first_visit")
       end
 
       if event["_ss"] == "1"
-        Hyper::Event.create(result.merge(event_name: "session_start"))
+        attrs << result.merge(event_name: "session_start")
       end
 
-      Hyper::Event.create!(result)
+      attrs << result
     end
+
+    Hyper::Event.import(
+      COLUMN_NAMES,
+      attrs.map { |attr| Hyper::Event.new(attr) },
+      validate: false,
+      timestamps: false
+    ) unless attrs.empty?
   end
 end
