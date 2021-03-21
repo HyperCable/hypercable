@@ -29,6 +29,7 @@ jobs:
   docker_web:
     needs: build
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -57,6 +58,7 @@ jobs:
   docker_collector:
     needs: build
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
