@@ -92,7 +92,6 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.10.0)
-    fast_jsonparser (0.5.0)
     ffi (1.13.1)
     geoip2_compat (0.0.3)
     get_process_mem (0.2.7)
@@ -268,7 +267,6 @@ DEPENDENCIES
   chartkick (~> 3.4)
   device_detector (~> 1.0)
   dotenv-rails (~> 2.7)
-  fast_jsonparser (~> 0.5.0)
   geoip2_compat
   groupdate (~> 5.2)
   jbuilder (~> 2.7)
