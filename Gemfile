@@ -53,7 +53,7 @@ end
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "dotenv-rails", "~> 2.7", require: "dotenv/rails-now"
-gem "sidekiq"
+gem "sidekiq", "~> 5.0"
 
 gem "pry-rails", "~> 0.3.9"
 
@@ -84,3 +84,5 @@ gem "user_agent_parser", "~> 2.7"
 gem "referer-parser", "~> 0.3.0"
 
 gem "activerecord-import", "~> 1.0"
+
+gem "sidekiq-grouping", git: "https://github.com/thredup/sidekiq-grouping.git"

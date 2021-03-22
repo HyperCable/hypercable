@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/thredup/sidekiq-grouping.git
+  revision: cd446d58798c445e670a68867b22364d0c755ba0
+  specs:
+    sidekiq-grouping (1.0.10)
+      activesupport
+      concurrent-ruby
+      sidekiq (>= 3.4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -136,6 +145,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -168,7 +179,7 @@ GEM
       thor (~> 1.0)
     rainbow (3.0.0)
     rake (13.0.1)
-    redis (4.2.5)
+    redis (4.1.4)
     referer-parser (0.3.0)
     regexp_parser (1.7.1)
     rexml (3.2.4)
@@ -211,10 +222,11 @@ GEM
       sendgrid-ruby (~> 6.0)
     sendgrid-ruby (6.3.9)
       ruby_http_client (~> 3.4)
-    sidekiq (6.1.2)
-      connection_pool (>= 2.2.2)
+    sidekiq (5.2.9)
+      connection_pool (~> 2.2, >= 2.2.2)
       rack (~> 2.0)
-      redis (>= 4.2.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 4.2)
     sidekiq-worker-killer (1.0.0)
       get_process_mem (~> 0.2.1)
       sidekiq (>= 5)
@@ -284,7 +296,8 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sendgrid-actionmailer (~> 3.1)
-  sidekiq
+  sidekiq (~> 5.0)
+  sidekiq-grouping!
   sidekiq-worker-killer (~> 1.0)
   turbolinks (~> 5)
   user_agent_parser (~> 2.7)
@@ -293,4 +306,4 @@ DEPENDENCIES
   webpacker (~> 4.0)
 
 BUNDLED WITH
-   2.1.4
+   2.2.3

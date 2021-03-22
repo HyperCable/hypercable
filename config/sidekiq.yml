@@ -11,6 +11,7 @@
 # even put in dynamic logic, like a host-specific queue.
 # http://www.mikeperham.com/2013/11/13/advanced-sidekiq-host-specific-queues/
 :queues:
+  - event_bulks
   - critical
   - default
   - low

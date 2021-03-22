@@ -47,7 +47,7 @@ jobs:
           context: .
           file: ./docker/Dockerfile
           platforms: linux/amd64
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/hypercable:latest
           build-args: |
@@ -75,6 +75,6 @@ jobs:
           context: ./docker/dockerfiles
           file: ./docker/dockerfiles/openresty.Dockerfile
           platforms: linux/amd64
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/hypercable-openresty:latest

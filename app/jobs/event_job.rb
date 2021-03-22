@@ -79,12 +79,10 @@ class EventJob
 
       attrs << result
     end
-
-    Hyper::Event.import(
-      COLUMN_NAMES,
-      attrs.map { |attr| Hyper::Event.new(attr) },
-      validate: false,
-      timestamps: false
-    ) unless attrs.empty?
+    attrs.each do |attr|
+      EventBulkInsertJob.perform_async(
+        [attr]
+      )
+    end
   end
 end
