@@ -59,7 +59,7 @@ class PayloadParser
     params.each do |key, value|
       if event_prop_key_matched = key.match(EVENT_PROP_KEY)
         event_props[event_prop_key_matched[:key]] = if event_prop_key_matched[:ext] == "json"
-          FastJsonparser.parse(value, symbolize_keys: false)
+          JSON.parse(value, symbolize_names: false)
         else
           event_prop_key_matched[:is_number] ? value.to_f : value
         end
@@ -68,7 +68,7 @@ class PayloadParser
 
       if user_prop_key_matched = key.match(USER_PROP_KEY)
         user_props[user_prop_key_matched[:key]] = if user_prop_key_matched[:ext] == "json"
-          FastJsonparser.parse(value, symbolize_keys: false)
+          JSON.parse(value, symbolize_names: false)
         else
           user_prop_key_matched[:is_number] ? value.to_f : value
         end
