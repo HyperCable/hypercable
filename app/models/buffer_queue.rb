@@ -19,7 +19,12 @@ class BufferQueue
     batch = []
     max_batch_size.times do
       if not @queue.empty?
-        batch << @queue.pop
+        begin
+          batch << @queue.pop
+        rescue ThreadError
+          puts "queue is empty"
+          break
+        end
       else
         break
       end
