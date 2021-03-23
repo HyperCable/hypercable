@@ -20,7 +20,7 @@ class BufferQueue
     max_batch_size.times do
       if not @queue.empty?
         begin
-          batch << @queue.pop
+          batch << @queue.pop(true)
         rescue ThreadError
           puts "queue is empty"
           break
