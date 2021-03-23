@@ -4,7 +4,7 @@ require "sidekiq/worker_killer"
 
 if Sidekiq.server?
   Sidekiq.on(:startup) do
-    BQ = BufferQueue.new(max_batch_size: 10, execution_interval: 100) do |batch|
+    BQ = BufferQueue.new(max_batch_size: (ENV["MAX_BATCH_SIZE"] || 100).to_i, execution_interval: (ENV["EXECUTION_INTERVAL"] || 20).to_i) do |batch|
       puts "bulk insert #{batch.size} records"
       Hyper::Event.import(
         EventJob::COLUMN_NAMES,
