@@ -6,6 +6,15 @@ class EventJob
   COLUMN_NAMES = Hyper::Event.column_names
 
   def perform(*args)
+    Thread.current[:bq] ||= BufferQueue.new(max_batch_size: (ENV["MAX_BATCH_SIZE"] || 100).to_i, execution_interval: (ENV["EXECUTION_INTERVAL"] || 20).to_i) do |batch|
+      puts "bulk insert #{batch.size} records"
+      Hyper::Event.import(
+        EventJob::COLUMN_NAMES,
+        batch.flatten.map { |attr| Hyper::Event.new(attr) },
+        validate: false,
+        timestamps: false
+      ) unless batch.empty?
+    end
     params, form, request = args
 
     if form
@@ -68,14 +77,14 @@ class EventJob
       })
 
       if event["_fv"] == "1"
-        BQ.push result.merge(event_name: "first_visit")
+        Thread.current[:bq].push result.merge(event_name: "first_visit")
       end
 
       if event["_ss"] == "1"
-        BQ.push result.merge(event_name: "session_start")
+        Thread.current[:bq].push result.merge(event_name: "session_start")
       end
 
-      BQ.push result
+      Thread.current[:bq].push result
     end
   end
 end
