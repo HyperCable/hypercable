@@ -4,4 +4,5 @@ siege -R <(echo connection = keep-alive) -c50 -b -t 20S  'http://10.40.96.5:8000
   -H 'accept: */*' \
   -H 'origin: https://hypercable.github.io' \
   -H 'referer: https://hypercable.github.io/' \
-  -H 'accept-language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7'
+  -H 'accept-language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7' \
+  -A 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'
