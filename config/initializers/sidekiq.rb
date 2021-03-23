@@ -7,7 +7,7 @@ if Sidekiq.server?
     BQ = BufferQueue.new(max_batch_size: 10, execution_interval: 100) do |batch|
       puts "bulk insert #{batch.size} records"
       Hyper::Event.import(
-        EventBatchInsert::COLUMN_NAMES,
+        EventJob::COLUMN_NAMES,
         batch.flatten.map { |attr| Hyper::Event.new(attr) },
         validate: false,
         timestamps: false
