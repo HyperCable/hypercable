@@ -16,6 +16,7 @@ class BufferQueue
   end
 
   def flush
+    puts "flushing..."
     batch = []
     max_batch_size.times do
       if not @queue.empty?
@@ -29,6 +30,7 @@ class BufferQueue
         break
       end
     end
+    p batch
     callback.call(batch) unless batch.empty?
   end
 
