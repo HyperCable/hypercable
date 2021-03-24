@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 25 } %>
 
 development:
   main:
@@ -32,3 +32,4 @@ production:
     <<: *default
     url: <%= ENV['HYPER_DATABASE_URL'] %>
     migrations_paths: db/hyper_migrate
+    pool: 25
