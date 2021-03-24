@@ -11,6 +11,16 @@
 # even put in dynamic logic, like a host-specific queue.
 # http://www.mikeperham.com/2013/11/13/advanced-sidekiq-host-specific-queues/
 :queues:
+  - event1
+  - event2
+  - event3
+  - event4
+  - event5
+  - event6
+  - event7
+  - event8
+  - event9
+  - event10
   - critical
   - default
   - low
