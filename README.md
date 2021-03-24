@@ -13,7 +13,6 @@ Hypercable Analytics is a fully featured high performance scalable alternative t
 * build: docker-compose build
 * start: docker-compose up
 * stop: docker-compose stop
-* add migration: docker-compose run rails rails g migration xxx
 * run migration: docker-compose run rails rake db:migrate
 * collcetor location: http://localhost:8000
 * open http://localhost:3333
@@ -24,9 +23,9 @@ Hypercable Analytics is a fully featured high performance scalable alternative t
 * git clone 
 * edit .env.production
 * docker-compose -f docker-compose.production.yaml run rails  rake db:migrate
-* docker-compose -f docker-compose.production.yaml up -d
+* docker-compose -f docker-compose.production.yaml up -d --scale sidekiq=6
 * git pull && docker-compose -f docker-compose.production.yaml pull
-* docker-compose -f docker-compose.production.yaml logs --tail="all"
+* docker-compose -f docker-compose.production.yaml logs --tail="100"
 
 ## demo site
 
