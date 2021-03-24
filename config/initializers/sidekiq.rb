@@ -5,7 +5,7 @@ require "sidekiq/worker_killer"
 Sidekiq.configure_server do |config|
   config.redis = { driver: :hiredis, url: ENV["REDIS_URL"] || "redis://localhost:6379/0" }
   config.server_middleware do |chain|
-    chain.add Sidekiq::WorkerKiller, max_rss: 880
+    # chain.add Sidekiq::WorkerKiller, max_rss: 880
   end
 end
 
