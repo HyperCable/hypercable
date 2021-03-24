@@ -79,7 +79,7 @@ class EventJob
 
       attrs << result
       Hyper::Event.import(
-        COLUMN_NAMES,
+        EventJob::COLUMN_NAMES,
         attrs.map { |attr| Hyper::Event.new(attr) },
         validate: false,
         timestamps: false
