@@ -8,12 +8,7 @@ class EventJob
   def perform(*args)
     Thread.current[:bq] ||= BufferQueue.new(max_batch_size: (ENV["MAX_BATCH_SIZE"] || 100).to_i, execution_interval: (ENV["EXECUTION_INTERVAL"] || 1).to_i) do |batch|
       puts "bulk insert #{batch.size} records"
-      Hyper::Event.import(
-        EventJob::COLUMN_NAMES,
-        batch.flatten.map { |attr| Hyper::Event.new(attr) },
-        validate: false,
-        timestamps: false
-      ) unless batch.empty?
+      Hyper::Event.insert_all!(batch)
     end
     params, form, request = args
 
