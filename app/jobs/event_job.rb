@@ -6,7 +6,7 @@ class EventJob
   COLUMN_NAMES = Hyper::Event.column_names
 
   def perform(*args)
-    Thread.current[:bq] ||= BufferQueue.new(max_batch_size: (ENV["MAX_BATCH_SIZE"] || 100).to_i, execution_interval: (ENV["EXECUTION_INTERVAL"] || 20).to_i) do |batch|
+    Thread.current[:bq] ||= BufferQueue.new(max_batch_size: (ENV["MAX_BATCH_SIZE"] || 100).to_i, execution_interval: (ENV["EXECUTION_INTERVAL"] || 1).to_i) do |batch|
       puts "bulk insert #{batch.size} records"
       Hyper::Event.import(
         EventJob::COLUMN_NAMES,
