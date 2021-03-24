@@ -100,6 +100,7 @@ GEM
       activesupport (>= 4.2.0)
     groupdate (5.2.2)
       activesupport (>= 5)
+    hiredis (0.6.3)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
@@ -269,6 +270,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.7)
   geoip2_compat
   groupdate (~> 5.2)
+  hiredis (~> 0.6.3)
   jbuilder (~> 2.7)
   lru_redux (~> 1.1)
   mini_portile2 (~> 2.5)
@@ -293,4 +295,4 @@ DEPENDENCIES
   webpacker (~> 4.0)
 
 BUNDLED WITH
-   2.1.4
+   2.2.3
