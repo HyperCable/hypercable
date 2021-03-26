@@ -35,6 +35,9 @@ Longest transaction:            0.04
 Shortest transaction:           0.00
 ```
 
+## Data Flow diagram
+
+![](diagrams/data_flow_diagram.png)
 
 ## screenshot
 
