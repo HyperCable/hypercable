@@ -78,6 +78,7 @@ RUN apk add --update --no-cache \
     curl-dev \
     git \
     make \
+    shared-mime-info \
   && gem install bundler
 
 RUN apk add --no-cache perl
