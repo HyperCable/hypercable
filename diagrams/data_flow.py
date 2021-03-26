@@ -9,12 +9,13 @@ with Diagram("Data flow diagram", show=False):
     rails = Custom("rails", "./imgs/rails.png")
     postgresql = Custom("postgresql", "./imgs/postgresql.png")
     timescaledb = Custom("tsdb", "./imgs/TimescaleDB.png")
-    metabase = Custom("metabase", "./imgs/metabase.png")
-    chartio = Custom("chartio", "./imgs/chartio.png")
+    
 
-    with Cluster("visual BI"):
+    with Cluster("self service BI"):
+        metabase = Custom("metabase", "./imgs/metabase.png")
+        chartio = Custom("chartio", "./imgs/chartio.png")
         bi = [metabase, chartio]
-
-    ga >> openresty >> redis >> sidekiq >> timescaledb
+    
     rails >> [postgresql, timescaledb]
+    ga >> openresty >> redis >> sidekiq >> timescaledb
     timescaledb >> bi 
