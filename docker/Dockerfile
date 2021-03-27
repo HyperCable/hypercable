@@ -27,7 +27,6 @@ RUN apk update \
     nodejs \
     yarn \
     git \
-    shared-mime-info \
     libmaxminddb \
   && mkdir -p /var/app \
   && gem install bundler
@@ -78,7 +77,6 @@ RUN apk add --update --no-cache \
     curl-dev \
     git \
     make \
-    shared-mime-info \
   && gem install bundler
 
 RUN apk add --no-cache perl
