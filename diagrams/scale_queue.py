@@ -23,7 +23,9 @@ with Diagram("scale queue", show=False):
         sidekiq_group = [sidekiq1, sidekiq2, sidekiq3]
 
 
-    
     rails >> [postgresql, timescaledb]
-    ga >> openresty >> redis >> sidekiq_group >> timescaledb
+    ga >> openresty >> redis >> sidekiq_group 
+    sidekiq1 >> timescaledb
+    sidekiq2 >> timescaledb
+    sidekiq3 >> timescaledb
     timescaledb >> bi 

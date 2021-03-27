@@ -35,9 +35,19 @@ Longest transaction:            0.04
 Shortest transaction:           0.00
 ```
 
-## Data Flow diagram
+## Diagram
+
+### Data Flow
 
 ![](diagrams/data_flow_diagram.png)
+
+### Scale Queue
+
+![](diagrams/scale_queue.png)
+
+### Scale Collector
+
+![](diagrams/scale_collector.png)
 
 ## screenshot
 
