@@ -1,7 +1,7 @@
 from diagrams import Cluster, Diagram
 from diagrams.custom import Custom
 
-with Diagram("scale sidekiq", show=False):
+with Diagram("scale queue", show=False):
     ga = Custom("Google Analytics v4", "./imgs/ga.png")
     redis = Custom("redis", "./imgs/redis.png")
     

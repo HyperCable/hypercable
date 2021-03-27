@@ -2,7 +2,7 @@ from diagrams import Cluster, Diagram
 from diagrams.custom import Custom
 from diagrams.aws.network import ELB
 
-with Diagram("scale openresty", show=False):
+with Diagram("scale collector", show=False):
     ga = Custom("Google Analytics v4", "./imgs/ga.png")
     lb = ELB("lb")
     timescaledb = Custom("tsdb", "./imgs/TimescaleDB.png")
