@@ -11,7 +11,7 @@ with Diagram("simple_architecture", show=False):
     timescaledb = Custom("tsdb", "./imgs/TimescaleDB.png")
     
 
-    with Cluster("self service BI"):
+    with Cluster("Self-Service BI"):
         metabase = Custom("metabase", "./imgs/metabase.png")
         chartio = Custom("chartio", "./imgs/chartio.png")
         bi = [metabase, chartio]
