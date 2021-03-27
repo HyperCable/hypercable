@@ -1,7 +1,7 @@
 from diagrams import Cluster, Diagram
 from diagrams.custom import Custom
 
-with Diagram("Data flow diagram", show=False):
+with Diagram("simple_architecture", show=False):
     ga = Custom("Google Analytics v4", "./imgs/ga.png")
     redis = Custom("redis", "./imgs/redis.png")
     sidekiq = Custom("sidekiq", "./imgs/sidekiq.png")

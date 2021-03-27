@@ -37,9 +37,9 @@ Shortest transaction:           0.00
 
 ## Diagram
 
-### Data Flow
+### Simple Architecture
 
-![](diagrams/data_flow_diagram.png)
+![](diagrams/simple_architecture.png)
 
 ### Scale Queue
 
