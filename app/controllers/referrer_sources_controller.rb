@@ -11,7 +11,7 @@ class ReferrerSourcesController < ApplicationController
     @current_visitors_count = current_scope.distinct.count(:client_id)
     @top_referrer_sources = base
       .where(event_name: "page_view")
-      .where(traffic_medium: "referral")
+      .where("traffic_medium != '(none)'")
       .select("referrer_source, count(distinct client_id) as visitors_count, count(*) as count, count(distinct session_id) as sessions_count")
       .group("site_id, referrer_source").order("2 desc").limit(100)
   end
