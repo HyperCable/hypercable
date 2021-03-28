@@ -101,7 +101,7 @@ class SitesController < ApplicationController
   def query_sources(base)
     case params[:source_meniu]
     when "referrer_source"
-      @top_referrer_sources = base.where(traffic_medium: "referral").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
+      @top_referrer_sources = base.where("traffic_medium != '(none)'").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
     when "traffic_medium"
       @top_traffic_mediums = base.select("traffic_medium, count(distinct client_id) as count").group("site_id, traffic_medium").order("2 desc").limit(9)
     when "traffic_source"
@@ -109,7 +109,7 @@ class SitesController < ApplicationController
     when "traffic_campaign"
       @top_traffic_campaigns = base.select("traffic_campaign, count(distinct client_id) as count").group("site_id, traffic_campaign").order("2 desc").limit(9)
     else
-      @top_referrer_sources = base.where(traffic_medium: "referral").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
+      @top_referrer_sources = base.where("traffic_medium != '(none)'").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
     end
   end
 end
