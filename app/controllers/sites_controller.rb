@@ -88,28 +88,28 @@ class SitesController < ApplicationController
   def query_devices(base)
     case params[:device_meniu]
     when "device_type"
-      @top_device_types = base.select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
+      @top_device_types = base.where(event_name: :page_view).select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
     when "browser"
-      @top_browsers = base.select("browser, count(distinct client_id) as count").group("site_id, browser").order("2 desc").limit(9)
+      @top_browsers = base.where(event_name: :page_view).select("browser, count(distinct client_id) as count").group("site_id, browser").order("2 desc").limit(9)
     when "os"
-      @top_oses = base.select("os, count(distinct client_id) as count").group("site_id, os").order("2 desc").limit(9)
+      @top_oses = base.where(event_name: :page_view).select("os, count(distinct client_id) as count").group("site_id, os").order("2 desc").limit(9)
     else
-      @top_device_types = base.select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
+      @top_device_types = base.where(event_name: :page_view).select("device_type, count(distinct client_id) as count").group("site_id, device_type").order("2 desc").limit(9)
     end
   end
 
   def query_sources(base)
     case params[:source_meniu]
     when "referrer_source"
-      @top_referrer_sources = base.where("traffic_medium != '(none)'").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
+      @top_referrer_sources = base.where(event_name: :page_view).where("traffic_medium != '(none)'").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
     when "traffic_medium"
-      @top_traffic_mediums = base.select("traffic_medium, count(distinct client_id) as count").group("site_id, traffic_medium").order("2 desc").limit(9)
+      @top_traffic_mediums = base.where(event_name: :page_view).select("traffic_medium, count(distinct client_id) as count").group("site_id, traffic_medium").order("2 desc").limit(9)
     when "traffic_source"
-      @top_traffic_sources = base.select("traffic_source, count(distinct client_id) as count").group("site_id, traffic_source").order("2 desc").limit(9)
+      @top_traffic_sources = base.where(event_name: :page_view).select("traffic_source, count(distinct client_id) as count").group("site_id, traffic_source").order("2 desc").limit(9)
     when "traffic_campaign"
-      @top_traffic_campaigns = base.select("traffic_campaign, count(distinct client_id) as count").group("site_id, traffic_campaign").order("2 desc").limit(9)
+      @top_traffic_campaigns = base.where(event_name: :page_view).select("traffic_campaign, count(distinct client_id) as count").group("site_id, traffic_campaign").order("2 desc").limit(9)
     else
-      @top_referrer_sources = base.where("traffic_medium != '(none)'").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
+      @top_referrer_sources = base.where(event_name: :page_view).where("traffic_medium != '(none)'").select("referrer_source, count(distinct client_id) as count").group("site_id, referrer_source").order("2 desc").limit(9)
     end
   end
 end
