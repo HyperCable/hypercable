@@ -432,8 +432,6 @@ CREATE UNIQUE INDEX index_users_on_remember_token ON public.users USING btree (r
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20201116103746'),
-('20201217005220'),
 ('20210110190350'),
 ('20210110200847'),
 ('20210115100815'),

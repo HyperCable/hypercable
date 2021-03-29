@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   base: &base
@@ -60,8 +60,6 @@ services:
     environment:
       - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-ASN GeoLite2-City GeoLite2-Country'
       - GEOIPUPDATE_FREQUENCY=72
-    networks:
-      - geoipupdate
     volumes:
       - 'geoipupdate_data:/usr/share/GeoIP/'
 
@@ -114,10 +112,6 @@ services:
       - RAILS_ENV=production
     entrypoint: docker/entrypoints/rails.sh
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
-
-
-networks:
-  geoipupdate:
 
 volumes:
   postgres:

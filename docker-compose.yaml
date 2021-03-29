@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   base: &base
@@ -26,7 +26,6 @@ services:
       - POSTGRES_DB=hypercable_dev
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
-
   tsdb:
     image: timescale/timescaledb:2.1.0-pg13
     restart: always
@@ -38,7 +37,6 @@ services:
       - POSTGRES_DB=tsdb_dev
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
-
   redis:
     image: redis:alpine
     restart: always
@@ -73,8 +71,6 @@ services:
     environment:
       - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-ASN GeoLite2-City GeoLite2-Country'
       - GEOIPUPDATE_FREQUENCY=72
-    networks:
-      - geoipupdate
     volumes:
       - 'geoipupdate_data:/usr/local/var/GeoIP/'
 
@@ -152,11 +148,6 @@ services:
       - RAILS_ENV=development
     entrypoint: docker/entrypoints/webpack.sh
     command: bin/webpack-dev-server
-
-  
-
-networks:
-  geoipupdate:
 
 volumes:
   postgres:
