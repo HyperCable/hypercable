@@ -28,8 +28,7 @@ services:
       - POSTGRES_PASSWORD=password
 
   tsdb:
-    image: timescale/timescaledb:2.0.1-pg12
-    #image: timescale/timescaledb:latest-pg12
+    image: timescale/timescaledb:2.1.0-pg13
     restart: always
     ports:
       - '5532:5432'

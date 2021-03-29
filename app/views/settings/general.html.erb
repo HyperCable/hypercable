@@ -68,6 +68,8 @@
                 gtag('js', new Date());
 
                 gtag('config', '<%= @site.tracking_id %>', {transport_url: '<%= collector_server_url(@site) %>'});
+                // replay payload to google analytics
+                gtag('config', '<%= @site.tracking_id %>');
               </script>
 
             </textarea>
