@@ -149,6 +149,10 @@ services:
     entrypoint: docker/entrypoints/webpack.sh
     command: bin/webpack-dev-server
 
+networks:
+  default:
+
+
 volumes:
   postgres:
   tsdb:
