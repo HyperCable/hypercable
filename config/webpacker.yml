@@ -59,7 +59,7 @@ development:
   dev_server:
     https: false
     host: localhost
-    port: 13035
+    port: 3035
     public: localhost:13035
     hmr: false
     # Inline should be set to true if using HMR
