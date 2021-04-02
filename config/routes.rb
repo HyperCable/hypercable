@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :oses, only: [:index]
 
     resources :site_connections, only: [:index, :new, :show, :destroy, :create]
+    resources :measurement_protocols, only: [:index, :new, :show, :destroy, :create]
     member do
       get "snippet"
       get "debug"

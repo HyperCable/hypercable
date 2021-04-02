@@ -29,6 +29,7 @@ class Site < ApplicationRecord
 
   has_many :shared_links
   has_many :site_connections
+  has_many :measurement_protocols
 
   validates :domain, presence: true
   validates :tracking_id, presence: true
