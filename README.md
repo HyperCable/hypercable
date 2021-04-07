@@ -2,6 +2,18 @@
 
 Hypercable Analytics is a fully featured high performance scalable alternative to Google Analytics, build with timescaledb openresty redis and rails.
 
+## Feature list
+
+* Selfhost
+* Basic Metrics
+* Channel Referrer / Campaign Tracking
+* Integration with Google Ads
+* Ecommerce Analytics
+* Event-level raw data
+* Custom reporting logic
+* No data sampling
+* [Measurment Protocol](measurement_protocol.md)
+
 ## Benchmark
 
 ### collector
