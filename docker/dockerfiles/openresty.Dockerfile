@@ -10,4 +10,5 @@ RUN /usr/local/openresty/luajit/bin/luarocks install lua-resty-reqargs
 RUN /usr/local/openresty/luajit/bin/luarocks install lua-resty-jit-uuid
 RUN /usr/local/openresty/luajit/bin/luarocks install jsonschema
 ADD nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
+ADD debug_mp.lua /usr/local/openresty/nginx/debug_mp.lua
 #RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' > /etc/nsswitch.conf
