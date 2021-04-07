@@ -14,6 +14,8 @@ class TrafficDetector
   def self.detect(event)
     result = {}
     request_url = event["dl"]
+    return result if request_url.nil?
+
     request_uri = Addressable::URI.parse(request_url).normalize
     request_params = request_uri.query_values || {}
 

@@ -44,6 +44,6 @@ module HypercableWeb
     }
 
     config.action_mailer.delivery_method = :smtp
-    # config.logger = ActiveSupport::Logger.new(STDOUT)
+    config.logger = ActiveSupport::Logger.new(STDOUT)
   end
 end

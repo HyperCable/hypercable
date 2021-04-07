@@ -1,12 +1,10 @@
 <div class="py-4 g:py-0 lg:col-span-3">
   <form action="" class="lg:hidden" method="post">
-    <select class="dark:bg-gray-800 mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-500 outline-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md dark:text-gray-100" id="tab" name="tab" onchange="location.href = location.href.replace(/[^//]*$/, event.target.value)">
-      <option value="general" selected="">General</option>
-      <option value="visibility">Visibility</option>
-      <option value="goals">Goals</option>
-      <option value="search_console">Search Console</option>
-      <option value="email_reports">Email reports</option>
-      <option value="danger_zone">Danger zone</option></select>
+    <select class="dark:bg-gray-800 mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-500 outline-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md dark:text-gray-100" id="tab" name="tab" onchange="location.href = event.target.value">
+      <option value="<%= general_site_settings_path(@site)  %>" selected="">General</option>
+      <option value="<%= site_site_connections_path(@site) %>">Site Connection</option>
+      <option value="<%= site_measurement_protocols_path(@site) %>">Measurement Protocol</option>
+    </select>
   </form>
   <div class="hidden lg:block">
 
@@ -15,6 +13,8 @@
 
 
     <a href="<%= site_site_connections_path(@site) %>" class="flex items-center px-3 py-2 text-sm leading-5 font-medium  transition ease-in-out duration-150  <%= render_setting_nav_css(:site_connection) %> mt-1">Connection</a>
+
+    <a href="<%= site_measurement_protocols_path(@site) %>" class="flex items-center px-3 py-2 text-sm leading-5 font-medium  transition ease-in-out duration-150  <%= render_setting_nav_css(:measurement_protocol) %> mt-1">Measurement Protocol</a>
 
 
 

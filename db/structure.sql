@@ -74,6 +74,38 @@ ALTER SEQUENCE public.goals_id_seq OWNED BY public.goals.id;
 
 
 --
+-- Name: measurement_protocols; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.measurement_protocols (
+    id bigint NOT NULL,
+    site_id bigint,
+    api_secret character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: measurement_protocols_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.measurement_protocols_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: measurement_protocols_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.measurement_protocols_id_seq OWNED BY public.measurement_protocols.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -257,6 +289,13 @@ ALTER TABLE ONLY public.goals ALTER COLUMN id SET DEFAULT nextval('public.goals_
 
 
 --
+-- Name: measurement_protocols id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.measurement_protocols ALTER COLUMN id SET DEFAULT nextval('public.measurement_protocols_id_seq'::regclass);
+
+
+--
 -- Name: shared_links id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -305,6 +344,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.goals
     ADD CONSTRAINT goals_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: measurement_protocols measurement_protocols_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.measurement_protocols
+    ADD CONSTRAINT measurement_protocols_pkey PRIMARY KEY (id);
 
 
 --
@@ -367,6 +414,13 @@ CREATE INDEX index_goals_on_site_id ON public.goals USING btree (site_id);
 --
 
 CREATE INDEX index_goals_on_user_id ON public.goals USING btree (user_id);
+
+
+--
+-- Name: index_measurement_protocols_on_site_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_measurement_protocols_on_site_id ON public.measurement_protocols USING btree (site_id);
 
 
 --
@@ -442,6 +496,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210202211704'),
 ('20210211144851'),
 ('20210311122231'),
-('20210311142921');
+('20210311142921'),
+('20210404121858');
 
 
