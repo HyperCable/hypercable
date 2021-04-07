@@ -26,6 +26,8 @@ local validator = jsonschema.generate_validator({
 local cjson = require "cjson"
 local redis = require "resty.redis"
 local r     = redis:new()
+local ok
+local err
 if (os.getenv("SAAS_REDIS_HOST") == nil or os.getenv("SAAS_REDIS_HOST") == "") then
     ok, err = r:connect(os.getenv("REDIS_HOST"), os.getenv("REDIS_PORT")) 
 else
