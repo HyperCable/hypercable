@@ -35,6 +35,15 @@ module ApplicationHelper
     ["https://", ENV["COLLECTOR_HOST"] || ENV["HOST"], "/", site.uuid].join
   end
 
+  def measurement_protocol_url(site, debug = false)
+    path = if debug
+      "/debug/mp/collect"
+    else
+      "/mp/collect"
+    end
+    ["https://", ENV["COLLECTOR_HOST"] || ENV["HOST"], "/", site.uuid, path].join
+  end
+
   def url_to_path(url)
     return if url.blank?
     URI.parse(url).normalize.request_uri
