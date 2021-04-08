@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Hypercable is a lightweight and open-source web analytics tool. Your website data is 100% yours and the privacy of your visitors is respected."/>
+    <title>hypercable · Simple, privacy-friendly alternative to Google Analytics</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="https://tailwindui.com/js/components-v2.js" ></script>
+  </head>
+  <body class="antialiased font-sans bg-gray-200">
+    <%= yield %>
+  </body>
+</html>

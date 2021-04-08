@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root "sessions#new"
   resources :sessions, only: [:create, :new]
   delete "sign_out", to: "sessions#destroy", as: :destroy_session
   resources :registrations, only: [:create, :new] do
@@ -10,6 +9,8 @@ Rails.application.routes.draw do
       get "verify"
     end
   end
+  resources :landing, only: [:index]
+  root "landing#index"
   resources :sites do
     resources :location_urls, only: [:index]
     resources :countries, only: [:index]
