@@ -94,9 +94,9 @@ COPY --from=pre-builder /app /app
 RUN apk --update add less
 
 # Remove unnecessary files
-RUN rm -rf /gems/ruby/3.0.1/cache/*.gem \
-  && find /gems/ruby/3.0.1/gems/ -name "*.c" -delete \
-  && find /gems/ruby/3.0.1/gems/ -name "*.o" -delete
+RUN rm -rf /gems/ruby/3.0.0/cache/*.gem \
+  && find /gems/ruby/3.0.0/gems/ -name "*.c" -delete \
+  && find /gems/ruby/3.0.0/gems/ -name "*.o" -delete
 
 # creating a log directory so that image wont fail when  RAILS_LOG_TO_STDOUT is false
 RUN mkdir -p /app/log
