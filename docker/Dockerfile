@@ -1,5 +1,5 @@
 # pre-build stage
-FROM ruby:3.0.0-alpine AS pre-builder
+FROM ruby:3.0.1-alpine AS pre-builder
 
 # ARG default to production settings
 # For development docker-compose file overrides ARGS
@@ -53,7 +53,7 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
   fi
 
 # final build stage
-FROM ruby:3.0.0-alpine
+FROM ruby:3.0.1-alpine
 
 ARG BUNDLE_WITHOUT="development:test"
 ENV BUNDLE_WITHOUT ${BUNDLE_WITHOUT}
@@ -94,9 +94,9 @@ COPY --from=pre-builder /app /app
 RUN apk --update add less
 
 # Remove unnecessary files
-RUN rm -rf /gems/ruby/3.0.0/cache/*.gem \
-  && find /gems/ruby/3.0.0/gems/ -name "*.c" -delete \
-  && find /gems/ruby/3.0.0/gems/ -name "*.o" -delete
+RUN rm -rf /gems/ruby/3.0.1/cache/*.gem \
+  && find /gems/ruby/3.0.1/gems/ -name "*.c" -delete \
+  && find /gems/ruby/3.0.1/gems/ -name "*.o" -delete
 
 # creating a log directory so that image wont fail when  RAILS_LOG_TO_STDOUT is false
 RUN mkdir -p /app/log
