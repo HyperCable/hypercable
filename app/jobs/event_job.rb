@@ -79,6 +79,10 @@ class EventJob
         Thread.current[:bq].push result.merge(event_name: "session_start")
       end
 
+      if event["seg"] == "1"
+        Thread.current[:bq].push result.merge(event_name: "user_engagement")
+      end
+
       Thread.current[:bq].push result
     end
   end
