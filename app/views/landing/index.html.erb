@@ -5,8 +5,8 @@
           <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6" aria-label="Global">
             <div class="flex items-center flex-1">
               <div class="flex items-center justify-between w-full md:w-auto">
-                <a href="#">
-                  <span class="sr-only">Workflow</span>
+                <a href="/">
+                  <span class="sr-only">Hypercable Analytics</span>
                   <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-teal-200-cyan-400.svg" alt="">
                 </a>
                 <div class="-mr-2 flex items-center md:hidden">
@@ -31,10 +31,10 @@
               </div>
             </div>
             <div class="hidden md:flex md:items-center md:space-x-6">
-              <a href="#" class="text-base font-medium text-white hover:text-gray-300">
+              <a href="<%= new_session_path %>" class="text-base font-medium text-white hover:text-gray-300">
                 Log in
               </a>
-              <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+              <a href="<%= new_registration_path %>" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
                 Start free trial
               </a>
             </div>
@@ -70,10 +70,10 @@
                   
                 </div>
                 <div class="mt-6 px-5">
-                  <a href="#" class="block text-center w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700">Start free trial</a>
+                  <a href="<%= new_registration_path %>" class="block text-center w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700">Start free trial</a>
                 </div>
                 <div class="mt-6 px-5">
-                  <p class="text-center text-base font-medium text-gray-500">Existing customer? <a href="#" class="text-gray-900 hover:underline">Login</a></p>
+                  <p class="text-center text-base font-medium text-gray-500">Existing customer? <a href="<%= new_session_path %>" class="text-gray-900 hover:underline">Login</a></p>
                 </div>
               </div>
             </div>
@@ -682,7 +682,7 @@
           </div>
           <div class="mt-12 border-t border-gray-200 py-8">
             <p class="text-base text-gray-400 xl:text-center">
-              © 2020 Workflow, Inc. All rights reserved.
+              © 2021 Hypercable Analytics, Inc. All rights reserved.
             </p>
           </div>
         </div>
