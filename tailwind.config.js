@@ -11,6 +11,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        teal: colors.teal,
+        cyan: colors.cyan,
         orange: colors.orange,
         'gray-850': 'rgb(26, 32, 44)',
         'gray-825': 'rgb(37, 47, 63)'
