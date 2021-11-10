@@ -4,16 +4,17 @@ class IPDB
   CACHE = LruRedux::Cache.new(10000)
   begin
     if Rails.env.production?
-      MMDB = GeoIP2Compat.new("/usr/share/GeoIP/GeoLite2-City.mmdb")
+      $mmdb = GeoIP2Compat.new("/usr/share/GeoIP/GeoLite2-City.mmdb")
     else
-      MMDB = GeoIP2Compat.new("/usr/local/var/GeoIP/GeoLite2-City.mmdb")
+      $mmdb = GeoIP2Compat.new("/usr/local/var/GeoIP/GeoLite2-City.mmdb")
     end
   rescue GeoIP2Compat::Error
     puts "run 'geoipupdate -d /usr/local/var/GeoIP' locally."
   end
 
   def self.get_from_mmdb(ip)
-    MMDB.lookup(ip) || {}
+    return {} if $mmdb.nil?
+    $mmdb.lookup(ip) || {}
   rescue GeoIP2Compat::Error
     {}
   end

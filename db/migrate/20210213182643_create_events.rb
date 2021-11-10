@@ -48,17 +48,16 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.string :os
       t.string :device_type
 
-      t.jsonb :user_props, default: {}
-      t.jsonb :event_props, default: {}
+      t.json :user_props
+      t.json :event_props
 
       t.boolean :non_interaction_hit, default: false
 
       t.datetime :started_at, null: false
 
-      t.jsonb :raw_event, default: {}
+      t.json :raw_event
     end
 
-    execute "SELECT create_hypertable('events', 'started_at');"
-    add_index :events, [:site_id, :session_id, :started_at], order: {started_at: :desc}
+    add_index :events, [:site_id, :session_id, :started_at]
   end
 end

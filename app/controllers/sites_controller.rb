@@ -73,15 +73,15 @@ class SitesController < ApplicationController
   def group_sql
     case params[:period]
     when nil, "7d", "week", "30d", "month"
-      "time_bucket('1 day', started_at)::date"
+      "DATE_FORMAT(started_at, '%Y-%m-%d')"
     when "realtime"
-      "time_bucket('1 minute', started_at)::time"
+      "DATE_FORMAT(started_at, '%Y-%m-01 %h:%i')"
     when "today"
-      "time_bucket('1 hour', started_at)::time"
+      "DATE_FORMAT(started_at, '%Y-%m-01 %h')"
     when "12m", "6m"
-      "time_bucket('1 day', started_at)::date"
+      "DATE_FORMAT(started_at, '%Y-%m-%d')"
     else
-      "time_bucket('1 day', started_at)::date"
+      "DATE_FORMAT(started_at, '%Y-%m-%d')"
     end
   end
 

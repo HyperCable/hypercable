@@ -4,52 +4,51 @@
 #
 # Table name: events
 #
-#  browser            :string
-#  city               :string
-#  country            :string
-#  data_source        :string           default("web")
-#  device_type        :string
+#  browser            :string(255)
+#  city               :string(255)
+#  country            :string(255)
+#  data_source        :string(255)      default("web")
+#  device_type        :string(255)
 #  engagement_time    :integer
-#  event_name         :string           default("page_view")
-#  event_props        :jsonb
-#  hostname           :string
-#  ip                 :string
-#  latitude           :float
-#  location_url       :string
-#  longitude          :float
-#  os                 :string
-#  path               :string
-#  protocol_version   :string           default("2")
-#  raw_event          :jsonb
-#  referrer           :string
-#  referrer_source    :string
-#  region             :string
+#  event_name         :string(255)      default("page_view")
+#  event_props        :json
+#  hostname           :string(255)
+#  ip                 :string(255)
+#  latitude           :float(24)
+#  location_url       :string(255)
+#  longitude          :float(24)
+#  os                 :string(255)
+#  path               :string(255)
+#  protocol_version   :string(255)      default("2")
+#  raw_event          :json
+#  referrer           :string(255)
+#  referrer_source    :string(255)
+#  region             :string(255)
 #  request_number     :integer
-#  request_params     :jsonb
-#  screen_resolution  :string
+#  request_params     :json
+#  screen_resolution  :string(255)
 #  session_count      :integer
 #  session_engagement :boolean          default(FALSE)
 #  started_at         :datetime         not null
-#  title              :string
-#  traffic_campaign   :string
-#  traffic_medium     :string
-#  traffic_source     :string
-#  user_agent         :string
-#  user_language      :string
-#  user_props         :jsonb
-#  client_id          :string           not null
-#  session_id         :string           not null
-#  site_id            :string           not null
-#  tracking_id        :string           not null
-#  user_id            :string
+#  title              :string(255)
+#  traffic_campaign   :string(255)
+#  traffic_medium     :string(255)
+#  traffic_source     :string(255)
+#  user_agent         :string(255)
+#  user_language      :string(255)
+#  user_props         :json
+#  client_id          :string(255)      not null
+#  session_id         :string(255)      not null
+#  site_id            :string(255)      not null
+#  tracking_id        :string(255)      not null
+#  user_id            :string(255)
 #
 # Indexes
 #
-#  events_started_at_idx                                  (started_at)
-#  index_events_on_site_id_and_session_id_and_started_at  (site_id,session_id,started_at DESC)
+#  index_events_on_site_id_and_session_id_and_started_at  (site_id,session_id,started_at)
 #
 module Hyper
-  class Event < ApplicationHyperRecord
+  class Event < ApplicationRecord
     COUNTRY_2_TO_FULL = {
       "AF" => "Afghanistan",
       "AX" => "Aland Islands",

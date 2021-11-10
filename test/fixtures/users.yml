@@ -3,11 +3,11 @@
 # Table name: users
 #
 #  id                       :bigint           not null, primary key
-#  email                    :string           not null
-#  email_verification_token :string
+#  email                    :string(255)      not null
+#  email_verification_token :string(255)
 #  email_verified           :boolean          default(FALSE)
-#  password_digest          :string
-#  remember_token           :string
+#  password_digest          :string(255)
+#  remember_token           :string(255)
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #

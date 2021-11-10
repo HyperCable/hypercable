@@ -15,6 +15,13 @@ services:
     image: hypercable:development
     env_file: .env
 
+
+  tidb:
+    image: hooopo/tidb-playground:v5.2.0
+    env:
+      TIDB_VERSION: v5.2.0
+    ports: ["4000:4000"]
+
   redis:
     image: redis:alpine
     restart: always
@@ -68,6 +75,7 @@ services:
       - cache:/app/tmp/cache
       - bundle:/usr/local/bundle
     depends_on:
+      - tidb
       - redis
       - webpack
       - sidekiq
@@ -95,6 +103,7 @@ services:
       - bundle:/usr/local/bundle
       - 'geoipupdate_data:/usr/local/var/GeoIP/'
     depends_on:
+      - tidb
       - redis
     environment:
       - NODE_ENV=development

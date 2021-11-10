@@ -5,7 +5,7 @@
 # Table name: measurement_protocols
 #
 #  id         :bigint           not null, primary key
-#  api_secret :string           not null
+#  api_secret :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  site_id    :bigint

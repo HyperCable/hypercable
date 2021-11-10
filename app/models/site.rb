@@ -5,13 +5,13 @@
 # Table name: sites
 #
 #  id          :bigint           not null, primary key
-#  domain      :string
+#  domain      :string(255)
 #  public      :boolean          default(FALSE)
-#  timezone    :string
-#  uuid        :uuid             not null
+#  timezone    :string(255)
+#  uuid        :string(255)      not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  tracking_id :string
+#  tracking_id :string(255)
 #  user_id     :bigint
 #
 # Indexes
@@ -33,6 +33,14 @@ class Site < ApplicationRecord
 
   validates :domain, presence: true
   validates :tracking_id, presence: true
+
+  before_create { generate_uuid(:uuid) }
+
+  def generate_uuid(column)
+    begin
+      self[column] = SecureRandom.uuid
+    end while Site.exists?(column => self[column])
+  end
 
   def to_param
     uuid

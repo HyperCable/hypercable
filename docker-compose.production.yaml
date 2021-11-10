@@ -2,32 +2,8 @@ version: '3.3'
 
 services:
   base: &base
-    image: hooopo/hypercable:latest
+    image: hooopo/tipanel:latest
     env_file: .env.production
-
-  postgres:
-    image: postgres:12
-    restart: always
-    ports:
-      - '4432:5432'
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=hypercable_prod
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-
-  tsdb:
-    image: timescale/timescaledb:2.1.1-pg13
-    restart: always
-    ports:
-      - '5532:5432'
-    volumes:
-      - tsdb:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=tsdb_prod
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
 
   redis:
     image: redis:alpine
@@ -45,7 +21,7 @@ services:
     stdin_open: true
     ports:
       - '8000:8000'
-    image: hooopo/hypercable-openresty:latest
+    image: hooopo/tipanel-openresty:latest
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -65,7 +41,7 @@ services:
 
   rails:
     <<: *base
-    image: hooopo/hypercable:latest
+    image: hooopo/tipanel:latest
     dns:
       - 8.8.8.8
     restart: always
@@ -76,8 +52,6 @@ services:
       - cache:/app/tmp/cache
       - bundle:/usr/local/bundle
     depends_on:
-      - postgres
-      - tsdb
       - redis
       - sidekiq
     ports:
@@ -91,7 +65,7 @@ services:
 
   sidekiq:
     <<: *base
-    image: hooopo/hypercable:latest
+    image: hooopo/tipanel:latest
     dns:
       - 8.8.8.8
     restart: always
@@ -103,8 +77,6 @@ services:
       - bundle:/usr/local/bundle
       - 'geoipupdate_data:/usr/share/GeoIP/'
     depends_on:
-      - postgres
-      - tsdb
       - redis
       - geoipupdate
     environment:
@@ -114,8 +86,6 @@ services:
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
 
 volumes:
-  postgres:
-  tsdb:
   redis:
   packs:
   node_modules:

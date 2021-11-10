@@ -22,12 +22,14 @@ RUN apk update \
     tar \
     build-base \
     tzdata \
-    postgresql-dev \
-    postgresql-client \
     nodejs \
     yarn \
     git \
     libmaxminddb \
+    mariadb-dev \
+    mysql-client \
+    python3 \
+    py3-pip \
   && mkdir -p /var/app \
   && gem install bundler
 
@@ -72,11 +74,12 @@ ENV BUNDLE_PATH="/gems"
 RUN apk add --update --no-cache \
     openssl \
     tzdata \
-    postgresql-client \
     imagemagick \
     curl-dev \
     git \
     make \
+    mariadb-dev \
+    mysql-client \
   && gem install bundler
 
 RUN apk add --no-cache perl

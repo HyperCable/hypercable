@@ -3,8 +3,8 @@
 # Table name: goals
 #
 #  id         :bigint           not null, primary key
-#  event_name :string
-#  path       :string
+#  event_name :string(255)
+#  path       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  site_id    :bigint

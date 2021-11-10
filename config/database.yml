@@ -1,35 +1,27 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 25 } %>
+  adapter: tidb
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+  host: 127.0.0.1
+  port: 4000
+  variables:
+    tidb_enable_noop_functions: ON
+  username: root
+  password:
 
 development:
-  main:
-    <<: *default
-    url: <%= ENV['MAIN_DATABASE_URL'] %>
-    migrations_paths: db/migrate
-  hyper:
-    <<: *default
-    url: <%= ENV['HYPER_DATABASE_URL'] %>
-    migrations_paths: db/hyper_migrate
+  <<: *default
+  database: tipanel_test
+  url: <%= ENV['DATABASE_URL'] %>
 
 test:
-  main:
-    <<: *default
-    url: <%= ENV['MAIN_DATABASE_URL'] %>
-    migrations_paths: db/migrate
-  hyper:
-    <<: *default
-    url: <%= ENV['HYPER_DATABASE_URL'] %>
-    migrations_paths: db/hyper_migrate
+  <<: *default
+  database: tipanel_test
+  url: <%= ENV['DATABASE_URL'] %>
 
 production:
-  main:
-    <<: *default
-    url: <%= ENV['MAIN_DATABASE_URL'] %>
-    migrations_paths: db/migrate
-  hyper:
-    <<: *default
-    url: <%= ENV['HYPER_DATABASE_URL'] %>
-    migrations_paths: db/hyper_migrate
-    pool: 25
+  <<: *default
+  database: tipanel
+  pool: 25
+  url: <%= ENV['DATABASE_URL'] %>
