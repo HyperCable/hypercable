@@ -7,8 +7,8 @@ with Diagram("scale queue", show=False):
     
     openresty = Custom("openresty", "./imgs/openresty.png")
     rails = Custom("rails", "./imgs/rails.png")
-    postgresql = Custom("postgresql", "./imgs/postgresql.png")
-    timescaledb = Custom("tsdb", "./imgs/TimescaleDB.png")
+    tidb = Custom("tidb", "./imgs/tidb.png")
+    
     
 
     with Cluster("Self-Service BI"):
@@ -23,9 +23,9 @@ with Diagram("scale queue", show=False):
         sidekiq_group = [sidekiq1, sidekiq2, sidekiq3]
 
 
-    rails >> [postgresql, timescaledb]
+    rails >> tidb
     ga >> openresty >> redis >> sidekiq_group 
-    sidekiq1 >> timescaledb
-    sidekiq2 >> timescaledb
-    sidekiq3 >> timescaledb
-    timescaledb >> bi 
+    sidekiq1 >> tidb
+    sidekiq2 >> tidb
+    sidekiq3 >> tidb
+    tidb >> bi 

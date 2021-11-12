@@ -7,8 +7,8 @@ with Diagram("simple_architecture", show=False):
     sidekiq = Custom("sidekiq", "./imgs/sidekiq.png")
     openresty = Custom("openresty", "./imgs/openresty.png")
     rails = Custom("rails", "./imgs/rails.png")
-    postgresql = Custom("postgresql", "./imgs/postgresql.png")
-    timescaledb = Custom("tsdb", "./imgs/TimescaleDB.png")
+    
+    tidb = Custom("tidb", "./imgs/tidb.png")
     
 
     with Cluster("Self-Service BI"):
@@ -16,6 +16,6 @@ with Diagram("simple_architecture", show=False):
         chartio = Custom("chartio", "./imgs/chartio.png")
         bi = [metabase, chartio]
     
-    rails >> [postgresql, timescaledb]
-    ga >> openresty >> redis >> sidekiq >> timescaledb
-    timescaledb >> bi 
+    rails >> tidb
+    ga >> openresty >> redis >> sidekiq >> tidb
+    tidb >> bi 

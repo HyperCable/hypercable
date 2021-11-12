@@ -5,7 +5,7 @@ from diagrams.aws.network import ELB
 with Diagram("scale collector", show=False):
     ga = Custom("Google Analytics v4", "./imgs/ga.png")
     lb = ELB("lb")
-    timescaledb = Custom("tsdb", "./imgs/TimescaleDB.png")
+    tidb = Custom("tidb", "./imgs/tidb.png")
     bi = Custom("metabase", "./imgs/metabase.png")
 
     with Cluster("collector"):
@@ -30,4 +30,4 @@ with Diagram("scale collector", show=False):
     lb >> openresty 
     lb >> openresty1
     lb >> openresty2
-    [collector_group, collector_group1, collector_group2] >> timescaledb >> bi
+    [collector_group, collector_group1, collector_group2] >> tidb >> bi
